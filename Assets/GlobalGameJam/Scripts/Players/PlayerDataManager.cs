@@ -64,9 +64,14 @@ namespace GlobalGameJam.Players
             var players = GetActivePlayers();
             var rect = new Rect(10, 10, 100, 50);
 
-            foreach (var player in players)
+            foreach (var map in playerInputMap)
             {
-                GUI.Label(rect, player.ToString());
+                if (map.Value is null)
+                {
+                    continue;
+                }
+                
+                GUI.Label(rect, map.Key.ToString());
                 rect.y += rect.height;
             }
         }

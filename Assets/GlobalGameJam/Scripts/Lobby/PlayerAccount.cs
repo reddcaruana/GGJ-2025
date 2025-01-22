@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace GlobalGameJam.Lobby
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class PlayerAccount : MonoBehaviour
+    public class PlayerAccount : MonoBehaviour, IBindable
     {
         [SerializeField] private Image profileImage;
         [SerializeField] private TMP_Text profileName;
@@ -69,7 +69,7 @@ namespace GlobalGameJam.Lobby
 
 #endregion
 
-#region Player Input Control
+#region IBindable Implementation
 
         /// <summary>
         /// Binds the player input to the specified player number.
