@@ -1,16 +1,15 @@
-using System.Collections.Generic;
+using System.Linq;
+using GlobalGameJam.Data;
 using GlobalGameJam.Players;
 using UnityEngine;
 
-namespace GlobalGameJam
+namespace GlobalGameJam.Lobby
 {
     public class LoginScreen : MonoBehaviour
     {
-        [SerializeField] private PlayerAccount playerAccountPrefab;
-        [SerializeField] private Transform playerAccountParent;
+        [SerializeField] private PlayerAccount[] playerAccounts;
 
         private PlayerDataManager playerDataManager;
-        private readonly Dictionary<int, PlayerAccount> playerAccounts = new();
 
 #region Lifecycle Events
 
@@ -21,12 +20,27 @@ namespace GlobalGameJam
 
         private void OnEnable()
         {
+            var profileRegistry = Singleton.GetOrCreateScriptableObject<ProfileRegistry>();
+            var profiles = profileRegistry.Profiles.OrderBy(_ => Random.value).ToArray();
+            
+            for (var i = 0; i < playerAccounts.Length; i++)
+            {
+                var account = playerAccounts[i];
+                account.Setup(profiles[i]);
+                account.enabled = false;
+            }
+            
             Activate();
         }
 
         private void OnDisable()
         {
             Deactivate();
+        }
+
+        private void Reset()
+        {
+            playerAccounts = GetComponentsInChildren<PlayerAccount>();
         }
 
 #endregion
@@ -51,21 +65,17 @@ namespace GlobalGameJam
 
         public void OnPlayerJoinedHandler(int playerNumber)
         {
-            var account = Instantiate(playerAccountPrefab, playerAccountParent);
-            account.name = $"PlayerAccount_{playerNumber}";
+            var account = playerAccounts[playerNumber];
             
-            playerAccounts.Add(playerNumber, account);
+            account.enabled = true;
+            account.Bind(playerNumber);
         }
 
         public void OnPlayerLeftHandler(int playerNumber)
         {
-            if (playerAccounts.TryGetValue(playerNumber, out var account) == false)
-            {
-                return;
-            }
-            
-            Destroy(account.gameObject);
-            playerAccounts.Remove(playerNumber);
+            var account = playerAccounts[playerNumber];
+            account.Release();
+            account.enabled = false;
         }
 
 #endregion

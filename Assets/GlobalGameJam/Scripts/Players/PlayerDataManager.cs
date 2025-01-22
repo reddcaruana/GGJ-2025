@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,8 +12,6 @@ namespace GlobalGameJam.Players
         
         private readonly Dictionary<int, PlayerInput> playerInputMap = new();
 
-        private readonly List<int> playerNumberMap = new();
-
         private PlayerInputManager playerInputManager;
 
 #region Lifecycle Events
@@ -22,7 +21,7 @@ namespace GlobalGameJam.Players
             playerInputManager = Singleton.GetOrCreateMonoBehaviour<PlayerInputManager>();
             for (var i = 0; i < playerInputManager.maxPlayerCount; i++)
             {
-                playerNumberMap.Add(-1);
+                playerInputMap.Add(i, null);
             }
         }
 
@@ -56,22 +55,36 @@ namespace GlobalGameJam.Players
 
         public int[] GetActivePlayers()
         {
-            var playerNumbers = new List<int>();
-            for (var i = 0; i < playerNumberMap.Count; i++)
+            return playerInputMap.Keys.ToArray();
+        }
+
+        private int GetFirstAvailableIndex()
+        {
+            foreach (var map in playerInputMap)
             {
-                if (playerNumberMap[i] != -1)
+                if (map.Value is null)
                 {
-                    playerNumbers.Add(i);
+                    return map.Key;
                 }
             }
 
-            return playerNumbers.ToArray();
+            return -1;
         }
 
         public PlayerInput GetPlayerInput(int playerNumber)
         {
-            var playerIndex = playerNumberMap[playerNumber];
-            return playerInputMap.GetValueOrDefault(playerIndex, null);
+            return playerInputMap.GetValueOrDefault(playerNumber, null);
+        }
+        
+        public void Leave(int playerNumber)
+        {
+            if (playerInputMap.TryGetValue(playerNumber, out var playerInput) == false)
+            {
+                Debug.LogWarning($"Player Number {playerNumber} was not registered.");
+                return;
+            }
+            
+            Destroy(playerInput.gameObject);
         }
 
 #endregion
@@ -80,42 +93,37 @@ namespace GlobalGameJam.Players
 
         private void OnPlayerJoinedHandler(PlayerInput playerInput)
         {
-            var index = playerInput.playerIndex;
-            if (playerInputMap.TryAdd(index, playerInput) == false)
+            var index = GetFirstAvailableIndex();
+            if (index == -1)
             {
-                Debug.LogWarning($"Player {index} is already registered.");
+                Debug.LogWarning("All player slots are occupied. Will not register this player.");
                 return;
             }
 
-            var firstUnassignedPlayer = playerNumberMap.FindIndex(playerID => playerID == -1);
-            playerNumberMap[firstUnassignedPlayer] = index;
+            playerInputMap[index] = playerInput;
 
             var playerInputObject = playerInput.gameObject;
             playerInputObject.name = $"PlayerInput_{index}";
             playerInputObject.transform.SetParent(transform);
             
-            OnPlayerJoined?.Invoke(firstUnassignedPlayer);
+            OnPlayerJoined?.Invoke(index);
         }
 
         private void OnPlayerLeftHandler(PlayerInput playerInput)
         {
-            var index = playerInput.playerIndex;
-            if (playerInputMap.ContainsKey(index) == false)
+            foreach (var map in playerInputMap)
             {
-                Debug.LogWarning($"Player {index} was not registered and will not be removed.");
-            }
-
-            playerInputMap.Remove(index);
-
-            var playerNumber = playerNumberMap.FindIndex(playerID => playerID == index);
-            if (playerNumber != -1)
-            {
-                playerNumberMap[playerNumber] = -1;
+                if (map.Value == playerInput)
+                {
+                    playerInputMap[map.Key] = null;
+                    OnPlayerLeft?.Invoke(map.Key);
+                    
+                    playerInputManager.EnableJoining();
+                    return;
+                }
             }
             
-            playerInputManager.EnableJoining();
-            
-            OnPlayerLeft?.Invoke(playerNumber);
+            Debug.LogWarning($"Player {playerInput.playerIndex} was not registered and will not be removed.");
         }
 
 #endregion

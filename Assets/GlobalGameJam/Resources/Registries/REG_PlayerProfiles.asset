@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1400230d47ff452e975725080075a5cd, type: 3}
+  m_Name: REG_PlayerProfiles
+  m_EditorClassIdentifier: 
+  <Profiles>k__BackingField:
+  - {fileID: 11400000, guid: 24484db81936f466cb3a93413c4810c7, type: 2}
+  - {fileID: 11400000, guid: 4b7ceb4ad15394484884d2703e5601bc, type: 2}
+  - {fileID: 11400000, guid: 560769cee8f714481be36a3b2f986576, type: 2}
+  - {fileID: 11400000, guid: 67dba759eb38446c7b16fedaebb4b8e3, type: 2}
