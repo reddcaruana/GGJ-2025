@@ -38,8 +38,30 @@
                 },
                 {
                     "name": "",
+                    "id": "4662c75e-a908-4a31-b80a-003dd20d10d1",
+                    "path": "<HID::usb gamepad           >/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f1bed157-0536-4812-9f86-007d231cf953",
                     "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Leave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c8c335a-937f-46df-8900-37c8d6742f14",
+                    "path": "<HID::usb gamepad           >/button3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
