@@ -1,6 +1,6 @@
 using System.Linq;
 using GlobalGameJam.Data;
-using GlobalGameJam.Players;
+using GlobalGameJam.Gameplay;
 using UnityEngine;
 
 namespace GlobalGameJam.Lobby

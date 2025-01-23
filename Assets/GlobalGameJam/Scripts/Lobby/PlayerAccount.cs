@@ -1,5 +1,5 @@
 using GlobalGameJam.Data;
-using GlobalGameJam.Players;
+using GlobalGameJam.Gameplay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

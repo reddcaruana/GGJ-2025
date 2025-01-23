@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GlobalGameJam.Players
+namespace GlobalGameJam.Gameplay
 {
     /// <summary>
     /// Manages player data and handles player join/leave events.
@@ -56,6 +56,7 @@ namespace GlobalGameJam.Players
             playerInputManager.onPlayerLeft -= OnPlayerLeftHandler;
         }
 
+#if GAME_DEBUG
         /// <summary>
         /// Displays the active players on the GUI.
         /// </summary>
@@ -75,6 +76,7 @@ namespace GlobalGameJam.Players
                 rect.y += rect.height;
             }
         }
+#endif
 
 #endregion
 
