@@ -1,4 +1,4 @@
-using GlobalGameJam.Players;
+using GlobalGameJam.Gameplay;
 using UnityEngine;
 
 namespace GlobalGameJam.Level
