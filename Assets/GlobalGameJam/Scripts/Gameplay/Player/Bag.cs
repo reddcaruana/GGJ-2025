@@ -5,14 +5,16 @@ namespace GlobalGameJam.Gameplay
 {
     public class Bag
     {
+        private readonly Transform anchor;
         private readonly SpriteRenderer spriteRenderer;
 
         public PickableObjectData Contents;
 
         public bool IsFull => Contents is not null;
         
-        public Bag(SpriteRenderer spriteRenderer)
+        public Bag(Transform anchor, SpriteRenderer spriteRenderer)
         {
+            this.anchor = anchor;
             this.spriteRenderer = spriteRenderer;
             this.spriteRenderer.sprite = null;
         }
@@ -35,7 +37,7 @@ namespace GlobalGameJam.Gameplay
 
         public Transform GetAnchor()
         {
-            return spriteRenderer.transform;
+            return anchor;
         }
     }
 }

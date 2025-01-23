@@ -33,6 +33,19 @@ namespace GlobalGameJam.Gameplay
             sphereCollider.radius = maxSize * 0.5f;
         }
 
+        public void Launch(Vector3 direction, float force, float angle)
+        {
+            var angleRad = angle * Mathf.Deg2Rad;
+            
+            var velocity = new Vector3(
+                direction.x * force * Mathf.Cos(angleRad),
+                force * Mathf.Sin(angleRad),
+                direction.z * force * Mathf.Cos(angleRad)
+            );
+
+            attachedRigidbody.linearVelocity = velocity;
+        }
+
 #endregion
 
 #region IUsable Implementation

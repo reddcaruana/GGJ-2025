@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,9 @@ namespace GlobalGameJam.Gameplay
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerBehavior : MonoBehaviour, IBindable
     {
+        [Header("Rendering")]
+        [SerializeField] private PlayerRenderer playerRenderer;
+        
         [Header("Movement")]
         [SerializeField] private float speed = 7.5f;
         
@@ -17,7 +21,12 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private LayerMask interactionLayer;
 
         [Header("Bag")]
+        [SerializeField] private Transform bagAnchor;
         [SerializeField] private SpriteRenderer bagSpriteRenderer;
+
+        [Header("Throwing")]
+        [SerializeField] private float throwSpeed = 10f;
+        [SerializeField] private float throwAngle = 45f;
 
         private PlayerContext playerContext;
         
@@ -39,8 +48,8 @@ namespace GlobalGameJam.Gameplay
             {
                 Movement = new Movement(speed, attachedRigidbody),
                 Interaction = new Interaction(interactionAnchor, interactionDistance, interactionRadius, interactionLayer),
-                Bag = new Bag(bagSpriteRenderer),
-                Throw = new Throw()
+                Bag = new Bag(bagAnchor, bagSpriteRenderer),
+                Throw = new Throw(throwSpeed, throwAngle)
             };
         }
 
@@ -60,27 +69,27 @@ namespace GlobalGameJam.Gameplay
 
         public Direction GetDirection(Vector3 vector)
         {
-            var dotProducts = new Dictionary<Direction, float>
+            var dotProducts = new Dictionary<Direction, float>();
+            var directions = System.Enum.GetValues(typeof(Direction)).Cast<Direction>();
+            
+            foreach (var direction in directions)
             {
-                { Direction.Forward, Vector3.Dot(inputValue, Vector3.forward) },
-                { Direction.Back, Vector3.Dot(inputValue, Vector3.back) },
-                { Direction.Left, Vector3.Dot(inputValue, Vector3.left) },
-                { Direction.Right, Vector3.Dot(inputValue, Vector3.right) }
-            };
+                dotProducts.Add(direction, Vector3.Dot(inputValue, direction.ToVector()));
+            }
 
             var maxDot = -1f;
-            var direction = Direction.Right;
+            var selection = Direction.East;
 
             foreach (var dotProduct in dotProducts)
             {
                 if (dotProduct.Value > maxDot)
                 {
                     maxDot = dotProduct.Value;
-                    direction = dotProduct.Key;
+                    selection = dotProduct.Key;
                 }
             }
 
-            return direction;
+            return selection;
         }
 
 #endregion

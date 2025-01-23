@@ -5,10 +5,14 @@ namespace GlobalGameJam
 {
     public enum Direction
     {
-        Left,
-        Right,
-        Forward,
-        Back
+        North,
+        NorthEast,
+        East,
+        SouthEast,
+        South,
+        SouthWest,
+        West,
+        NorthWest
     }
 
     public static class DirectionExtensions
@@ -17,10 +21,14 @@ namespace GlobalGameJam
         {
             return direction switch
             {
-                Direction.Left => Vector3.left,
-                Direction.Right => Vector3.right,
-                Direction.Forward => Vector3.forward,
-                Direction.Back => Vector3.back,
+                Direction.North => Vector3.forward,
+                Direction.NorthEast => (Vector3.forward + Vector3.right).normalized,
+                Direction.East => Vector3.right,
+                Direction.SouthEast => (Vector3.back + Vector3.right).normalized,
+                Direction.South => Vector3.back,
+                Direction.SouthWest => (Vector3.back + Vector3.left).normalized,
+                Direction.West => Vector3.left,
+                Direction.NorthWest => (Vector3.forward + Vector3.left).normalized,
                 _ => Vector3.zero
             };
         }
