@@ -16,7 +16,11 @@ namespace GlobalGameJam.Level
 
         private void Start()
         {
-            playerBehaviors[0].Bind(0);
+            var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
+            playerDataManager.OnPlayerJoined += (id) =>
+            {
+                playerBehaviors[id].Bind(id);
+            };
         }
 
 #endregion
