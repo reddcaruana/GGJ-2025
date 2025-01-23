@@ -26,7 +26,8 @@ namespace GlobalGameJam.Gameplay
         private InputAction moveAction;
         private InputAction interactionAction;
 
-        private Vector3 inputDirection;
+        private Vector3 inputValue;
+        private Direction facingDirection;
 
 #region Lifecycle Events
 
@@ -38,13 +39,14 @@ namespace GlobalGameJam.Gameplay
             {
                 Movement = new Movement(speed, attachedRigidbody),
                 Interaction = new Interaction(interactionAnchor, interactionDistance, interactionRadius, interactionLayer),
-                Bag = new Bag(bagSpriteRenderer)
+                Bag = new Bag(bagSpriteRenderer),
+                Throw = new Throw()
             };
         }
 
         private void FixedUpdate()
         {
-            playerContext.Movement.Move(inputDirection);
+            playerContext.Movement.Move(inputValue);
         }
 
         private void OnDestroy()
@@ -60,10 +62,10 @@ namespace GlobalGameJam.Gameplay
         {
             var dotProducts = new Dictionary<Direction, float>
             {
-                { Direction.Forward, Vector3.Dot(inputDirection, Vector3.forward) },
-                { Direction.Back, Vector3.Dot(inputDirection, Vector3.back) },
-                { Direction.Left, Vector3.Dot(inputDirection, Vector3.left) },
-                { Direction.Right, Vector3.Dot(inputDirection, Vector3.right) }
+                { Direction.Forward, Vector3.Dot(inputValue, Vector3.forward) },
+                { Direction.Back, Vector3.Dot(inputValue, Vector3.back) },
+                { Direction.Left, Vector3.Dot(inputValue, Vector3.left) },
+                { Direction.Right, Vector3.Dot(inputValue, Vector3.right) }
             };
 
             var maxDot = -1f;
@@ -128,18 +130,25 @@ namespace GlobalGameJam.Gameplay
 
         private void InteractionHandler(InputAction.CallbackContext context)
         {
+            if (playerContext.Bag.IsFull)
+            {
+                playerContext.Throw.Drop(playerContext.Bag, facingDirection);
+                return;
+            }
+            
             playerContext.Interaction.Interact(playerContext);
         }
 
         private void MoveHandler(InputAction.CallbackContext context)
         {
-            var inputValue = context.ReadValue<Vector2>();
-            inputDirection = Vector3.forward * inputValue.y + Vector3.right * inputValue.x;
+            var value = context.ReadValue<Vector2>();
+            inputValue = Vector3.forward * value.y + Vector3.right * value.x;
+            facingDirection = GetDirection(inputValue);
 
-            if (inputDirection.sqrMagnitude > Mathf.Epsilon)
+            if (inputValue.sqrMagnitude > Mathf.Epsilon)
             {
                 var interaction = playerContext.Interaction;
-                interaction.Direction = GetDirection(inputDirection);
+                interaction.Direction = facingDirection;
                 playerContext.Interaction = interaction;
             }
         }

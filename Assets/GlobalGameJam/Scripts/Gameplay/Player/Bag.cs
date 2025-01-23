@@ -8,6 +8,8 @@ namespace GlobalGameJam.Gameplay
         private readonly SpriteRenderer spriteRenderer;
 
         public PickableObjectData Contents;
+
+        public bool IsFull => Contents is not null;
         
         public Bag(SpriteRenderer spriteRenderer)
         {
@@ -19,6 +21,21 @@ namespace GlobalGameJam.Gameplay
         {
             Contents = objectData;
             spriteRenderer.sprite = Contents.Sprite;
+            
+            Debug.Log($"Bag is full: {IsFull}");
+        }
+
+        public void Clear()
+        {
+            Contents = null;
+            spriteRenderer.sprite = null;
+            
+            Debug.Log($"Bag is full: {IsFull}");
+        }
+
+        public Transform GetAnchor()
+        {
+            return spriteRenderer.transform;
         }
     }
 }

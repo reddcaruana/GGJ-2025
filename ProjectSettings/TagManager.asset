@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,7 @@ TagManager:
   - Interactions
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
@@ -43,7 +44,7 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
-  - Light Layer 1
+  - Decals
   - Light Layer 2
   - Light Layer 3
   - Light Layer 4
