@@ -24,7 +24,6 @@ namespace GlobalGameJam.Gameplay.Cauldron
         public void Evaluate(IngredientData ingredientData)
         {
             ingredients.Add(ingredientData);
-            
         }
 
 #endregion
