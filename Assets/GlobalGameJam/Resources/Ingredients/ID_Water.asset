@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Water
   <Sprite>k__BackingField: {fileID: 373168637, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}
+  <Color>k__BackingField: {r: 0, g: 0.5882353, b: 1, a: 1}

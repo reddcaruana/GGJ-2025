@@ -6,6 +6,8 @@ namespace GlobalGameJam.Gameplay
 {
     public class CauldronManager : MonoBehaviour
     {
+        [SerializeField] private float duration = 3f;
+        
         private ObjectiveManager objectiveManager;
 
         private PotionData targetPotion;
@@ -33,6 +35,11 @@ namespace GlobalGameJam.Gameplay
 
 #region Methods
 
+        public void Brew()
+        {
+            Debug.Log("Potion being brewed");
+        }
+
         public void Evaluate(IngredientData ingredientData)
         {
             ingredients.Add(ingredientData);
@@ -41,13 +48,18 @@ namespace GlobalGameJam.Gameplay
             switch (state)
             {
                 case PotionResult.Incorrect:
-                    Debug.Log("This ingredient is incorrect.");
+                    Fail();
                     break;
                 
                 case PotionResult.Complete:
-                    Debug.Log("The potion is complete.");
+                    Brew();
                     break;
             }
+        }
+
+        public void Fail()
+        {
+            Debug.Log("Potion failed");
         }
 
 #endregion
