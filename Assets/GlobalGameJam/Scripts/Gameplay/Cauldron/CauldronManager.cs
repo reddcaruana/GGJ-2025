@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay.Cauldron
 {
-    public class ConcoctionManager : MonoBehaviour
+    public class CauldronManager : MonoBehaviour
     {
         public event System.Action<IngredientData[]> OnIngredientsChanged;
 
@@ -37,7 +37,7 @@ namespace GlobalGameJam.Gameplay.Cauldron
 
 #region Methods
 
-        private void Brew()
+        public void Brew()
         {
             if (ingredients.Count > potionRegistry.MaxIngredientCount)
             {
