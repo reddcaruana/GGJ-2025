@@ -8,6 +8,10 @@ namespace GlobalGameJam.Gameplay
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerBehavior : MonoBehaviour, IBindable
     {
+        private static readonly int AnimatorDirectionYFloat = Animator.StringToHash("DirectionY");
+        private static readonly int AnimatorIsMovingBool = Animator.StringToHash("IsMoving");
+        private static readonly int AnimatorIsCarryingObjectBool = Animator.StringToHash("IsCarryingObject");
+
         [Header("Rendering")]
         [SerializeField] private PlayerRenderer playerRenderer;
         
@@ -142,23 +146,39 @@ namespace GlobalGameJam.Gameplay
             if (playerContext.Bag.IsFull)
             {
                 playerContext.Throw.Drop(playerContext.Bag, facingDirection);
-                return;
+            }
+            else
+            {
+                playerContext.Interaction.Interact(playerContext);
             }
             
-            playerContext.Interaction.Interact(playerContext);
+            playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);
         }
 
         private void MoveHandler(InputAction.CallbackContext context)
         {
             var value = context.ReadValue<Vector2>();
             inputValue = Vector3.forward * value.y + Vector3.right * value.x;
-            facingDirection = GetDirection(inputValue);
 
             if (inputValue.sqrMagnitude > Mathf.Epsilon)
             {
+                facingDirection = GetDirection(inputValue);
                 var interaction = playerContext.Interaction;
                 interaction.Direction = facingDirection;
                 playerContext.Interaction = interaction;
+                
+            }
+
+            playerRenderer.Animator.SetBool(AnimatorIsMovingBool, inputValue.sqrMagnitude > Mathf.Epsilon);
+
+            if (Mathf.Abs(value.y) > Mathf.Epsilon)
+            {
+                playerRenderer.Animator.SetFloat(AnimatorDirectionYFloat, value.y);
+            }
+
+            if (Mathf.Abs(value.x) > Mathf.Epsilon)
+            {
+                playerRenderer.SpriteRenderer.flipX = value.x < 0;
             }
         }
 

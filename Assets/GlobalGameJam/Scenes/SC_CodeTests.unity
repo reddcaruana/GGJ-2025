@@ -930,6 +930,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
   m_PrefabInstance: {fileID: 915786562}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &958022747 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5211454927047654686, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+  m_PrefabInstance: {fileID: 7713407580393583986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345672df654c4210b02c742b92ab148e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,6 +1311,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 879054463}
     m_Modifications:
     - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 2099687863}
+    - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
       propertyPath: bagSpriteRenderer
       value: 
       objectReference: {fileID: 532836320}
@@ -1496,6 +1511,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 879054463}
     m_Modifications:
+    - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 1296491317}
     - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
       propertyPath: bagSpriteRenderer
       value: 
@@ -1731,6 +1750,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7558021406297073117, guid: 6aa86a1a27a3d412abbce79f4327af11, type: 3}
   m_PrefabInstance: {fileID: 1726343063}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1296491317 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5211454927047654686, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+  m_PrefabInstance: {fileID: 915786562}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345672df654c4210b02c742b92ab148e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &1337784529 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1541402168457075655, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
@@ -2892,6 +2922,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 879054463}
     m_Modifications:
     - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 2067736651}
+    - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
       propertyPath: bagSpriteRenderer
       value: 
       objectReference: {fileID: 1085748112}
@@ -3019,6 +3053,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
   m_PrefabInstance: {fileID: 2067736649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2067736651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5211454927047654686, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+  m_PrefabInstance: {fileID: 2067736649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345672df654c4210b02c742b92ab148e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2099687863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5211454927047654686, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+  m_PrefabInstance: {fileID: 1761335278}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345672df654c4210b02c742b92ab148e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2109607013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 879054463}
     m_Modifications:
+    - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
+      propertyPath: playerRenderer
+      value: 
+      objectReference: {fileID: 958022747}
     - target: {fileID: 509721360689898116, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
       propertyPath: bagSpriteRenderer
       value: 
