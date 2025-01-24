@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GlobalGameJam.Data
@@ -12,26 +13,27 @@ namespace GlobalGameJam.Data
 
         public int IngredientCount => Ingredients.Length;
         
-        public bool IsComplete(IngredientData[] ingredients)
+        public PotionResult Evaluate(IngredientData[] ingredients)
         {
-            if (ingredients.Length != IngredientCount)
-            {
-                return false;
-            }
+            var requiredIngredients = Ingredients.ToList();
+            var addedIngredients = ingredients.ToList();
 
-            var targetList = new List<IngredientData>(Ingredients);
-            foreach (var ingredient in ingredients)
+            foreach (var ingredient in addedIngredients)
             {
-                var index = targetList.IndexOf(ingredient);
-                if (index == -1)
+                if (requiredIngredients.Contains(ingredient) == false)
                 {
-                    return false;
+                    return PotionResult.Incorrect;
                 }
 
-                targetList.RemoveAt(index);
+                requiredIngredients.Remove(ingredient);
             }
 
-            return targetList.Count == 0;
+            if (requiredIngredients.Count > 0)
+            {
+                return PotionResult.Incomplete;
+            }
+
+            return PotionResult.Complete;
         }
     }
 }

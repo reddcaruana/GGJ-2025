@@ -7,6 +7,8 @@ namespace GlobalGameJam.Gameplay
     [RequireComponent(typeof(Rigidbody))]
     public class Ingredient : MonoBehaviour, IUsable
     {
+        private const float ExpandColliderRadius = 0.1f;
+        
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private SphereCollider sphereCollider;
         [SerializeField] private TrailRenderer trailRenderer;
@@ -67,7 +69,7 @@ namespace GlobalGameJam.Gameplay
 
             var spriteSize = spriteRenderer.bounds.size;
             var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
-            sphereCollider.radius = maxSize * 0.5f;
+            sphereCollider.radius = maxSize * 0.5f + ExpandColliderRadius;
         }
 
 #endregion

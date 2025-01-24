@@ -1,10 +1,18 @@
+using GlobalGameJam.Data;
 using UnityEngine;
 
-namespace GlobalGameJam.Gameplay.Cauldron
+namespace GlobalGameJam.Gameplay
 {
     public class IngredientReceiver : MonoBehaviour
     {
+        private CauldronManager cauldronManager; 
+        
 #region Lifecycle Events
+
+        private void Awake()
+        {
+            cauldronManager = Singleton.GetOrCreateMonoBehaviour<CauldronManager>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -14,6 +22,7 @@ namespace GlobalGameJam.Gameplay.Cauldron
                 return;
             }
             
+            cauldronManager.Evaluate(ingredient.Data);
             ingredient.Despawn();
         }
 
