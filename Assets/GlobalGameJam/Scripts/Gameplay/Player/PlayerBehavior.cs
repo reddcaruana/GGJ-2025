@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,13 @@ namespace GlobalGameJam.Gameplay
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerBehavior : MonoBehaviour, IBindable
     {
+        private static readonly int AnimatorDirectionYFloat = Animator.StringToHash("DirectionY");
+        private static readonly int AnimatorIsMovingBool = Animator.StringToHash("IsMoving");
+        private static readonly int AnimatorIsCarryingObjectBool = Animator.StringToHash("IsCarryingObject");
+
+        [Header("Rendering")]
+        [SerializeField] private PlayerRenderer playerRenderer;
+        
         [Header("Movement")]
         [SerializeField] private float speed = 7.5f;
         
@@ -17,7 +25,12 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private LayerMask interactionLayer;
 
         [Header("Bag")]
+        [SerializeField] private Transform bagAnchor;
         [SerializeField] private SpriteRenderer bagSpriteRenderer;
+
+        [Header("Throwing")]
+        [SerializeField] private float throwSpeed = 10f;
+        [SerializeField] private float throwAngle = 45f;
 
         private PlayerContext playerContext;
         
@@ -26,7 +39,8 @@ namespace GlobalGameJam.Gameplay
         private InputAction moveAction;
         private InputAction interactionAction;
 
-        private Vector3 inputDirection;
+        private Vector3 inputValue;
+        private Direction facingDirection;
 
 #region Lifecycle Events
 
@@ -38,13 +52,14 @@ namespace GlobalGameJam.Gameplay
             {
                 Movement = new Movement(speed, attachedRigidbody),
                 Interaction = new Interaction(interactionAnchor, interactionDistance, interactionRadius, interactionLayer),
-                Bag = new Bag(bagSpriteRenderer)
+                Bag = new Bag(bagAnchor, bagSpriteRenderer),
+                Throw = new Throw(throwSpeed, throwAngle)
             };
         }
 
         private void FixedUpdate()
         {
-            playerContext.Movement.Move(inputDirection);
+            playerContext.Movement.Move(inputValue);
         }
 
         private void OnDestroy()
@@ -58,27 +73,27 @@ namespace GlobalGameJam.Gameplay
 
         public Direction GetDirection(Vector3 vector)
         {
-            var dotProducts = new Dictionary<Direction, float>
+            var dotProducts = new Dictionary<Direction, float>();
+            var directions = System.Enum.GetValues(typeof(Direction)).Cast<Direction>();
+            
+            foreach (var direction in directions)
             {
-                { Direction.Forward, Vector3.Dot(inputDirection, Vector3.forward) },
-                { Direction.Back, Vector3.Dot(inputDirection, Vector3.back) },
-                { Direction.Left, Vector3.Dot(inputDirection, Vector3.left) },
-                { Direction.Right, Vector3.Dot(inputDirection, Vector3.right) }
-            };
+                dotProducts.Add(direction, Vector3.Dot(inputValue, direction.ToVector()));
+            }
 
             var maxDot = -1f;
-            var direction = Direction.Right;
+            var selection = Direction.East;
 
             foreach (var dotProduct in dotProducts)
             {
                 if (dotProduct.Value > maxDot)
                 {
                     maxDot = dotProduct.Value;
-                    direction = dotProduct.Key;
+                    selection = dotProduct.Key;
                 }
             }
 
-            return direction;
+            return selection;
         }
 
 #endregion
@@ -128,19 +143,42 @@ namespace GlobalGameJam.Gameplay
 
         private void InteractionHandler(InputAction.CallbackContext context)
         {
-            playerContext.Interaction.Interact(playerContext);
+            if (playerContext.Bag.IsFull)
+            {
+                playerContext.Throw.Drop(playerContext.Bag, facingDirection);
+            }
+            else
+            {
+                playerContext.Interaction.Interact(playerContext);
+            }
+            
+            playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);
         }
 
         private void MoveHandler(InputAction.CallbackContext context)
         {
-            var inputValue = context.ReadValue<Vector2>();
-            inputDirection = Vector3.forward * inputValue.y + Vector3.right * inputValue.x;
+            var value = context.ReadValue<Vector2>();
+            inputValue = Vector3.forward * value.y + Vector3.right * value.x;
 
-            if (inputDirection.sqrMagnitude > Mathf.Epsilon)
+            if (inputValue.sqrMagnitude > Mathf.Epsilon)
             {
+                facingDirection = GetDirection(inputValue);
                 var interaction = playerContext.Interaction;
-                interaction.Direction = GetDirection(inputDirection);
+                interaction.Direction = facingDirection;
                 playerContext.Interaction = interaction;
+                
+            }
+
+            playerRenderer.Animator.SetBool(AnimatorIsMovingBool, inputValue.sqrMagnitude > Mathf.Epsilon);
+
+            if (Mathf.Abs(value.y) > Mathf.Epsilon)
+            {
+                playerRenderer.Animator.SetFloat(AnimatorDirectionYFloat, value.y);
+            }
+
+            if (Mathf.Abs(value.x) > Mathf.Epsilon)
+            {
+                playerRenderer.SpriteRenderer.flipX = value.x < 0;
             }
         }
 

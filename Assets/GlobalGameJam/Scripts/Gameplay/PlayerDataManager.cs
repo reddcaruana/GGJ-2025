@@ -62,8 +62,9 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnGUI()
         {
-            var players = GetActivePlayers();
             var rect = new Rect(10, 10, 100, 50);
+            GUI.Label(rect, $"Player count: {GetActivePlayers().Length}");
+            rect.y += rect.height;
 
             foreach (var map in playerInputMap)
             {
@@ -88,7 +89,9 @@ namespace GlobalGameJam.Gameplay
         /// <returns>An array of active player indices.</returns>
         public int[] GetActivePlayers()
         {
-            return playerInputMap.Keys.ToArray();
+            return playerInputMap.Keys
+                .Where(id => playerInputMap[id] is not null)
+                .ToArray();
         }
 
         /// <summary>

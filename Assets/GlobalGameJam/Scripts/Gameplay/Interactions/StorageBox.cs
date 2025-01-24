@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
-    public class IngredientBox : MonoBehaviour, IUsable
+    public class StorageBox : MonoBehaviour, IUsable
     {
-        [SerializeField] private IngredientData ingredient;
+        [SerializeField] private PickableObjectData pickableObjectData;
         
 #region IUsable Implementation
         
@@ -17,7 +17,7 @@ namespace GlobalGameJam.Gameplay
                 return;
             }
 
-            playerContext.Bag.Carry(ingredient);
+            playerContext.Bag.Carry(pickableObjectData);
         }
 
 #endregion

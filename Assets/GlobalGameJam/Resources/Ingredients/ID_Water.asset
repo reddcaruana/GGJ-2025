@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 017bd351c4344989a20856c3e58c4843, type: 3}
-  m_Name: ID_Ingredient
+  m_Name: ID_Water
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Ingredient
-  <Sprite>k__BackingField: {fileID: -1848419005, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}
+  <Name>k__BackingField: Water
+  <Sprite>k__BackingField: {fileID: 373168637, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}

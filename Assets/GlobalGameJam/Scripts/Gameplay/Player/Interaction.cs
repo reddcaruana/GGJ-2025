@@ -33,11 +33,11 @@ namespace GlobalGameJam.Gameplay
             for (var i = 0; i < numCollisions; i++)
             {
                 var result = results[i];
-                var distance = Vector3.Distance(result.transform.position, anchorPosition);
+                var closest = Vector3.Distance(result.transform.position, anchorPosition);
 
-                if (distance < closestDistance)
+                if (closest < closestDistance)
                 {
-                    closestDistance = distance;
+                    closestDistance = closest;
                     closestCollider = result;
                 }
             }
