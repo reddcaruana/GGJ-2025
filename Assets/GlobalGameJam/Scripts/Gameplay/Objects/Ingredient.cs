@@ -10,7 +10,7 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private SphereCollider sphereCollider;
         
         private Rigidbody attachedRigidbody;
-        private PickableObjectData pickableObjectData;
+        public IngredientData Data { get; private set; }
 
 #region Lifecycle Events
 
@@ -23,16 +23,17 @@ namespace GlobalGameJam.Gameplay
 
 #region Methods
 
-        public void SetData(PickableObjectData objectData)
+        public void Clear()
         {
-            pickableObjectData = objectData;
-            spriteRenderer.sprite = pickableObjectData.Sprite;
-
-            var spriteSize = spriteRenderer.bounds.size;
-            var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
-            sphereCollider.radius = maxSize * 0.5f;
+            Data = null;
         }
 
+        public void Despawn()
+        {
+            var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
+            ingredientManager.Release(this);
+        }
+        
         public void Launch(Vector3 direction, float force, float angle)
         {
             var angleRad = angle * Mathf.Deg2Rad;
@@ -46,6 +47,22 @@ namespace GlobalGameJam.Gameplay
             attachedRigidbody.linearVelocity = velocity;
         }
 
+        public void SetData(PickableObjectData objectData)
+        {
+            if (objectData is null)
+            {
+                Clear();
+                return;
+            }
+            
+            Data = (IngredientData)objectData;
+            spriteRenderer.sprite = Data.Sprite;
+
+            var spriteSize = spriteRenderer.bounds.size;
+            var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
+            sphereCollider.radius = maxSize * 0.5f;
+        }
+
 #endregion
 
 #region IUsable Implementation
@@ -53,10 +70,9 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public void Use(PlayerContext playerContext)
         {
-            playerContext.Bag.Carry(pickableObjectData);
+            playerContext.Bag.Carry(Data);
         }
 
 #endregion
-
     }
 }

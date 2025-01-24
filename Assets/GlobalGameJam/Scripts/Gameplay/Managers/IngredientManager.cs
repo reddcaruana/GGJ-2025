@@ -31,10 +31,16 @@ namespace GlobalGameJam.Gameplay
             var instance = objectPool.Get();
             
             instance.SetData(pickableObjectData);
+            instance.name = $"Ingredient_{objectPool.CountAll:000}";
             instance.transform.position = anchor.position;
             instance.transform.rotation = anchor.rotation;
 
             return instance;
+        }
+
+        public void Release(Ingredient instance)
+        {
+            objectPool.Release(instance);
         }
 
 #endregion
@@ -54,6 +60,8 @@ namespace GlobalGameJam.Gameplay
 
         private void ReleaseIngredient(Ingredient instance)
         {
+            instance.Clear();
+            instance.gameObject.SetActive(false);
         }
 
 #endregion
