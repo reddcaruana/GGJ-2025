@@ -1,3 +1,4 @@
+using System;
 using GlobalGameJam.Data;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace GlobalGameJam.Gameplay
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private SphereCollider sphereCollider;
+        [SerializeField] private TrailRenderer trailRenderer;
         
         private Rigidbody attachedRigidbody;
         public IngredientData Data { get; private set; }
@@ -17,6 +19,11 @@ namespace GlobalGameJam.Gameplay
         private void Awake()
         {
             attachedRigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void OnDisable()
+        {
+            trailRenderer.Clear();
         }
 
 #endregion

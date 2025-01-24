@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1496089330074998667}
   sphereCollider: {fileID: 938481945244517765}
+  trailRenderer: {fileID: 947148775912067304}
 --- !u!1 &2080786704402552987
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace GlobalGameJam.Data
@@ -6,5 +7,7 @@ namespace GlobalGameJam.Data
     public class PotionRegistry : ScriptableObject
     {
         [field: SerializeField] public PotionData[] Potions { get; private set; }
+
+        public int MaxIngredientCount => Potions.Max(potion => potion.IngredientCount);
     }
 }
