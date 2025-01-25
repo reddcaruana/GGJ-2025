@@ -143,13 +143,16 @@ namespace GlobalGameJam.Gameplay
 
         private void InteractionHandler(InputAction.CallbackContext context)
         {
+            var bagWasFull = playerContext.Bag.IsFull;
+            playerContext.Interaction.Interact(playerContext);
+            if (bagWasFull == false)
+            {
+                return;
+            }
+
             if (playerContext.Bag.IsFull)
             {
                 playerContext.Throw.Drop(playerContext.Bag, facingDirection);
-            }
-            else
-            {
-                playerContext.Interaction.Interact(playerContext);
             }
             
             playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);
