@@ -1,16 +1,40 @@
 using GlobalGameJam.Gameplay;
+using GlobalGameJam.UI;
 using UnityEngine;
 
 namespace GlobalGameJam.Level
 {
+    public struct LevelContext
+    {
+        public PlayerBehavior[] PlayerBehaviors;
+        
+        public CauldronManager CauldronManager;
+
+        public ObjectiveDisplay ObjectiveDisplay;
+    }
+    
     public class LevelManager : MonoBehaviour
     {
         public event System.Action OnLevelStart;
         public event System.Action OnLevelStop;
         
         [SerializeField] private PlayerBehavior[] playerBehaviors;
+        [SerializeField] private CauldronManager cauldronManager;
+        [SerializeField] private ObjectiveDisplay objectiveDisplay;
 
+        private LevelContext levelContext;
+        
 #region Lifecycle Events
+
+        private void Awake()
+        {
+            levelContext = new LevelContext
+            {
+                PlayerBehaviors = playerBehaviors,
+                CauldronManager = cauldronManager,
+                ObjectiveDisplay = objectiveDisplay
+            };
+        }
 
         private void Reset()
         {
@@ -22,10 +46,12 @@ namespace GlobalGameJam.Level
             var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
             playerDataManager.OnPlayerJoined += (id) =>
             {
-                playerBehaviors[id].Bind(id);
+                levelContext.PlayerBehaviors[id].Bind(id);
             };
             
             OnLevelStart?.Invoke();
+            
+            levelContext.ObjectiveDisplay.Bind(cauldronManager.GetContext());
         }
 
         private void OnDestroy()

@@ -7,6 +7,9 @@ namespace GlobalGameJam.Gameplay
 {
     public class CauldronMixture
     {
+        public event System.Action OnSuccess; 
+        public event System.Action OnFailure; 
+        
         private IngredientData expected;
         private readonly List<IngredientData> ingredients = new();
         
@@ -32,7 +35,7 @@ namespace GlobalGameJam.Gameplay
                 if (required.Contains(item) == false)
                 {
                     ingredients.Clear();
-                    Debug.Log("Bad ingredient (not in recipe).");
+                    OnFailure?.Invoke();
                     return;
                 }
             }
@@ -44,7 +47,7 @@ namespace GlobalGameJam.Gameplay
             }
             
             ingredients.Clear();
-            Debug.Log("Complete.");
+            OnSuccess?.Invoke();
         }
 
         public void OnExpectedIngredientChangedHandler(IngredientData ingredient)

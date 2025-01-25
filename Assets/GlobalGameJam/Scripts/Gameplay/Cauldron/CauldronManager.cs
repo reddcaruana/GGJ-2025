@@ -29,15 +29,19 @@ namespace GlobalGameJam.Gameplay
         private void OnEnable()
         {
             cauldronContext.CauldronObjective.OnChanged += cauldronContext.CauldronMixture.OnTargetPotionChanged;
-            cauldronContext.IngredientCatcher.OnAdded += cauldronContext.CauldronMixture.OnIngredientAddedHandler;
             cauldronContext.IngredientSequencer.OnChanged += cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
+            cauldronContext.IngredientCatcher.OnAdded += cauldronContext.CauldronMixture.OnIngredientAddedHandler;
+
+            cauldronContext.CauldronMixture.OnSuccess += cauldronContext.CauldronObjective.Next;
         }
 
         private void OnDisable()
         {
             cauldronContext.CauldronObjective.OnChanged -= cauldronContext.CauldronMixture.OnTargetPotionChanged;
-            cauldronContext.IngredientCatcher.OnAdded -= cauldronContext.CauldronMixture.OnIngredientAddedHandler;
             cauldronContext.IngredientSequencer.OnChanged -= cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
+            cauldronContext.IngredientCatcher.OnAdded -= cauldronContext.CauldronMixture.OnIngredientAddedHandler;
+            
+            cauldronContext.CauldronMixture.OnSuccess -= cauldronContext.CauldronObjective.Next;
         }
 
         private void Start()

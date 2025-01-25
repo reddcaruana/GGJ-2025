@@ -30,8 +30,11 @@ namespace GlobalGameJam.Gameplay
         {
             var index = Random.Range(0, availablePotions.Count);
             var next = availablePotions[index];
-            
-            availablePotions.Add(Target);
+
+            if (Target is not null)
+            {
+                availablePotions.Add(Target);
+            }
             availablePotions.Remove(next);
 
             Target = next;
