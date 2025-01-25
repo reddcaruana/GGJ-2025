@@ -1,9 +1,12 @@
+using GlobalGameJam.Data;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace GlobalGameJam.Gameplay
 {
-    public abstract class CarryableManager<TCarryable, TData> : MonoBehaviour where TCarryable : Carryable
+    public abstract class CarryableManager<TCarryable, TData> : MonoBehaviour
+        where TCarryable : Carryable
+        where TData : CarryableData
     {
         [SerializeField] private TCarryable prefab;
         
