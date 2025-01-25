@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using GlobalGameJam.Data;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GlobalGameJam.Gameplay
 {
@@ -10,8 +7,14 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private CauldronObjective cauldronObjective;
         [SerializeField] private IngredientCatcher ingredientCatcher;
         [SerializeField] private IngredientSequencer ingredientSequencer;
+        [SerializeField] private Transform throwAnchor;
 
+        [SerializeField] private float throwSpeed = 10.0f;
+        [SerializeField] private float throwAngle = 45.0f;
+        [SerializeField] private Direction throwDirection = Direction.South;
+        
         private CauldronContext cauldronContext;
+        private Throw cauldronThrow;
 
 #region Lifecycle Events
 
@@ -21,8 +24,12 @@ namespace GlobalGameJam.Gameplay
             {
                 CauldronMixture = new CauldronMixture(),
                 CauldronObjective = cauldronObjective,
+                CauldronThrow = new Throw(throwSpeed, throwAngle),
+                
                 IngredientCatcher = ingredientCatcher,
-                IngredientSequencer = ingredientSequencer
+                IngredientSequencer = ingredientSequencer,
+                
+                ThrowAnchor = throwAnchor
             };
         }
 
@@ -32,7 +39,7 @@ namespace GlobalGameJam.Gameplay
             cauldronContext.IngredientSequencer.OnChanged += cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
             cauldronContext.IngredientCatcher.OnAdded += cauldronContext.CauldronMixture.OnIngredientAddedHandler;
 
-            cauldronContext.CauldronMixture.OnSuccess += cauldronContext.CauldronObjective.Next;
+            cauldronContext.CauldronMixture.OnSuccess += Spawn;
         }
 
         private void OnDisable()
@@ -41,7 +48,7 @@ namespace GlobalGameJam.Gameplay
             cauldronContext.IngredientSequencer.OnChanged -= cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
             cauldronContext.IngredientCatcher.OnAdded -= cauldronContext.CauldronMixture.OnIngredientAddedHandler;
             
-            cauldronContext.CauldronMixture.OnSuccess -= cauldronContext.CauldronObjective.Next;
+            cauldronContext.CauldronMixture.OnSuccess -= Spawn;
         }
 
         private void Start()
@@ -56,6 +63,17 @@ namespace GlobalGameJam.Gameplay
         public CauldronContext GetContext()
         {
             return cauldronContext;
+        }
+
+        public void Spawn()
+        {
+            var data = cauldronContext.CauldronObjective.Target;
+            var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionManager>();
+
+            var potion = potionManager.Generate(data, cauldronContext.ThrowAnchor);
+            potion.Throw(throwDirection.ToVector(), throwSpeed, throwAngle);
+
+            cauldronContext.CauldronObjective.Next();
         }
 
 #endregion

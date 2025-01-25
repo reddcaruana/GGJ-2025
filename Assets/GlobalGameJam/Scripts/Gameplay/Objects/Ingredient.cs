@@ -56,7 +56,7 @@ namespace GlobalGameJam.Gameplay
                 return;
             }
 
-            Data = (IngredientData)data;
+            Data = data;
             spriteRenderer.sprite = Data.Sprite;
 
             var spriteSize = spriteRenderer.bounds.size;

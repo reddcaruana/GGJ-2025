@@ -945,6 +945,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &498846122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 498846123}
+  m_Layer: 0
+  m_Name: ThrowAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &498846123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498846122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.02, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1807224587}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &529958859
 GameObject:
   m_ObjectHideFlags: 0
@@ -3789,6 +3820,7 @@ Transform:
   m_Children:
   - {fileID: 734360545}
   - {fileID: 1518460816}
+  - {fileID: 498846123}
   m_Father: {fileID: 1015509993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1807224588
@@ -3806,6 +3838,10 @@ MonoBehaviour:
   cauldronObjective: {fileID: 1807224590}
   ingredientCatcher: {fileID: 734360549}
   ingredientSequencer: {fileID: 1518460817}
+  throwAnchor: {fileID: 498846123}
+  throwSpeed: 5
+  throwAngle: 45
+  throwDirection: 4
 --- !u!114 &1807224590
 MonoBehaviour:
   m_ObjectHideFlags: 0
