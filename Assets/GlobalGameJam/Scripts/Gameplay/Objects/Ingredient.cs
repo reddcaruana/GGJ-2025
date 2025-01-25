@@ -3,31 +3,9 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
-    [RequireComponent(typeof(Rigidbody))]
-    public class Ingredient : MonoBehaviour, IUsable, IIngredientData
+    public class Ingredient : Carryable, IUsable, IIngredientData, IThrowable
     {
         private const float ExpandColliderRadius = 0.1f;
-        
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private SphereCollider sphereCollider;
-        [SerializeField] private TrailRenderer trailRenderer;
-        
-        private Rigidbody attachedRigidbody;
-        public IngredientData Data { get; private set; }
-
-#region Lifecycle Events
-
-        private void Awake()
-        {
-            attachedRigidbody = GetComponent<Rigidbody>();
-        }
-
-        private void OnDisable()
-        {
-            trailRenderer.Clear();
-        }
-
-#endregion
 
 #region Methods
 
@@ -36,34 +14,43 @@ namespace GlobalGameJam.Gameplay
             Data = null;
         }
 
-        public void Despawn()
+#endregion
+
+#region Overrides of Carryable
+
+        /// <inheritdoc />
+        public override void Despawn()
         {
             var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
             ingredientManager.Release(this);
         }
-        
-        public void Launch(Vector3 direction, float force, float angle)
-        {
-            var angleRad = angle * Mathf.Deg2Rad;
-            
-            var velocity = new Vector3(
-                direction.x * force * Mathf.Cos(angleRad),
-                force * Mathf.Sin(angleRad),
-                direction.z * force * Mathf.Cos(angleRad)
-            );
 
-            attachedRigidbody.linearVelocity = velocity;
+#endregion
+
+#region Implementation of IUsable
+
+        /// <inheritdoc />
+        public void Use(PlayerContext playerContext)
+        {
         }
 
-        public void SetData(IngredientData objectData)
+#endregion
+
+#region Implementation of IIngredientData
+
+        /// <inheritdoc />
+        public IngredientData Data { get; private set; }
+
+        /// <inheritdoc />
+        public void SetData(IngredientData data)
         {
-            if (objectData is null)
+            if (data is null)
             {
                 Clear();
                 return;
             }
-            
-            Data = (IngredientData)objectData;
+
+            Data = (IngredientData)data;
             spriteRenderer.sprite = Data.Sprite;
 
             var spriteSize = spriteRenderer.bounds.size;
@@ -73,12 +60,20 @@ namespace GlobalGameJam.Gameplay
 
 #endregion
 
-#region IUsable Implementation
-        
+#region Implementation of IThrowable
+
         /// <inheritdoc />
-        public void Use(PlayerContext playerContext)
+        public void Throw(Vector3 direction, float force, float angle)
         {
-            playerContext.Bag.Carry(Data);
+            var angleRad = angle * Mathf.Deg2Rad;
+
+            var velocity = new Vector3(
+                direction.x * force * Mathf.Cos(angleRad),
+                force * Mathf.Sin(angleRad),
+                direction.z * force * Mathf.Cos(angleRad)
+            );
+
+            AttachedRigidbody.linearVelocity = velocity;
         }
 
 #endregion

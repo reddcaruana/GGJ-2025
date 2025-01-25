@@ -3,28 +3,24 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
-    public class IngredientManager : CarryableManager<Ingredient, IngredientData>
+    public class PotionManager : CarryableManager<Potion, PotionData>
     {
-#region Overrides of CarryableManager<Ingredient,IngredientData>
-
         /// <inheritdoc />
-        protected override void ReleaseInstance(Ingredient instance)
+        protected override void ReleaseInstance(Potion instance)
         {
             instance.Clear();
             base.ReleaseInstance(instance);
         }
 
-#endregion
-        
-#region Overrides of CarryableManager<Ingredient,IngredientData>
+#region Overrides of CarryableManager<Potion,PotionData>
 
         /// <inheritdoc />
-        public override Ingredient Generate(IngredientData data, Transform anchor)
+        public override Potion Generate(PotionData data, Transform anchor)
         {
             var instance = ObjectPool.Get();
             
             instance.SetData(data);
-            instance.name = $"Ingredient_{ObjectPool.CountAll:000}";
+            instance.name = $"Potion_{ObjectPool.CountActive:000}";
             instance.transform.position = anchor.position;
             instance.transform.rotation = anchor.rotation;
 
