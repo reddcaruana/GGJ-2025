@@ -11,6 +11,10 @@ namespace GlobalGameJam.Level
         public CauldronManager CauldronManager;
 
         public ObjectiveDisplay ObjectiveDisplay;
+
+        public TimerDisplay TimerDisplay;
+        
+        public Timer GameTimer;
     }
     
     public class LevelManager : MonoBehaviour
@@ -21,6 +25,8 @@ namespace GlobalGameJam.Level
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private CauldronManager cauldronManager;
         [SerializeField] private ObjectiveDisplay objectiveDisplay;
+        [SerializeField] private TimerDisplay timerDisplay;
+        [SerializeField] private Timer gameTimer;
 
         private LevelContext levelContext;
         
@@ -32,7 +38,9 @@ namespace GlobalGameJam.Level
             {
                 PlayerBehaviors = playerBehaviors,
                 CauldronManager = cauldronManager,
-                ObjectiveDisplay = objectiveDisplay
+                ObjectiveDisplay = objectiveDisplay,
+                TimerDisplay = timerDisplay,
+                GameTimer = gameTimer
             };
         }
 
@@ -52,6 +60,8 @@ namespace GlobalGameJam.Level
             OnLevelStart?.Invoke();
             
             levelContext.ObjectiveDisplay.Bind(cauldronManager.GetContext());
+            levelContext.TimerDisplay.Bind(levelContext.GameTimer);
+            levelContext.GameTimer.Activate();
         }
 
         private void OnDestroy()

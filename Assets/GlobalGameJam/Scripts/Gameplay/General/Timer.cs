@@ -4,7 +4,7 @@ namespace GlobalGameJam.Gameplay
 {
     public class Timer : MonoBehaviour
     {
-        public event System.Action OnUpdate;
+        public event System.Action<float, float> OnUpdate;
         public event System.Action OnComplete;
         
         [field: SerializeField] public float Duration { get; private set; }
@@ -24,7 +24,7 @@ namespace GlobalGameJam.Gameplay
             }
 
             Current += Time.deltaTime;
-            OnUpdate?.Invoke();
+            OnUpdate?.Invoke(Current, Duration);
             
             if (Current >= Duration)
             {

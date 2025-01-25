@@ -181,7 +181,10 @@ namespace GlobalGameJam.Gameplay
 
             if (Mathf.Abs(value.x) > Mathf.Epsilon)
             {
-                playerRenderer.SpriteRenderer.flipX = value.x < 0;
+                foreach (var spriteRenderer in playerRenderer.SpriteRenderers)
+                {
+                    spriteRenderer.flipX = value.x < 0;
+                }
             }
         }
 
