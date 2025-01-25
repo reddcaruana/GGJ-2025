@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: PRF_Witchy
   m_EditorClassIdentifier: 
   <Username>k__BackingField: Witchy
-  <PasswordLength>k__BackingField: 10
+  <PasswordLength>k__BackingField: 12
+  <Attempts>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 713762619, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}
