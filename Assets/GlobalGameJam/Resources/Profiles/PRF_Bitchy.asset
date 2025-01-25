@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa30334dde2545bea0c70c28b68ccfc0, type: 3}
-  m_Name: PRF_Angy
+  m_Name: PRF_Bitchy
   m_EditorClassIdentifier: 
-  <Username>k__BackingField: Angy
+  <Username>k__BackingField: Bitchy
+  <PasswordLength>k__BackingField: 7
   <Sprite>k__BackingField: {fileID: -109328001, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}

@@ -6,6 +6,7 @@ namespace GlobalGameJam.Data
     public class ProfileData : ScriptableObject
     {
         [field: SerializeField] public string Username { get; private set; }
+        [field: SerializeField] public int PasswordLength { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; private set; }
     }
 }

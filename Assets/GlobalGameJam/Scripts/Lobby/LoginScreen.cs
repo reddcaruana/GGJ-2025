@@ -33,7 +33,7 @@ namespace GlobalGameJam.Lobby
         private void Start()
         {
             var profileRegistry = Singleton.GetOrCreateScriptableObject<ProfileRegistry>();
-            var profiles = profileRegistry.Profiles.OrderBy(_ => Random.value).ToArray();
+            var profiles = profileRegistry.Profiles;
 
             for (var i = 0; i < playerAccounts.Length; i++)
             {
