@@ -9,7 +9,7 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] protected SphereCollider sphereCollider;
         [SerializeField] protected TrailRenderer trailRenderer;
         
-        protected Rigidbody AttachedRigidbody { get; private set; }
+        public Rigidbody AttachedRigidbody { get; private set; }
 
 #region Lifecycle Events
 

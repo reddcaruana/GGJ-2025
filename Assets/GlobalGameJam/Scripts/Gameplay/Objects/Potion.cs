@@ -6,13 +6,13 @@ namespace GlobalGameJam.Gameplay
     {
 #region Methods
 
-            public void Clear()
-            {
-                    Data = null;
-            }
+        public void Clear()
+        {
+            Data = null;
+        }
 
 #endregion
-            
+
 #region Overrides of Carryable
 
         /// <inheritdoc />

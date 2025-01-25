@@ -42,12 +42,8 @@ namespace GlobalGameJam.Gameplay
                 }
             }
 
-            if (closestCollider is null || closestCollider.TryGetComponent(out IUsable usable) == false)
-            {
-                return;
-            }
-            
-            usable.Use(playerContext);
+            var usable = closestCollider?.GetComponentInParent<IUsable>();
+            usable?.Use(playerContext);
         }
     }
 }

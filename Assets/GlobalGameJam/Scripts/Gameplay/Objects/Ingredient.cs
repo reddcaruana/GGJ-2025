@@ -32,6 +32,12 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public void Use(PlayerContext playerContext)
         {
+            playerContext.Bag.Carry(Data);
+            
+            if (AttachedRigidbody.isKinematic == false)
+            {
+                Despawn();
+            }
         }
 
 #endregion
