@@ -1,3 +1,5 @@
+using GlobalGameJam.Data;
+
 namespace GlobalGameJam.Gameplay
 {
     public class Throw
@@ -13,10 +15,15 @@ namespace GlobalGameJam.Gameplay
 
         public void Drop(Bag bag, Direction direction)
         {
+            if (bag.Contents is not IngredientData ingredientData)
+            {
+                return;
+            }
+
             var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
+            var ingredient = ingredientManager.Generate(ingredientData, bag.GetAnchor());
+            ingredient.Throw(direction.ToVector(), speed, angle);
             
-            var ingredient = ingredientManager.Generate(bag.Contents, bag.GetAnchor());
-            ingredient.Launch(direction.ToVector(), speed, angle);
             
             // TODO: Throw the object
             bag.Clear();

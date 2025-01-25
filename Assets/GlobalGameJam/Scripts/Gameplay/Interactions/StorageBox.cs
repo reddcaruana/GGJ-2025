@@ -5,7 +5,25 @@ namespace GlobalGameJam.Gameplay
 {
     public class StorageBox : MonoBehaviour, IUsable
     {
-        [SerializeField] private PickableObjectData pickableObjectData;
+        [SerializeField] private CarryableData carryableData;
+        private Carryable storedInstance;
+
+#region Lifecycle Events
+
+        private void Start()
+        {
+            switch (carryableData)
+            {
+                case IngredientData ingredientData:
+                    var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
+                    storedInstance = ingredientManager.Generate(ingredientData, transform);
+                    break;
+            }
+            
+            storedInstance.AttachedRigidbody.isKinematic = true;
+        }
+
+#endregion
         
 #region IUsable Implementation
         
@@ -17,7 +35,7 @@ namespace GlobalGameJam.Gameplay
                 return;
             }
 
-            playerContext.Bag.Carry(pickableObjectData);
+            playerContext.Bag.Carry(carryableData);
         }
 
 #endregion

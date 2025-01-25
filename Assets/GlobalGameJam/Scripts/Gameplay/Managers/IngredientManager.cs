@@ -1,67 +1,34 @@
 using GlobalGameJam.Data;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace GlobalGameJam.Gameplay
 {
-    public class IngredientManager : MonoBehaviour
+    public class IngredientManager : CarryableManager<Ingredient, IngredientData>
     {
-        [SerializeField] private Ingredient ingredientPrefab;
-        
-        private ObjectPool<Ingredient> objectPool;
+#region Overrides of CarryableManager<Ingredient,IngredientData>
 
-#region Lifecycle Events
-
-        private void Awake()
+        /// <inheritdoc />
+        protected override void ReleaseInstance(Ingredient instance)
         {
-            objectPool = new ObjectPool<Ingredient>(
-                createFunc: CreateIngredient,
-                actionOnGet: GetIngredient,
-                actionOnRelease: ReleaseIngredient,
-                defaultCapacity: 100,
-                maxSize: 200);
+            instance.Clear();
+            base.ReleaseInstance(instance);
         }
 
 #endregion
+        
+#region Overrides of CarryableManager<Ingredient,IngredientData>
 
-#region Methods
-
-        public Ingredient Generate(PickableObjectData pickableObjectData, Transform anchor)
+        /// <inheritdoc />
+        public override Ingredient Generate(IngredientData data, Transform anchor)
         {
-            var instance = objectPool.Get();
+            var instance = ObjectPool.Get();
             
-            instance.SetData(pickableObjectData);
-            instance.name = $"Ingredient_{objectPool.CountAll:000}";
+            instance.SetData(data);
+            instance.name = $"Ingredient_{ObjectPool.CountAll:000}";
             instance.transform.position = anchor.position;
             instance.transform.rotation = anchor.rotation;
 
             return instance;
-        }
-
-        public void Release(Ingredient instance)
-        {
-            objectPool.Release(instance);
-        }
-
-#endregion
-
-#region Object Pool Methods
-
-        private Ingredient CreateIngredient()
-        {
-            var instance = Instantiate(ingredientPrefab, transform);
-            return instance;
-        }
-
-        private void GetIngredient(Ingredient instance)
-        {
-            instance.gameObject.SetActive(true);
-        }
-
-        private void ReleaseIngredient(Ingredient instance)
-        {
-            instance.Clear();
-            instance.gameObject.SetActive(false);
         }
 
 #endregion

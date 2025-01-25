@@ -1,32 +1,11 @@
-using System;
 using GlobalGameJam.Data;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
-    [RequireComponent(typeof(Rigidbody))]
-    public class Ingredient : MonoBehaviour, IUsable
+    public class Ingredient : Carryable, IUsable, IIngredientData, IThrowable
     {
-        [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private SphereCollider sphereCollider;
-        [SerializeField] private TrailRenderer trailRenderer;
-        
-        private Rigidbody attachedRigidbody;
-        public IngredientData Data { get; private set; }
-
-#region Lifecycle Events
-
-        private void Awake()
-        {
-            attachedRigidbody = GetComponent<Rigidbody>();
-        }
-
-        private void OnDisable()
-        {
-            trailRenderer.Clear();
-        }
-
-#endregion
+        private const float ExpandColliderRadius = 0.1f;
 
 #region Methods
 
@@ -35,49 +14,72 @@ namespace GlobalGameJam.Gameplay
             Data = null;
         }
 
-        public void Despawn()
+#endregion
+
+#region Overrides of Carryable
+
+        /// <inheritdoc />
+        public override void Despawn()
         {
             var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
             ingredientManager.Release(this);
         }
-        
-        public void Launch(Vector3 direction, float force, float angle)
+
+#endregion
+
+#region Implementation of IUsable
+
+        /// <inheritdoc />
+        public void Use(PlayerContext playerContext)
+        {
+            playerContext.Bag.Carry(Data);
+            
+            if (AttachedRigidbody.isKinematic == false)
+            {
+                Despawn();
+            }
+        }
+
+#endregion
+
+#region Implementation of IIngredientData
+
+        /// <inheritdoc />
+        public IngredientData Data { get; private set; }
+
+        /// <inheritdoc />
+        public void SetData(IngredientData data)
+        {
+            if (data is null)
+            {
+                Clear();
+                return;
+            }
+
+            Data = data;
+            spriteRenderer.sprite = Data.Sprite;
+
+            var spriteSize = spriteRenderer.bounds.size;
+            var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
+            sphereCollider.radius = maxSize * 0.5f + ExpandColliderRadius;
+        }
+
+#endregion
+
+#region Implementation of IThrowable
+
+        /// <inheritdoc />
+        public void Throw(Vector3 direction, float force, float angle)
         {
             var angleRad = angle * Mathf.Deg2Rad;
-            
+
             var velocity = new Vector3(
                 direction.x * force * Mathf.Cos(angleRad),
                 force * Mathf.Sin(angleRad),
                 direction.z * force * Mathf.Cos(angleRad)
             );
 
-            attachedRigidbody.linearVelocity = velocity;
-        }
-
-        public void SetData(PickableObjectData objectData)
-        {
-            if (objectData is null)
-            {
-                Clear();
-                return;
-            }
-            
-            Data = (IngredientData)objectData;
-            spriteRenderer.sprite = Data.Sprite;
-
-            var spriteSize = spriteRenderer.bounds.size;
-            var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
-            sphereCollider.radius = maxSize * 0.5f;
-        }
-
-#endregion
-
-#region IUsable Implementation
-        
-        /// <inheritdoc />
-        public void Use(PlayerContext playerContext)
-        {
-            playerContext.Bag.Carry(Data);
+            AttachedRigidbody.linearVelocity = velocity;
         }
 
 #endregion

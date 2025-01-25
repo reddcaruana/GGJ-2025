@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Star
   <Sprite>k__BackingField: {fileID: 746869191, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}
+  <Color>k__BackingField: {r: 1, g: 0.5882353, b: 0, a: 1}
