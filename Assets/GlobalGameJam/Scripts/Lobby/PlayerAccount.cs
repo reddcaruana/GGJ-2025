@@ -61,7 +61,7 @@ namespace GlobalGameJam.Lobby
         /// Sets up the player account with the provided profile data.
         /// </summary>
         /// <param name="profileData">The profile data to set up.</param>
-        public void Setup(PlayerProfileData profileData)
+        public void Setup(ProfileData profileData)
         {
             profileImage.sprite = profileData.Sprite;
             profileName.text = profileData.Username;

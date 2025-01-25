@@ -5,7 +5,7 @@ namespace GlobalGameJam.Gameplay
 {
     public class StorageBox : MonoBehaviour, IUsable
     {
-        [SerializeField] private PickableObjectData pickableObjectData;
+        [SerializeField] private IngredientData pickableObjectData;
         
 #region IUsable Implementation
         

@@ -1,11 +1,10 @@
-using System;
 using GlobalGameJam.Data;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Ingredient : MonoBehaviour, IUsable
+    public class Ingredient : MonoBehaviour, IUsable, IIngredientData
     {
         private const float ExpandColliderRadius = 0.1f;
         
@@ -56,7 +55,7 @@ namespace GlobalGameJam.Gameplay
             attachedRigidbody.linearVelocity = velocity;
         }
 
-        public void SetData(PickableObjectData objectData)
+        public void SetData(IngredientData objectData)
         {
             if (objectData is null)
             {

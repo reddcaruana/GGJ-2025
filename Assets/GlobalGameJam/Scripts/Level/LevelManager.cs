@@ -5,6 +5,9 @@ namespace GlobalGameJam.Level
 {
     public class LevelManager : MonoBehaviour
     {
+        public event System.Action OnLevelStart;
+        public event System.Action OnLevelStop;
+        
         [SerializeField] private PlayerBehavior[] playerBehaviors;
 
 #region Lifecycle Events
@@ -21,6 +24,13 @@ namespace GlobalGameJam.Level
             {
                 playerBehaviors[id].Bind(id);
             };
+            
+            OnLevelStart?.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            OnLevelStop?.Invoke();
         }
 
 #endregion

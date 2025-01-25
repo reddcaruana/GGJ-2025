@@ -4,24 +4,26 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
-    public class ObjectiveManager : MonoBehaviour
+    public class CauldronObjective : MonoBehaviour
     {
         public event System.Action<PotionData> OnChanged;
 
-        private List<PotionData> availablePotions;
+        private readonly List<PotionData> availablePotions = new();
         
-        public PotionData TargetPotion { get; private set; }
+        public PotionData Target { get; private set; }
 
 #region Lifecycle Events
 
         private void Awake()
         {
             var potionRegistry = Singleton.GetOrCreateScriptableObject<PotionRegistry>();
-            availablePotions = new List<PotionData>(potionRegistry.Potions);
+            
+            availablePotions.Clear();
+            availablePotions.AddRange(potionRegistry.Potions);
         }
 
 #endregion
-        
+
 #region Methods
 
         public void Next()
@@ -29,11 +31,11 @@ namespace GlobalGameJam.Gameplay
             var index = Random.Range(0, availablePotions.Count);
             var next = availablePotions[index];
             
-            availablePotions.Add(TargetPotion);
+            availablePotions.Add(Target);
             availablePotions.Remove(next);
 
-            TargetPotion = next;
-            OnChanged?.Invoke(TargetPotion);
+            Target = next;
+            OnChanged?.Invoke(Target);
         }
 
 #endregion

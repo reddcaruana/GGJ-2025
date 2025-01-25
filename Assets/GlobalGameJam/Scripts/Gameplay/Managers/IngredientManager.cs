@@ -26,7 +26,7 @@ namespace GlobalGameJam.Gameplay
 
 #region Methods
 
-        public Ingredient Generate(PickableObjectData pickableObjectData, Transform anchor)
+        public Ingredient Generate(IngredientData pickableObjectData, Transform anchor)
         {
             var instance = objectPool.Get();
             

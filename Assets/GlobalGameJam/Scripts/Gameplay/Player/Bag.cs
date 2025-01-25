@@ -8,7 +8,7 @@ namespace GlobalGameJam.Gameplay
         private readonly Transform anchor;
         private readonly SpriteRenderer spriteRenderer;
 
-        public PickableObjectData Contents;
+        public IngredientData Contents;
 
         public bool IsFull => Contents is not null;
         
@@ -19,7 +19,7 @@ namespace GlobalGameJam.Gameplay
             this.spriteRenderer.sprite = null;
         }
 
-        public void Carry(PickableObjectData objectData)
+        public void Carry(IngredientData objectData)
         {
             Contents = objectData;
             spriteRenderer.sprite = Contents.Sprite;

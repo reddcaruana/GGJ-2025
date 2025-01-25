@@ -1,75 +1,57 @@
 using System.Collections.Generic;
 using GlobalGameJam.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GlobalGameJam.Gameplay
 {
     public class CauldronManager : MonoBehaviour
     {
-        [SerializeField] private float duration = 3f;
-        
-        private ObjectiveManager objectiveManager;
+        [SerializeField] private CauldronObjective cauldronObjective;
+        [SerializeField] private IngredientCatcher ingredientCatcher;
+        [SerializeField] private IngredientSequencer ingredientSequencer;
 
-        private PotionData targetPotion;
-        private readonly List<IngredientData> ingredients = new();
+        private CauldronContext cauldronContext;
 
 #region Lifecycle Events
 
         private void Awake()
         {
-            objectiveManager = Singleton.GetOrCreateMonoBehaviour<ObjectiveManager>();
+            cauldronContext = new CauldronContext
+            {
+                CauldronMixture = new CauldronMixture(),
+                CauldronObjective = cauldronObjective,
+                IngredientCatcher = ingredientCatcher,
+                IngredientSequencer = ingredientSequencer
+            };
         }
 
         private void OnEnable()
         {
-            objectiveManager.OnChanged += OnChangedHandler;
-            objectiveManager.Next();
+            cauldronContext.CauldronObjective.OnChanged += cauldronContext.CauldronMixture.OnTargetPotionChanged;
+            cauldronContext.IngredientCatcher.OnAdded += cauldronContext.CauldronMixture.OnIngredientAddedHandler;
+            cauldronContext.IngredientSequencer.OnChanged += cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
         }
 
         private void OnDisable()
         {
-            objectiveManager.OnChanged -= OnChangedHandler;
+            cauldronContext.CauldronObjective.OnChanged -= cauldronContext.CauldronMixture.OnTargetPotionChanged;
+            cauldronContext.IngredientCatcher.OnAdded -= cauldronContext.CauldronMixture.OnIngredientAddedHandler;
+            cauldronContext.IngredientSequencer.OnChanged -= cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
+        }
+
+        private void Start()
+        {
+            cauldronContext.CauldronObjective.Next();
         }
 
 #endregion
 
 #region Methods
 
-        public void Brew()
+        public CauldronContext GetContext()
         {
-            Debug.Log("Potion being brewed");
-        }
-
-        public void Evaluate(IngredientData ingredientData)
-        {
-            ingredients.Add(ingredientData);
-            var state = targetPotion.Evaluate(ingredients.ToArray());
-
-            switch (state)
-            {
-                case PotionResult.Incorrect:
-                    Fail();
-                    break;
-                
-                case PotionResult.Complete:
-                    Brew();
-                    break;
-            }
-        }
-
-        public void Fail()
-        {
-            Debug.Log("Potion failed");
-        }
-
-#endregion
-
-#region Event Handlers
-
-        private void OnChangedHandler(PotionData potionData)
-        {
-            targetPotion = potionData;
-            ingredients.Clear();
+            return cauldronContext;
         }
 
 #endregion
