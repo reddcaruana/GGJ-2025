@@ -1,7 +1,7 @@
-using System.Linq;
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace GlobalGameJam.Lobby
 {
@@ -14,7 +14,7 @@ namespace GlobalGameJam.Lobby
         /// Array of player accounts.
         /// </summary>
         [SerializeField] private PlayerAccount[] playerAccounts;
-
+        
         private PlayerDataManager playerDataManager;
 
 #region Lifecycle Events

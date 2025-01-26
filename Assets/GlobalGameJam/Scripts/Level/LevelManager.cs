@@ -79,30 +79,27 @@ namespace GlobalGameJam.Level
 
         private void Start()
         {
-            var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
-            playerDataManager.OnPlayerJoined += (id) =>
-            {
-                levelContext.PlayerBehaviors[id].Bind(id);
-            };
-
             var ingredientRegistry = Singleton.GetOrCreateScriptableObject<IngredientRegistry>();
-            
             var randomIndex = Random.Range(0, chestBatches.Length);
             chestBatches[randomIndex].gameObject.SetActive(true);
             chestBatches[randomIndex].SetChests(ingredientRegistry.Ingredients);
             
             levelContext.Score.Bind(levelContext.ShippingBin);
             
-            OnLevelStart?.Invoke();
-            
             levelContext.ObjectiveDisplay.Bind(cauldronManager.GetContext());
             levelContext.TimerDisplay.Bind(levelContext.GameTimer);
-            levelContext.GameTimer.Activate();
         }
 
-        private void OnDestroy()
+#endregion
+
+#region Methods
+
+        public void AddPlayer(int index)
         {
-            OnLevelStop?.Invoke();
+            if (index == 3)
+            {
+                timeline.Play();
+            }
         }
 
 #endregion
