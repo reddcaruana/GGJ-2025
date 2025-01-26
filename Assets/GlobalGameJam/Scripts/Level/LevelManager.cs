@@ -2,6 +2,7 @@ using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
 using GlobalGameJam.UI;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace GlobalGameJam.Level
 {
@@ -23,6 +24,8 @@ namespace GlobalGameJam.Level
         public LeaderboardManager Leaderboard;
 
         public ShippingBin ShippingBin;
+
+        public PlayableDirector Timeline;
     }
     
     public class LevelManager : MonoBehaviour
@@ -36,6 +39,7 @@ namespace GlobalGameJam.Level
         [SerializeField] private ObjectiveDisplay objectiveDisplay;
         [SerializeField] private ScoreManager score;
         [SerializeField] private LeaderboardManager leaderboard;
+        [SerializeField] private PlayableDirector timeline;
         [SerializeField] private ShippingBin shippingBin;
         [SerializeField] private TimerDisplay timerDisplay;
         [SerializeField] private Timer gameTimer;
@@ -61,6 +65,8 @@ namespace GlobalGameJam.Level
                 
                 Score = score,
                 Leaderboard = leaderboard,
+                
+                Timeline = timeline,    
                 
                 GameTimer = gameTimer
             };
