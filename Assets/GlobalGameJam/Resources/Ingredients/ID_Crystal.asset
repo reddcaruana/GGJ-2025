@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ID_Crystal
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Crystal
-  <Sprite>k__BackingField: {fileID: -1505405860, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}
-  <Color>k__BackingField: {r: 0.509434, g: 0.13697045, b: 0.46269345, a: 1}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: f7fe7def0b8b64b499889322fed604a3, type: 3}
+  <Color>k__BackingField: {r: 0.9490196, g: 0.3254902, b: 0.5176471, a: 1}

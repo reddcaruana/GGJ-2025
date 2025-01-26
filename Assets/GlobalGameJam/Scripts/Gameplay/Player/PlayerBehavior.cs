@@ -32,6 +32,9 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private float throwSpeed = 10f;
         [SerializeField] private float throwAngle = 45f;
 
+        [Header("Add-Ons")]
+        [SerializeField] private Transform throwDirection;
+
         private PlayerContext playerContext;
         
         private PlayerInput playerInput;
@@ -170,6 +173,7 @@ namespace GlobalGameJam.Gameplay
                 interaction.Direction = facingDirection;
                 playerContext.Interaction = interaction;
                 
+                throwDirection.rotation = Quaternion.LookRotation(facingDirection.ToVector());
             }
 
             playerRenderer.Animator.SetBool(AnimatorIsMovingBool, inputValue.sqrMagnitude > Mathf.Epsilon);

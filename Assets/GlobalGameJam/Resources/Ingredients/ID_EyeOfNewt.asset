@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Eye of Newt
   <Sprite>k__BackingField: {fileID: 21300000, guid: dcc8b2a6ae88f49d1982acdac5c78e7e, type: 3}
-  <Color>k__BackingField: {r: 1, g: 0.53705597, b: 0, a: 1}
+  <Color>k__BackingField: {r: 0.77254903, g: 0.34509805, b: 0.12156863, a: 1}

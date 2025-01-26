@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Mushroom
   <Sprite>k__BackingField: {fileID: 21300000, guid: 46ea0b42ea45e424ea0971a677e9463d, type: 3}
-  <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  <Color>k__BackingField: {r: 0.70980394, g: 0.07450981, b: 0.13333334, a: 1}

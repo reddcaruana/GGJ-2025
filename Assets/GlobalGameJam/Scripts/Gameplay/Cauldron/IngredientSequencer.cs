@@ -8,6 +8,7 @@ namespace GlobalGameJam.Gameplay
 {
     public class IngredientSequencer : MonoBehaviour
     {
+        private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
         public event System.Action<IngredientData> OnChanged;
         
         [Header("Cycling")]
@@ -16,6 +17,7 @@ namespace GlobalGameJam.Gameplay
         [Header("Visual Feedback")]
         [SerializeField] private float colorChangeDuration = 0.5f;
         [SerializeField] private Renderer cauldronRenderer;
+        [SerializeField] private Light cauldronGlow;
         
         public IngredientData Current { get; private set; }
         private Queue<IngredientData> ingredientQueue;
@@ -62,14 +64,17 @@ namespace GlobalGameJam.Gameplay
             }
 
             var targetColor = Current.Color;
-            var materialColor = cauldronRenderer.material.color;
+            var materialColor = cauldronRenderer.material.GetColor(EmissionColorID);
 
             var progress = 0f;
 
             while (progress < colorChangeDuration)
             {
                 progress += Time.deltaTime;
-                cauldronRenderer.material.color = Color.Lerp(materialColor, targetColor, progress / colorChangeDuration);
+                var colorValue = Color.Lerp(materialColor, targetColor, progress / colorChangeDuration);
+                
+                cauldronRenderer.material.SetColor(EmissionColorID, colorValue);
+                cauldronGlow.color = colorValue;
                 yield return null;
             }
         }
