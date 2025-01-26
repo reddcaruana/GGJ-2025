@@ -5,7 +5,13 @@ namespace GlobalGameJam.Gameplay
 {
     public class StorageBox : MonoBehaviour, IUsable
     {
+        private static readonly int MainTex = Shader.PropertyToID("_MainTex");
+
         [SerializeField] private CarryableData carryableData;
+        [SerializeField] private Transform ingredientAnchor;
+        [SerializeField] private SpriteRenderer ingredientSprite;
+        [SerializeField] private Light glowLight;
+        
         private Carryable storedInstance;
 
 #region Lifecycle Events
@@ -16,7 +22,10 @@ namespace GlobalGameJam.Gameplay
             {
                 case IngredientData ingredientData:
                     var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
-                    storedInstance = ingredientManager.Generate(ingredientData, transform);
+                    storedInstance = ingredientManager.Generate(ingredientData, ingredientAnchor);
+
+                    ingredientSprite.sprite = ingredientData.Sprite;
+                    glowLight.color = ingredientData.Color;
                     break;
             }
             

@@ -26,7 +26,7 @@ namespace GlobalGameJam.UI
         {
             var remaining = duration - current;
             var minutes = Mathf.Floor(remaining / 60);
-            var seconds = remaining % 60;
+            var seconds = (int)remaining % 60;
 
             timerText.text = $"{minutes:00}:{seconds:00}";
         }

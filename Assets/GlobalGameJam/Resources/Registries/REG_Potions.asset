@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Potions>k__BackingField:
   - {fileID: 11400000, guid: 89389858b8c504c10b535923a56937db, type: 2}
-  - {fileID: 11400000, guid: ebc44ac14e7454f1fb7d2410fbd153b9, type: 2}
-  - {fileID: 11400000, guid: 3192bd471e1cf4ee58eb0ed1b0debace, type: 2}

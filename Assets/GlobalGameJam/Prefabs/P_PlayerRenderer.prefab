@@ -200,7 +200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animator>k__BackingField: {fileID: 8603457566515919020}
-  <SpriteRenderer>k__BackingField: {fileID: 3389869566212049989}
+  <SpriteRenderers>k__BackingField:
+  - {fileID: 3389869566212049989}
+  - {fileID: 7717174728651291991}
 --- !u!1 &4621545145584553301
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +229,7 @@ Transform:
   m_GameObject: {fileID: 4621545145584553301}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 0}
+  m_LocalPosition: {x: 0.25, y: 1.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -276,7 +278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1848419005, guid: 5f8388e807ecd4d5dbd9188980c6661f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -285,7 +287,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7998596742513252666

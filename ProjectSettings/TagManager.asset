@@ -14,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Transparent
   - 
   - 
   - 
@@ -46,7 +46,7 @@ TagManager:
   m_RenderingLayers:
   - Default
   - Decals
-  - Light Layer 2
+  - Chests
   - Light Layer 3
   - Light Layer 4
   - Light Layer 5

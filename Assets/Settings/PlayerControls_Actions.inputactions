@@ -230,10 +230,21 @@
                 {
                     "name": "",
                     "id": "0b8a6c7e-0617-472f-9f82-03179f9a5a09",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebe16009-29f1-4bc1-bc24-8b9fc5f67812",
+                    "path": "<HID::usb gamepad           >/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
