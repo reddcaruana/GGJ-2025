@@ -1,3 +1,4 @@
+using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
 using GlobalGameJam.UI;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace GlobalGameJam.Level
         public TimerDisplay TimerDisplay;
         
         public Timer GameTimer;
+
+        public ChestBatch[] ChestBatches;
     }
     
     public class LevelManager : MonoBehaviour
@@ -23,6 +26,7 @@ namespace GlobalGameJam.Level
         public event System.Action OnLevelStop;
         
         [SerializeField] private PlayerBehavior[] playerBehaviors;
+        [SerializeField] private ChestBatch[] chestBatches;
         [SerializeField] private CauldronManager cauldronManager;
         [SerializeField] private ObjectiveDisplay objectiveDisplay;
         [SerializeField] private TimerDisplay timerDisplay;
@@ -37,6 +41,7 @@ namespace GlobalGameJam.Level
             levelContext = new LevelContext
             {
                 PlayerBehaviors = playerBehaviors,
+                ChestBatches = chestBatches,
                 CauldronManager = cauldronManager,
                 ObjectiveDisplay = objectiveDisplay,
                 TimerDisplay = timerDisplay,
@@ -56,6 +61,12 @@ namespace GlobalGameJam.Level
             {
                 levelContext.PlayerBehaviors[id].Bind(id);
             };
+
+            var ingredientRegistry = Singleton.GetOrCreateScriptableObject<IngredientRegistry>();
+            
+            var randomIndex = Random.Range(0, chestBatches.Length);
+            chestBatches[randomIndex].gameObject.SetActive(true);
+            chestBatches[randomIndex].SetChests(ingredientRegistry.Ingredients);
             
             OnLevelStart?.Invoke();
             

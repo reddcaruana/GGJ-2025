@@ -278,10 +278,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1872624136}
     m_Modifications:
-    - target: {fileID: 3644510874156779822, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4821616701461091543, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_Name
       value: Environment
@@ -325,10 +321,6 @@ PrefabInstance:
     - target: {fileID: 6305612533049162406, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6930741664820481481, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -38.49
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1073,6 +1065,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365636863}
   m_CullTransparentMesh: 1
+--- !u!114 &395378358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8950111197814244847, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+  m_PrefabInstance: {fileID: 96457835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f1f90655234e8f97ff3aa3ce2a5dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &398511199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,6 +2350,10 @@ MonoBehaviour:
   - {fileID: 1912566816}
   - {fileID: 1257646642}
   - {fileID: 1062666749}
+  chestBatches:
+  - {fileID: 1050157388}
+  - {fileID: 1620336737}
+  - {fileID: 395378358}
   cauldronManager: {fileID: 1807224588}
   objectiveDisplay: {fileID: 923810856}
   timerDisplay: {fileID: 1295099035}
@@ -3379,6 +3386,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031612303}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1050157388 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7332479385186259832, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+  m_PrefabInstance: {fileID: 96457835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f1f90655234e8f97ff3aa3ce2a5dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1062666747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4471,6 +4489,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1620336737 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2149833744580362110, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+  m_PrefabInstance: {fileID: 96457835}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f1f90655234e8f97ff3aa3ce2a5dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1642860904
 GameObject:
   m_ObjectHideFlags: 0
@@ -6124,10 +6153,6 @@ PrefabInstance:
       propertyPath: bagSpriteRenderer
       value: 
       objectReference: {fileID: 1337784529}
-    - target: {fileID: 1653195760455666756, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
-      propertyPath: m_FadeFactor
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 2285546834891396709, guid: ff39d17fde5394ad0b3467fe5509b167, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6244,7 +6269,7 @@ PrefabInstance:
     - target: {fileID: 7717174728651291991, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7e72bf47ddf9f47df98af6c6dd17fa3d, type: 3}
+      objectReference: {fileID: 21300000, guid: 1917c69a92d6340458f3a2c3d68b0883, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
