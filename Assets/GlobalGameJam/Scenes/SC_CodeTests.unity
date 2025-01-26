@@ -2438,7 +2438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4039217745009099942, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_Name
-      value: P_PlayerRenderer.003
+      value: P_PlayerRenderer_Snitchy
       objectReference: {fileID: 0}
     - target: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5070,7 +5070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4039217745009099942, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_Name
-      value: P_PlayerRenderer.004
+      value: P_PlayerRenderer_Miaw
       objectReference: {fileID: 0}
     - target: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5740,7 +5740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4039217745009099942, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_Name
-      value: P_PlayerRenderer.002
+      value: P_PlayerRenderer_Bitchy
       objectReference: {fileID: 0}
     - target: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6088,9 +6088,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 783714616}
     m_Modifications:
+    - target: {fileID: 3314316641752512964, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+      propertyPath: backHead
+      value: 
+      objectReference: {fileID: 21300000, guid: 90ce1b10036604e65bd0fa15a166a5a8, type: 3}
+    - target: {fileID: 3314316641752512964, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+      propertyPath: frontHead
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e72bf47ddf9f47df98af6c6dd17fa3d, type: 3}
     - target: {fileID: 4039217745009099942, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_Name
-      value: P_PlayerRenderer.001
+      value: P_PlayerRenderer_Witchy
       objectReference: {fileID: 0}
     - target: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6132,6 +6140,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7717174728651291991, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e72bf47ddf9f47df98af6c6dd17fa3d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

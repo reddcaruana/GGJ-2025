@@ -9,6 +9,7 @@ namespace GlobalGameJam.Data
     public class PotionData : CarryableData
     {
         [field: SerializeField] public IngredientData[] Ingredients { get; private set; }
+        [field: SerializeField] public int Cost { get; private set; }
 
         public int IngredientCount => Ingredients.Length;
     }
