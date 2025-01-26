@@ -102,7 +102,7 @@ namespace GlobalGameJam.Level
 
         public void AddPlayer(int index)
         {
-            if (index == 0)
+            if (index == 3)
             {
                 timeline.Play();
             }

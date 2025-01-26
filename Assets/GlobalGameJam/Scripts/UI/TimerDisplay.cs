@@ -28,6 +28,12 @@ namespace GlobalGameJam.UI
             var minutes = Mathf.Floor(remaining / 60);
             var seconds = (int)remaining % 60;
 
+            if (remaining <= 0)
+            {
+                minutes = 0;
+                seconds = 0;
+            }
+            
             timerText.text = $"{minutes:00}:{seconds:00}";
         }
 
