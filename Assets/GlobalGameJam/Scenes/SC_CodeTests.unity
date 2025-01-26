@@ -6092,10 +6092,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_PlayerRenderer.001
       objectReference: {fileID: 0}
-    - target: {fileID: 6062646237105714674, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6134,10 +6130,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6502889299633756365, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7234210279129258009, guid: a38915d013cef404a829d597cbb5cd56, type: 3}
-      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

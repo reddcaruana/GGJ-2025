@@ -79,7 +79,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 8dc169e0ad3964441a281166fe7d6734, type: 3}
+      value: {fileID: 21300000, guid: 68bd5e92cb8484819afa999942b3d9be, type: 3}
     attribute: m_Sprite
     path: Head
     classID: 212
@@ -172,7 +172,7 @@ AnimationClip:
     - {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
     - {fileID: 21300000, guid: 421f7de3132a5475e89a084d23d88363, type: 3}
     - {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
-    - {fileID: 21300000, guid: 8dc169e0ad3964441a281166fe7d6734, type: 3}
+    - {fileID: 21300000, guid: 68bd5e92cb8484819afa999942b3d9be, type: 3}
     - {fileID: 21300000, guid: 060b3537aad9a4643af190b2a114cd8f, type: 3}
     - {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
     - {fileID: 21300000, guid: 644bc496e0d5d45bebec727cd5acbd4f, type: 3}
