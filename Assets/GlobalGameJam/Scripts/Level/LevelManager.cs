@@ -115,6 +115,11 @@ namespace GlobalGameJam.Level
             levelContext.GameTimer.Activate();
             levelContext.GameTimer.OnComplete += OnTimerCompleteHandler;
             OnLevelStart?.Invoke();
+
+            for (var i = 0; i < 1; i++)
+            {
+                playerBehaviors[i].Bind(i);
+            }
         }
 
 #endregion
@@ -125,6 +130,11 @@ namespace GlobalGameJam.Level
         {
             OnLevelStop?.Invoke();
             levelContext.Timeline.Play();
+
+            foreach (var player in playerBehaviors)
+            {
+                player.Release();
+            }
         }
 
 #endregion
