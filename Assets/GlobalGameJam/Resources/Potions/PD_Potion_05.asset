@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec45de8720847319878f1ff9a7bf135, type: 3}
   m_Name: PD_Potion_05
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Donut Potion
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 3bb8be25c5dd9462d9f2c7e1f7240497, type: 3}
-  <DecalMaterial>k__BackingField: {fileID: 2100000, guid: 3b952eabd32b1c84ab7e3b3594d35bef, type: 2}
+  <Name>k__BackingField: Potion5
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 6cd59b3e586ff48bca896360d8cc6845, type: 3}
   <Ingredients>k__BackingField:
   - {fileID: 11400000, guid: 5edbcd13b4cea4cc089143824b58654f, type: 2}
   - {fileID: 11400000, guid: 9fc0b8a546fc24b449cc797a53ad6bbf, type: 2}
   - {fileID: 11400000, guid: 7a697755e66e04915b822564ed1b6264, type: 2}
+  <Cost>k__BackingField: 0
