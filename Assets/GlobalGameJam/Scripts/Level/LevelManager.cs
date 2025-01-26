@@ -18,6 +18,11 @@ namespace GlobalGameJam.Level
         public Timer GameTimer;
 
         public ChestBatch[] ChestBatches;
+
+        public ScoreManager Score;
+        public LeaderboardManager Leaderboard;
+
+        public ShippingBin ShippingBin;
     }
     
     public class LevelManager : MonoBehaviour
@@ -29,10 +34,15 @@ namespace GlobalGameJam.Level
         [SerializeField] private ChestBatch[] chestBatches;
         [SerializeField] private CauldronManager cauldronManager;
         [SerializeField] private ObjectiveDisplay objectiveDisplay;
+        [SerializeField] private ScoreManager score;
+        [SerializeField] private LeaderboardManager leaderboard;
+        [SerializeField] private ShippingBin shippingBin;
         [SerializeField] private TimerDisplay timerDisplay;
         [SerializeField] private Timer gameTimer;
 
         private LevelContext levelContext;
+
+        private SessionOutcome sessionOutcome;
         
 #region Lifecycle Events
 
@@ -42,9 +52,16 @@ namespace GlobalGameJam.Level
             {
                 PlayerBehaviors = playerBehaviors,
                 ChestBatches = chestBatches,
+                
                 CauldronManager = cauldronManager,
+                ShippingBin = shippingBin,
+                
                 ObjectiveDisplay = objectiveDisplay,
                 TimerDisplay = timerDisplay,
+                
+                Score = score,
+                Leaderboard = leaderboard,
+                
                 GameTimer = gameTimer
             };
         }
@@ -67,6 +84,8 @@ namespace GlobalGameJam.Level
             var randomIndex = Random.Range(0, chestBatches.Length);
             chestBatches[randomIndex].gameObject.SetActive(true);
             chestBatches[randomIndex].SetChests(ingredientRegistry.Ingredients);
+            
+            levelContext.Score.Bind(levelContext.ShippingBin);
             
             OnLevelStart?.Invoke();
             

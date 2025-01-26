@@ -278,6 +278,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1872624136}
     m_Modifications:
+    - target: {fileID: 3644510874156779822, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4821616701461091543, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_Name
       value: Environment
@@ -324,10 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 557596649439122447, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 1009595461}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
 --- !u!4 &96457836 stripped
@@ -1183,7 +1184,7 @@ Transform:
   m_GameObject: {fileID: 498846122}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.75, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2300,11 +2301,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841408810}
   m_CullTransparentMesh: 1
---- !u!4 &868719972 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 557596649439122447, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-  m_PrefabInstance: {fileID: 96457835}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &879054462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,6 +2360,9 @@ MonoBehaviour:
   - {fileID: 395378358}
   cauldronManager: {fileID: 1807224588}
   objectiveDisplay: {fileID: 923810856}
+  score: {fileID: 1684529759}
+  leaderboard: {fileID: 1150300387}
+  shippingBin: {fileID: 1009595465}
   timerDisplay: {fileID: 1295099035}
   gameTimer: {fileID: 767402451}
 --- !u!1 &886592892
@@ -3021,11 +3020,11 @@ Transform:
   m_GameObject: {fileID: 1009595460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: -0.99, y: 0.97, z: -14.78}
   m_LocalScale: {x: 3.95, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 868719972}
+  m_Father: {fileID: 2114088357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1009595462
 BoxCollider:
@@ -3518,7 +3517,7 @@ GameObject:
   - component: {fileID: 1150300386}
   - component: {fileID: 1150300387}
   m_Layer: 0
-  m_Name: ScoreManager
+  m_Name: LeaderboardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4879,6 +4878,7 @@ GameObject:
   - component: {fileID: 1684529758}
   - component: {fileID: 1684529757}
   - component: {fileID: 1684529756}
+  - component: {fileID: 1684529759}
   m_Layer: 0
   m_Name: MoneyCanvas
   m_TagString: Untagged
@@ -4969,6 +4969,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1684529759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684529754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a90cddcac14883b4c6aa4adf6b48de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 767122971}
 --- !u!1001 &1726343063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6061,6 +6074,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1009595461}
   - {fileID: 747817878}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c6a4095de77452ca8a63c04998f6037, type: 3}
   m_Name: REG_Potions
   m_EditorClassIdentifier: 
+  <Pootion>k__BackingField: {fileID: 11400000, guid: 87d6e026b9b334cf191f8736f8fc2e0e, type: 2}
   <Potions>k__BackingField:
   - {fileID: 11400000, guid: 89389858b8c504c10b535923a56937db, type: 2}
+  - {fileID: 11400000, guid: 8d5adddaf7169445e887a8669d9cec8b, type: 2}
+  - {fileID: 11400000, guid: 49621203b38c04306b402c939442a478, type: 2}
+  - {fileID: 11400000, guid: 1f666a2b669514ff2a064b8c665dc26f, type: 2}
+  - {fileID: 11400000, guid: 13a3ff1f4779043c28b08a1495f227e3, type: 2}
+  - {fileID: 11400000, guid: 25cf48df50c514fcfb2567d9fc43344a, type: 2}
