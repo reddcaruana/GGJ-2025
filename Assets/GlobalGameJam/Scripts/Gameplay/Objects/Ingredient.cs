@@ -7,6 +7,8 @@ namespace GlobalGameJam.Gameplay
     {
         private const float ExpandColliderRadius = 0.1f;
 
+        public event System.Action OnUsed; 
+
 #region Methods
 
         public void Clear()
@@ -33,6 +35,7 @@ namespace GlobalGameJam.Gameplay
         public void Use(PlayerContext playerContext)
         {
             playerContext.Bag.Carry(Data);
+            OnUsed?.Invoke();
             
             if (AttachedRigidbody.isKinematic == false)
             {
