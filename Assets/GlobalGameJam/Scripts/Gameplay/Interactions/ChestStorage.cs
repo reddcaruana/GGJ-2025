@@ -23,11 +23,6 @@ namespace GlobalGameJam.Gameplay
             animator = GetComponent<Animator>();
         }
 
-        private void Start()
-        {
-            SetData(data);
-        }
-
 #endregion
 
 #region Methods

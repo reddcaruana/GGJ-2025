@@ -64,13 +64,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 9cac5622e978e44afa60a323408ca84b, type: 3}
+      value: {fileID: 21300000, guid: 2beb3aafdbc9d44948d4d03f475c9db9, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 7336c5b2c36944f889db2cef526b9ab8, type: 3}
+      value: {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: b521430ba4f6d4d77bd7f9fce8ada7f1, type: 3}
+      value: {fileID: 21300000, guid: 421f7de3132a5475e89a084d23d88363, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: 7336c5b2c36944f889db2cef526b9ab8, type: 3}
+      value: {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
     attribute: m_Sprite
     path: Body
     classID: 212
@@ -82,6 +82,36 @@ AnimationClip:
       value: {fileID: 21300000, guid: 8dc169e0ad3964441a281166fe7d6734, type: 3}
     attribute: m_Sprite
     path: Head
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 060b3537aad9a4643af190b2a114cd8f, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: 644bc496e0d5d45bebec727cd5acbd4f, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
+    attribute: m_Sprite
+    path: RightArm
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 21300000, guid: ffbdbb050f7eb4b279722ee7a881c168, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: e3092db330d2e49b4a12c5a230707573, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: 69b2647e793b94cac8cbdb88b3f31aa0, type: 3}
+    - time: 0.5
+      value: {fileID: 21300000, guid: e3092db330d2e49b4a12c5a230707573, type: 3}
+    attribute: m_Sprite
+    path: LeftArm
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -119,12 +149,38 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 1806956327
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    - serializedVersion: 2
+      path: 3951233754
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 9cac5622e978e44afa60a323408ca84b, type: 3}
-    - {fileID: 21300000, guid: 7336c5b2c36944f889db2cef526b9ab8, type: 3}
-    - {fileID: 21300000, guid: b521430ba4f6d4d77bd7f9fce8ada7f1, type: 3}
-    - {fileID: 21300000, guid: 7336c5b2c36944f889db2cef526b9ab8, type: 3}
+    - {fileID: 21300000, guid: 2beb3aafdbc9d44948d4d03f475c9db9, type: 3}
+    - {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
+    - {fileID: 21300000, guid: 421f7de3132a5475e89a084d23d88363, type: 3}
+    - {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
     - {fileID: 21300000, guid: 8dc169e0ad3964441a281166fe7d6734, type: 3}
+    - {fileID: 21300000, guid: 060b3537aad9a4643af190b2a114cd8f, type: 3}
+    - {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
+    - {fileID: 21300000, guid: 644bc496e0d5d45bebec727cd5acbd4f, type: 3}
+    - {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
+    - {fileID: 21300000, guid: ffbdbb050f7eb4b279722ee7a881c168, type: 3}
+    - {fileID: 21300000, guid: e3092db330d2e49b4a12c5a230707573, type: 3}
+    - {fileID: 21300000, guid: 69b2647e793b94cac8cbdb88b3f31aa0, type: 3}
+    - {fileID: 21300000, guid: e3092db330d2e49b4a12c5a230707573, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
