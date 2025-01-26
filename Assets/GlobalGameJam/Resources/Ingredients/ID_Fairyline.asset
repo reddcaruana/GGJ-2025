@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ID_Fairyline
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Fairyline
-  <Sprite>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 5b30f4f1b400a48d787b5d7a216b343f, type: 3}
   <Color>k__BackingField: {r: 0, g: 0.47820997, b: 1, a: 1}

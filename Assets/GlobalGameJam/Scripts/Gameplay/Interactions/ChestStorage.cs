@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
-    public class StorageBox : MonoBehaviour, IUsable
+    public class ChestStorage : MonoBehaviour, IUsable
     {
         private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
