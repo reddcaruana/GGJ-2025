@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
+using GlobalGameJam.Level;
 using TMPro;
 using UnityEditorInternal;
 using UnityEngine;
@@ -37,6 +38,7 @@ namespace GlobalGameJam.Lobby
         private int attempts = 1;
         private bool canLogIn = false;
         private Coroutine activeCoroutine;
+        private int playerID;
 
 #region Lifecycle Events
 
@@ -136,6 +138,7 @@ namespace GlobalGameJam.Lobby
         {
             var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
             playerInput = playerDataManager.GetPlayerInput(playerNumber);
+            playerID = playerNumber;
 
             playerInput.SwitchCurrentActionMap("Lobby");
 
@@ -187,7 +190,9 @@ namespace GlobalGameJam.Lobby
             }
             
             animator.Play(LoggedInAnimatorHash);
-            // TODO: Register player
+
+            var levelManager = Singleton.GetOrCreateMonoBehaviour<LevelManager>();
+            levelManager.AddPlayer(playerID);
         }
         
         /// <summary>

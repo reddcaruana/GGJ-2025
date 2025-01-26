@@ -1,5 +1,6 @@
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
+using GlobalGameJam.Level;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -16,6 +17,7 @@ namespace GlobalGameJam.Lobby
         [SerializeField] private PlayerAccount[] playerAccounts;
         
         private PlayerDataManager playerDataManager;
+        private LevelManager levelManager;
 
 #region Lifecycle Events
 
@@ -25,6 +27,7 @@ namespace GlobalGameJam.Lobby
         private void Awake()
         {
             playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
+            levelManager = Singleton.GetOrCreateMonoBehaviour<LevelManager>();
         }
 
         /// <summary>

@@ -96,7 +96,8 @@ namespace GlobalGameJam.Level
 
         public void AddPlayer(int index)
         {
-            if (index == 3)
+            Debug.Log(index);
+            if (index == 0)
             {
                 timeline.Play();
             }
