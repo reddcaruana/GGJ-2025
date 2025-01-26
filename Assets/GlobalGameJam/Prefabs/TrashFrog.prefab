@@ -48,10 +48,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3712181942456804278, guid: 1b0529837a4a4fa4ab5030f8414e3236, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 376a7b4d74bcbca4cb24f9d8588956c6, type: 2}
+    - target: {fileID: -401160514108067353, guid: 1b0529837a4a4fa4ab5030f8414e3236, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 376a7b4d74bcbca4cb24f9d8588956c6, type: 2}
     - target: {fileID: 919132149155446097, guid: 1b0529837a4a4fa4ab5030f8414e3236, type: 3}
       propertyPath: m_Name
       value: TrashFrog
       objectReference: {fileID: 0}
+    - target: {fileID: 3099890020775044894, guid: 1b0529837a4a4fa4ab5030f8414e3236, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 376a7b4d74bcbca4cb24f9d8588956c6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
