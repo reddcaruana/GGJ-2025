@@ -44,7 +44,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.666553, g: 0.9245283, b: 0.10902455, a: 1}
-  m_Intensity: 25
+  m_Intensity: 50
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -86,7 +86,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -690,7 +690,7 @@ Transform:
   m_GameObject: {fileID: 3720318697320192467}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.436449, y: 17.148726, z: -26.8}
+  m_LocalPosition: {x: -11.436449, y: 17.148726, z: -25.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -707,7 +707,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.666553, g: 0.9245283, b: 0.10902455, a: 1}
-  m_Intensity: 25
+  m_Intensity: 50
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -749,7 +749,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -6413,7 +6413,7 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 0.666553, g: 0.9245283, b: 0.10902455, a: 1}
-  m_Intensity: 25
+  m_Intensity: 50
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6455,7 +6455,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -6746,7 +6746,7 @@ Transform:
   m_GameObject: {fileID: 8158670878926998946}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.7, y: 17.148726, z: -14.9}
+  m_LocalPosition: {x: 6.7, y: 17.148726, z: -20.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6805,7 +6805,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
