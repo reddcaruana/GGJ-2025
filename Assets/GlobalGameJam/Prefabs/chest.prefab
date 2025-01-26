@@ -398,7 +398,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 2.4, y: 2, z: 2.4}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4120064519269466810
 MonoBehaviour:
@@ -413,6 +413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientAnchor: {fileID: 8556214557537764449}
-  carryableData: {fileID: 0}
   ingredientSprite: {fileID: 3280951188218260034}
   glowLight: {fileID: 4565759148695977452}
+  data: {fileID: 0}
