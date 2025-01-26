@@ -1,5 +1,6 @@
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
+using GlobalGameJam.Lobby;
 using GlobalGameJam.UI;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -9,7 +10,9 @@ namespace GlobalGameJam.Level
     public struct LevelContext
     {
         public PlayerBehavior[] PlayerBehaviors;
-        
+
+        public LoginScreen LoginScreen; 
+            
         public CauldronManager CauldronManager;
 
         public ObjectiveDisplay ObjectiveDisplay;
@@ -32,9 +35,10 @@ namespace GlobalGameJam.Level
     {
         public event System.Action OnLevelStart;
         public event System.Action OnLevelStop;
-        
+
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private ChestBatch[] chestBatches;
+        [SerializeField] private LoginScreen loginScreen;
         [SerializeField] private CauldronManager cauldronManager;
         [SerializeField] private ObjectiveDisplay objectiveDisplay;
         [SerializeField] private ScoreManager score;
@@ -54,6 +58,8 @@ namespace GlobalGameJam.Level
         {
             levelContext = new LevelContext
             {
+                LoginScreen = loginScreen,
+                
                 PlayerBehaviors = playerBehaviors,
                 ChestBatches = chestBatches,
                 
@@ -96,11 +102,29 @@ namespace GlobalGameJam.Level
 
         public void AddPlayer(int index)
         {
-            Debug.Log(index);
             if (index == 0)
             {
                 timeline.Play();
             }
+        }
+
+        public void Begin()
+        {
+            levelContext.LoginScreen.Deactivate();
+            
+            levelContext.GameTimer.Activate();
+            levelContext.GameTimer.OnComplete += OnTimerCompleteHandler;
+            OnLevelStart?.Invoke();
+        }
+
+#endregion
+
+#region Event Handlers
+
+        private void OnTimerCompleteHandler()
+        {
+            OnLevelStop?.Invoke();
+            levelContext.Timeline.Play();
         }
 
 #endregion

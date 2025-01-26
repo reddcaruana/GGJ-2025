@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa30334dde2545bea0c70c28b68ccfc0, type: 3}
-  m_Name: PRF_Miaow
+  m_Script: {fileID: 11500000, guid: d6fa2d92fc1b3f34da284357edf89c3b, type: 3}
+  m_Name: BeginGame
   m_EditorClassIdentifier: 
-  <Username>k__BackingField: Miaow
-  <PasswordLength>k__BackingField: 3
-  <Attempts>k__BackingField: 2
-  <Sprite>k__BackingField: {fileID: 21300000, guid: 1917c69a92d6340458f3a2c3d68b0883, type: 3}
