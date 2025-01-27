@@ -1153,7 +1153,7 @@ GameObject:
   - component: {fileID: 247826378}
   - component: {fileID: 247826376}
   m_Layer: 0
-  m_Name: TimerCamera
+  m_Name: TimerRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1167,13 +1167,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247826374}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 310}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6527454, y: 0.6159276, z: 307.16074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1295099031}
-  m_Father: {fileID: 1678753693}
+  m_Father: {fileID: 1697410146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &247826376
 MonoBehaviour:
@@ -3253,7 +3253,7 @@ GameObject:
   - component: {fileID: 791857613}
   - component: {fileID: 791857614}
   m_Layer: 0
-  m_Name: MoneyCamera
+  m_Name: MoneyRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3267,13 +3267,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791857611}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 320}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6527454, y: 0.6159276, z: 317.16074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1684529755}
-  m_Father: {fileID: 1678753693}
+  m_Father: {fileID: 1697410146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &791857613
 Camera:
@@ -3720,11 +3720,11 @@ MonoBehaviour:
   - {fileID: 395378358}
   loginScreen: {fileID: 997298381}
   objectiveUI: {fileID: 0}
-  score: {fileID: 1684529759}
+  score: {fileID: 0}
   leaderboard: {fileID: 1150300387}
   timeline: {fileID: 1678753694}
   shippingBin: {fileID: 1009595465}
-  timerDisplay: {fileID: 1295099035}
+  timerUI: {fileID: 0}
   gameTimer: {fileID: 767402451}
 --- !u!114 &879054465
 MonoBehaviour:
@@ -4108,7 +4108,7 @@ GameObject:
   - component: {fileID: 914252246}
   - component: {fileID: 914252249}
   m_Layer: 5
-  m_Name: End
+  m_Name: Leaderboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5748,6 +5748,7 @@ Transform:
   m_Children:
   - {fileID: 979752942}
   - {fileID: 879054463}
+  - {fileID: 1299270587}
   - {fileID: 767402450}
   - {fileID: 1150300386}
   m_Father: {fileID: 0}
@@ -5764,7 +5765,7 @@ GameObject:
   - component: {fileID: 1252152012}
   - component: {fileID: 1252152010}
   m_Layer: 0
-  m_Name: LoginCamera
+  m_Name: LoginRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5779,12 +5780,12 @@ Transform:
   m_GameObject: {fileID: 1252152008}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 200}
+  m_LocalPosition: {x: -0.6527454, y: 0.6159276, z: 197.16074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 997298377}
-  m_Father: {fileID: 1678753693}
+  m_Father: {fileID: 1697410146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1252152010
 MonoBehaviour:
@@ -6076,6 +6077,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345672df654c4210b02c742b92ab148e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1299270586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299270587}
+  - component: {fileID: 1299270588}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299270587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299270586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1233214788}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299270588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299270586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b901f1140c40f889cda7993ad208f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1325346312
@@ -6412,7 +6457,7 @@ GameObject:
   - component: {fileID: 1436197515}
   - component: {fileID: 1436197516}
   m_Layer: 0
-  m_Name: EndCamera
+  m_Name: LeaderboardRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6427,12 +6472,12 @@ Transform:
   m_GameObject: {fileID: 1436197513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 220}
+  m_LocalPosition: {x: -0.6527454, y: 0.6159276, z: 217.16074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 914252244}
-  m_Father: {fileID: 1678753693}
+  m_Father: {fileID: 1697410146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &1436197515
 Camera:
@@ -7597,11 +7642,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 961739753}
-  - {fileID: 1252152009}
-  - {fileID: 1436197514}
-  - {fileID: 2109449890}
-  - {fileID: 247826375}
-  - {fileID: 791857612}
   - {fileID: 512940280}
   - {fileID: 1436786546}
   - {fileID: 1711537574}
@@ -7802,7 +7842,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1684529754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60a90cddcac14883b4c6aa4adf6b48de, type: 3}
+  m_Script: {fileID: 11500000, guid: 114b7d429b51430087c7885f771568b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 767122971}
@@ -7894,6 +7934,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 287053267}
+  - {fileID: 1252152009}
+  - {fileID: 1436197514}
+  - {fileID: 2109449890}
+  - {fileID: 247826375}
+  - {fileID: 791857612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709381895
@@ -9634,7 +9679,7 @@ GameObject:
   - component: {fileID: 2109449891}
   - component: {fileID: 2109449892}
   m_Layer: 0
-  m_Name: HowToPlayCamera
+  m_Name: HowToPlayRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9649,12 +9694,12 @@ Transform:
   m_GameObject: {fileID: 2109449889}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 210}
+  m_LocalPosition: {x: -0.6527454, y: 0.6159276, z: 207.16074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 511502434}
-  m_Father: {fileID: 1678753693}
+  m_Father: {fileID: 1697410146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2109449891
 Camera:

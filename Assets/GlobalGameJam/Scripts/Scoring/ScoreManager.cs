@@ -1,77 +1,63 @@
-using GlobalGameJam.Data;
-using GlobalGameJam.Gameplay;
-using TMPro;
 using UnityEngine;
 
 namespace GlobalGameJam
 {
+    /// <summary>
+    /// Manages the score in the game, handling score updates and events.
+    /// </summary>
     public class ScoreManager : MonoBehaviour
     {
-        [SerializeField] private TMP_Text scoreText;
-        
+        /// <summary>
+        /// The current score.
+        /// </summary>
         private int score;
-        private int time;
-        private string group;
 
-        private ShippingBin shippingBin;
+        /// <summary>
+        /// Event binding for the add score event.
+        /// </summary>
+        private EventBinding<ScoreEvents.Add> onAddEventBinding;
 
-#region Methods
-        
-        public void Add(PotionData potionData)
+#region Lifecycle Events
+
+        /// <summary>
+        /// Initializes the event binding for the add score event.
+        /// </summary>
+        private void Awake()
         {
-            score += score;
-            time += time;
+            onAddEventBinding = new EventBinding<ScoreEvents.Add>(OnAddEventHandler);
         }
 
-        public void Clear()
+        /// <summary>
+        /// Registers the event binding when the object is enabled.
+        /// </summary>
+        private void OnEnable()
         {
-            score = 0;
-            time = 0;
-            group = string.Empty;
+            EventBus<ScoreEvents.Add>.Register(onAddEventBinding);
         }
 
-        public SessionOutcome GetOutcome()
+        /// <summary>
+        /// Deregisters the event binding when the object is disabled.
+        /// </summary>
+        private void OnDisable()
         {
-            return new SessionOutcome
-            {
-                Name = group,
-                Score = score,
-                Time = time
-            };
-        }
-
-        public void SetGroup(string newGroup)
-        {
-            group = newGroup;
-        }
-
-#endregion
-
-#region Binding
-
-        public void Bind(ShippingBin targetShippingBin)
-        {
-            shippingBin = targetShippingBin;
-            shippingBin.OnUse += OnShippingBinUsedHandler;
-        }
-
-        public void Release()
-        {
-            if (shippingBin is not null)
-            {
-                shippingBin.OnUse -= OnShippingBinUsedHandler;
-                shippingBin = null;
-            }
+            EventBus<ScoreEvents.Add>.Deregister(onAddEventBinding);
         }
 
 #endregion
 
 #region Event Handlers
 
-        private void OnShippingBinUsedHandler(PotionData data)
+        /// <summary>
+        /// Handles the add score event by updating the score and raising a score update event.
+        /// </summary>
+        /// <param name="obj">The add score event data.</param>
+        private void OnAddEventHandler(ScoreEvents.Add obj)
         {
-            score += data.Cost;
-            scoreText.text = score.ToString();
+            score += obj.Value;
+            EventBus<ScoreEvents.Update>.Raise(new ScoreEvents.Update
+            {
+                Value = score
+            });
         }
 
 #endregion

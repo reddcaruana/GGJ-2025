@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GlobalGameJam.UI
 {
-    public class TimerDisplay : MonoBehaviour
+    public class TimerUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text timerText;
 
