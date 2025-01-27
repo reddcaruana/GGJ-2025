@@ -652,10 +652,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 590480598963337111, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-      propertyPath: m_RenderingLayerMask
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4821616701461091543, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_Name
       value: ---------- Environment ----------
@@ -706,10 +702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7206622920176267885, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 498846123}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
 --- !u!1001 &118947121
@@ -1066,11 +1059,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181978312}
   m_CullTransparentMesh: 1
---- !u!4 &214320558 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7206622920176267885, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-  m_PrefabInstance: {fileID: 96457835}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &233299921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2008,53 +1996,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447113528}
   m_CullTransparentMesh: 1
---- !u!1 &498846122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 498846123}
-  - component: {fileID: 498846124}
-  m_Layer: 0
-  m_Name: ThrowAnchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &498846123
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498846122}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 214320558}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &498846124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498846122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf5740277e94fd5b4b9b4ad97990ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 5
-  angle: 45
-  direction: 4
 --- !u!1 &511502433
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,7 +4042,7 @@ GameObject:
   - component: {fileID: 889415380}
   - component: {fileID: 889415379}
   m_Layer: 5
-  m_Name: TMP_Team Name
+  m_Name: TMP_Instruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4146,7 +4087,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ENTER A TEAM NAME
+  m_text: Press any button to sign off
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbd2dba04b5dc4c5cbabee11179f2517, type: 2}
   m_sharedMaterial: {fileID: 8700668697429113108, guid: cbd2dba04b5dc4c5cbabee11179f2517, type: 2}
@@ -5151,7 +5092,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4234565203837049665, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Name
-      value: P_ScoreInput.003
+      value: P_LeaderBoard.003
       objectReference: {fileID: 0}
     - target: {fileID: 6037555766134366764, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Pivot.x
@@ -5735,8 +5676,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0.95, y: 1}
-  m_AnchoredPosition: {x: 26.5, y: -110}
-  m_SizeDelta: {x: 53, y: 100}
+  m_AnchoredPosition: {x: 4.5, y: -110}
+  m_SizeDelta: {x: 8.9999, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1221950041
 MonoBehaviour:
@@ -5758,7 +5699,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ENTER A TEAM NAME
+  m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbd2dba04b5dc4c5cbabee11179f2517, type: 2}
   m_sharedMaterial: {fileID: 8700668697429113108, guid: cbd2dba04b5dc4c5cbabee11179f2517, type: 2}
@@ -6253,7 +6194,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4234565203837049665, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Name
-      value: P_ScoreInput.004
+      value: P_LeaderBoard.004
       objectReference: {fileID: 0}
     - target: {fileID: 6037555766134366764, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Pivot.x
@@ -9878,7 +9819,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4234565203837049665, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Name
-      value: P_ScoreInput.002
+      value: P_LeaderBoard.002
       objectReference: {fileID: 0}
     - target: {fileID: 6037555766134366764, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Pivot.x
@@ -10704,7 +10645,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4234565203837049665, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Name
-      value: P_ScoreInput.001
+      value: P_LeaderBoard.001
       objectReference: {fileID: 0}
     - target: {fileID: 6037555766134366764, guid: 800cdc9edf85640c6881eec77cf26b33, type: 3}
       propertyPath: m_Pivot.x
