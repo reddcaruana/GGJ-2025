@@ -2,24 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using GlobalGameJam.Data;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-
 namespace GlobalGameJam.Gameplay
 {
     public class IngredientSequencer : MonoBehaviour
     {
-        private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
-        public event System.Action<IngredientData> OnChanged;
-        
-        [Header("Cycling")]
-        [SerializeField] private float cycleDuration = 3f;
+        [Header("Timing Values")]
+        [SerializeField] private float cycleDuration = 1.75f;
+        [SerializeField] private float colorChangeDuration = 0.15f;
 
-        [Header("Visual Feedback")]
-        [SerializeField] private float colorChangeDuration = 0.5f;
-        [SerializeField] private Renderer cauldronRenderer;
-        [SerializeField] private Light cauldronGlow;
-        
-        public IngredientData Current { get; private set; }
+        private IngredientData current;
         private Queue<IngredientData> ingredientQueue;
         
 #region Lifecycle Events
@@ -43,39 +34,19 @@ namespace GlobalGameJam.Gameplay
         {
             while (true)
             {
-                if (Current is not null)
+                if (current is not null)
                 {
-                    ingredientQueue.Enqueue(Current);
+                    ingredientQueue.Enqueue(current);
                 }
 
-                Current = ingredientQueue.Dequeue();
-                StartCoroutine(ChangeMaterialColorRoutine());
-                OnChanged?.Invoke(Current);
+                current = ingredientQueue.Dequeue();
+                EventBus<CauldronEvents.ChangedExpectedIngredient>.Raise(new CauldronEvents.ChangedExpectedIngredient
+                {
+                    Ingredient = current,
+                    ColorChangeDuration = colorChangeDuration
+                });
                 
                 yield return new WaitForSeconds(cycleDuration);
-            }
-        }
-
-        private IEnumerator ChangeMaterialColorRoutine()
-        {
-            if (Current is null)
-            {
-                yield break;
-            }
-
-            var targetColor = Current.Color;
-            var materialColor = cauldronRenderer.material.GetColor(EmissionColorID);
-
-            var progress = 0f;
-
-            while (progress < colorChangeDuration)
-            {
-                progress += Time.deltaTime;
-                var colorValue = Color.Lerp(materialColor, targetColor, progress / colorChangeDuration);
-                
-                cauldronRenderer.material.SetColor(EmissionColorID, colorValue);
-                cauldronGlow.color = colorValue;
-                yield return null;
             }
         }
 

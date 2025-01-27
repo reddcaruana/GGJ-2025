@@ -17,7 +17,7 @@ namespace GlobalGameJam.UI
         public void Bind(CauldronContext context)
         {
             cauldronContext = context;
-            cauldronContext.CauldronObjective.OnChanged += TargetPotionChangedHandler;
+            cauldronContext.Objective.OnChanged += TargetPotionChangedHandler;
         }
 
 #endregion

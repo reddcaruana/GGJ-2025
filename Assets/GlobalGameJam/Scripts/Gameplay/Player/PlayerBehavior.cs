@@ -150,6 +150,7 @@ namespace GlobalGameJam.Gameplay
             playerContext.Interaction.Interact(playerContext);
             if (bagWasFull == false)
             {
+                playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);
                 return;
             }
 

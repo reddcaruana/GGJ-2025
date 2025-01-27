@@ -34,6 +34,11 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public void Use(PlayerContext playerContext)
         {
+            if (playerContext.Bag.IsFull)
+            {
+                return;
+            }
+            
             playerContext.Bag.Carry(Data);
             OnUsed?.Invoke();
             

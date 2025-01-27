@@ -17,7 +17,7 @@ namespace GlobalGameJam.Gameplay
 
 #region Event Handlers
 
-        public void OnIngredientAddedHandler(IngredientData ingredient)
+        public void OnAddedHandler(IngredientData ingredient)
         {
             if (ingredient != expected)
             {
@@ -50,7 +50,7 @@ namespace GlobalGameJam.Gameplay
             OnSuccess?.Invoke();
         }
 
-        public void OnExpectedIngredientChangedHandler(IngredientData ingredient)
+        public void OnExpectedChangedHandler(IngredientData ingredient)
         {
             expected = ingredient;
         }

@@ -12,7 +12,7 @@ namespace GlobalGameJam.Endgame
         [SerializeField] private TMP_Text charactersText;
         
         private char[] groupName = { '_', '_', '_', '_' };
-        private int inputtedCharacters = 0;
+        private int inputtedCharacters;
         
 #region Methods
 

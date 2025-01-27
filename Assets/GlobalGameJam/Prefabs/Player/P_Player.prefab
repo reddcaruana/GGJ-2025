@@ -404,5 +404,5 @@ MonoBehaviour:
   bagAnchor: {fileID: 4547176660479118518}
   bagSpriteRenderer: {fileID: 0}
   throwSpeed: 10
-  throwAngle: 45
+  throwAngle: 50
   throwDirection: {fileID: 1224883257406806750}

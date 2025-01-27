@@ -4,13 +4,14 @@ namespace GlobalGameJam.Gameplay
 {
     public struct CauldronContext
     {
-        public CauldronMixture CauldronMixture;
-        public CauldronObjective CauldronObjective;
+        public CauldronMixture Mixture;
+        public CauldronObjective Objective;
+        public CauldronContents Contents;
         
-        public IngredientCatcher IngredientCatcher;
-        public IngredientSequencer IngredientSequencer;
+        public IngredientCatcher Catcher;
+        public IngredientSequencer Sequencer;
 
-        public Transform ThrowAnchor;
-        public Throw CauldronThrow;
+        public Transform PotionAnchor;
+        public Throw Throw;
     }
 }
