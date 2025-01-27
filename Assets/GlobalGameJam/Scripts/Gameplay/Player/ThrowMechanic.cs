@@ -2,12 +2,12 @@ using GlobalGameJam.Data;
 
 namespace GlobalGameJam.Gameplay
 {
-    public class Throw
+    public class ThrowMechanic
     {
         private readonly float speed;
         private readonly float angle;
 
-        public Throw(float speed, float angle)
+        public ThrowMechanic(float speed, float angle)
         {
             this.speed = speed;
             this.angle = angle;
@@ -23,7 +23,6 @@ namespace GlobalGameJam.Gameplay
             var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
             var ingredient = ingredientManager.Generate(ingredientData, bag.GetAnchor());
             ingredient.Throw(direction.ToVector(), speed, angle);
-            
             
             // TODO: Throw the object
             bag.Clear();

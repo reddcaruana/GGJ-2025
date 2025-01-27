@@ -6,8 +6,6 @@ namespace GlobalGameJam.Gameplay
     public class CauldronContents : MonoBehaviour
     {
         [SerializeField] private CauldronIngredient[] ingredients;
-        [SerializeField] private float minRadius = 1.0f;
-        [SerializeField] private float maxRadius = 2.0f;
         
         private int index;
         

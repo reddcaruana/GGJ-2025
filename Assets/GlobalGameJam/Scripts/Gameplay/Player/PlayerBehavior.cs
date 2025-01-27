@@ -56,7 +56,7 @@ namespace GlobalGameJam.Gameplay
                 Movement = new Movement(speed, attachedRigidbody),
                 Interaction = new Interaction(interactionAnchor, interactionDistance, interactionRadius, interactionLayer),
                 Bag = new Bag(bagAnchor, bagSpriteRenderer),
-                Throw = new Throw(throwSpeed, throwAngle)
+                ThrowMechanic = new ThrowMechanic(throwSpeed, throwAngle)
             };
         }
 
@@ -156,7 +156,7 @@ namespace GlobalGameJam.Gameplay
 
             if (playerContext.Bag.IsFull)
             {
-                playerContext.Throw.Drop(playerContext.Bag, facingDirection);
+                playerContext.ThrowMechanic.Drop(playerContext.Bag, facingDirection);
             }
             
             playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);

@@ -1,11 +1,10 @@
 using GlobalGameJam.Data;
-using GlobalGameJam.Gameplay;
 using GlobalGameJam.Lobby;
 using GlobalGameJam.UI;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace GlobalGameJam.Level
+namespace GlobalGameJam.Gameplay
 {
     public struct LevelContext
     {

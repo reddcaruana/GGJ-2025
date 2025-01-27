@@ -1,6 +1,5 @@
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
-using GlobalGameJam.Level;
 using UnityEngine;
 using UnityEngine.Playables;
 

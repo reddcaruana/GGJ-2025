@@ -5,7 +5,7 @@ namespace GlobalGameJam.Gameplay
     /// <summary>
     /// Abstract base class for listening to cauldron color change events.
     /// </summary>
-    public abstract class CauldronColorChangeListener : MonoBehaviour
+    public abstract class ExpectedIngredientChangeListener : MonoBehaviour
     {
         private EventBinding<CauldronEvents.ChangedExpectedIngredient> onChangedExpectedIngredientBinding;
 
@@ -22,7 +22,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Registers the event binding when the object is enabled.
         /// </summary>
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             EventBus<CauldronEvents.ChangedExpectedIngredient>.Register(onChangedExpectedIngredientBinding);
         }
@@ -30,7 +30,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Deregisters the event binding when the object is disabled.
         /// </summary>
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             EventBus<CauldronEvents.ChangedExpectedIngredient>.Deregister(onChangedExpectedIngredientBinding);
         }

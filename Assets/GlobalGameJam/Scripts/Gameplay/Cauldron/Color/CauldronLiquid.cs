@@ -4,12 +4,13 @@ using UnityEngine;
 namespace GlobalGameJam.Gameplay
 {
     /// <summary>
-    /// Manages the light component to change its color based on game events.
+    /// Listens for color change events to update the cauldron liquid color.
     /// </summary>
-    [RequireComponent(typeof(Light))]
-    public class CauldronLight : CauldronColorChangeListener
+    [RequireComponent(typeof(MeshRenderer))]
+    public class CauldronLiquid : ExpectedIngredientChangeListener
     {
-        private Light attachedLight;
+        private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
+        private MeshRenderer meshRenderer;
         private Coroutine activeCoroutine;
 
 #region Coroutines
@@ -23,16 +24,18 @@ namespace GlobalGameJam.Gameplay
         private IEnumerator ChangeColorRoutine(Color targetColor, float duration)
         {
             var targetTime = Time.time + duration;
-            var startingColor = attachedLight.color;
+            var startingColor = meshRenderer.material.GetColor(EmissionColorID);
 
             while (Time.time < targetTime)
             {
                 var t = (targetTime - Time.time) / duration;
-                attachedLight.color = Color.Lerp(startingColor, targetColor, 1 - t);
+                var color = Color.Lerp(startingColor, targetColor, 1 - t);
+                meshRenderer.material.SetColor(EmissionColorID, color);
+
                 yield return null;
             }
+            meshRenderer.material.SetColor(EmissionColorID, targetColor);
 
-            attachedLight.color = targetColor;
             activeCoroutine = null;
         }
 
@@ -40,20 +43,14 @@ namespace GlobalGameJam.Gameplay
 
 #region Overrides of CauldronColorChangeListener
 
-        /// <summary>
-        /// Initializes the attached light component and event binding.
-        /// </summary>
+        /// <inheritdoc />
         protected override void Awake()
         {
-            attachedLight = GetComponent<Light>();
+            meshRenderer = GetComponent<MeshRenderer>();
             base.Awake();
         }
-        
-        /// <summary>
-        /// Event handler for when the expected ingredient changes.
-        /// Stops any active color change coroutine and starts a new one.
-        /// </summary>
-        /// <param name="event">The event data containing the new ingredient and color change duration.</param>
+
+        /// <inheritdoc />
         protected override void OnChangedExpectedIngredientHandler(CauldronEvents.ChangedExpectedIngredient @event)
         {
             if (activeCoroutine != null)
