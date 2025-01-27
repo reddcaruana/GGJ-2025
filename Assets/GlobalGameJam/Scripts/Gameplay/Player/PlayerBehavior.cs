@@ -12,31 +12,27 @@ namespace GlobalGameJam.Gameplay
         private static readonly int AnimatorIsMovingBool = Animator.StringToHash("IsMoving");
         private static readonly int AnimatorIsCarryingObjectBool = Animator.StringToHash("IsCarryingObject");
 
-        [Header("Rendering")]
-        [SerializeField] private PlayerRenderer playerRenderer;
-        
-        [Header("Movement")]
-        [SerializeField] private float speed = 7.5f;
-        
-        [Header("Interaction")]
-        [SerializeField] private Transform interactionAnchor;
+        [Header("Rendering")] [SerializeField] private PlayerRenderer playerRenderer;
+
+        [Header("Movement")] [SerializeField] private float speed = 7.5f;
+
+        [Header("Interaction")] [SerializeField]
+        private Transform interactionAnchor;
+
         [SerializeField] private float interactionDistance = 1.0f;
         [SerializeField] private float interactionRadius = 0.5f;
         [SerializeField] private LayerMask interactionLayer;
 
-        [Header("Bag")]
-        [SerializeField] private Transform bagAnchor;
+        [Header("Bag")] [SerializeField] private Transform bagAnchor;
         [SerializeField] private SpriteRenderer bagSpriteRenderer;
 
-        [Header("Throwing")]
-        [SerializeField] private float throwSpeed = 10f;
+        [Header("Throwing")] [SerializeField] private float throwSpeed = 10f;
         [SerializeField] private float throwAngle = 45f;
 
-        [Header("Add-Ons")]
-        [SerializeField] private Transform throwDirection;
+        [Header("Add-Ons")] [SerializeField] private Transform throwDirection;
 
         private PlayerContext playerContext;
-        
+
         private PlayerInput playerInput;
 
         private InputAction moveAction;
@@ -47,6 +43,10 @@ namespace GlobalGameJam.Gameplay
 
 #region Lifecycle Events
 
+        /// <summary>
+        /// Called when the script instance is being loaded.
+        /// Initializes the player context with movement, interaction, bag, and throw components.
+        /// </summary>
         private void Awake()
         {
             var attachedRigidbody = GetComponent<Rigidbody>();
@@ -56,15 +56,23 @@ namespace GlobalGameJam.Gameplay
                 Movement = new Movement(speed, attachedRigidbody),
                 Interaction = new Interaction(interactionAnchor, interactionDistance, interactionRadius, interactionLayer),
                 Bag = new Bag(bagAnchor, bagSpriteRenderer),
-                ThrowMechanic = new ThrowMechanic(throwSpeed, throwAngle)
+                Throw = new Throw(throwSpeed, throwAngle)
             };
         }
 
+        /// <summary>
+        /// Called every fixed framerate frame.
+        /// Moves the player based on the input value.
+        /// </summary>
         private void FixedUpdate()
         {
             playerContext.Movement.Move(inputValue);
         }
 
+        /// <summary>
+        /// Called when the MonoBehaviour will be destroyed.
+        /// Releases the input actions.
+        /// </summary>
         private void OnDestroy()
         {
             Release();
@@ -74,11 +82,16 @@ namespace GlobalGameJam.Gameplay
 
 #region Methods
 
+        /// <summary>
+        /// Gets the direction based on the input vector.
+        /// </summary>
+        /// <param name="vector">The input vector.</param>
+        /// <returns>The direction corresponding to the input vector.</returns>
         public Direction GetDirection(Vector3 vector)
         {
             var dotProducts = new Dictionary<Direction, float>();
             var directions = System.Enum.GetValues(typeof(Direction)).Cast<Direction>();
-            
+
             foreach (var direction in directions)
             {
                 dotProducts.Add(direction, Vector3.Dot(inputValue, direction.ToVector()));
@@ -102,7 +115,7 @@ namespace GlobalGameJam.Gameplay
 #endregion
 
 #region IBindable Implementation
-        
+
         /// <inheritdoc />
         public void Bind(int playerNumber)
         {
@@ -129,12 +142,14 @@ namespace GlobalGameJam.Gameplay
                 moveAction.performed -= MoveHandler;
                 moveAction.canceled -= MoveHandler;
             }
+
             moveAction = null;
 
             if (interactionAction is not null)
             {
                 interactionAction.started -= InteractionHandler;
             }
+
             interactionAction = null;
 
             playerInput = null;
@@ -144,6 +159,10 @@ namespace GlobalGameJam.Gameplay
 
 #region Action Handlers
 
+        /// <summary>
+        /// Handles the interaction action.
+        /// </summary>
+        /// <param name="context">The context of the input action.</param>
         private void InteractionHandler(InputAction.CallbackContext context)
         {
             var bagWasFull = playerContext.Bag.IsFull;
@@ -156,12 +175,16 @@ namespace GlobalGameJam.Gameplay
 
             if (playerContext.Bag.IsFull)
             {
-                playerContext.ThrowMechanic.Drop(playerContext.Bag, facingDirection);
+                playerContext.Throw.Drop(playerContext.Bag, facingDirection);
             }
-            
+
             playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);
         }
 
+        /// <summary>
+        /// Handles the move action.
+        /// </summary>
+        /// <param name="context">The context of the input action.</param>
         private void MoveHandler(InputAction.CallbackContext context)
         {
             var value = context.ReadValue<Vector2>();
@@ -173,7 +196,7 @@ namespace GlobalGameJam.Gameplay
                 var interaction = playerContext.Interaction;
                 interaction.Direction = facingDirection;
                 playerContext.Interaction = interaction;
-                
+
                 throwDirection.rotation = Quaternion.LookRotation(facingDirection.ToVector());
             }
 

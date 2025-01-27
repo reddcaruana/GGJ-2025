@@ -3,12 +3,21 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
+    /// <summary>
+    /// Represents a potion that can be carried, used, thrown, and shipped in the game.
+    /// </summary>
     public class Potion : Carryable, IThrowable, IUsable, IPotionData, IShippable
     {
+        /// <summary>
+        /// The amount to expand the collider radius.
+        /// </summary>
         private const float ExpandColliderRadius = 0.1f;
 
 #region Methods
 
+        /// <summary>
+        /// Clears the potion data.
+        /// </summary>
         public void Clear()
         {
             Data = null;
@@ -54,7 +63,7 @@ namespace GlobalGameJam.Gameplay
 
             Data = data;
             spriteRenderer.sprite = Data.Sprite;
-            
+
             var spriteSize = spriteRenderer.bounds.size;
             var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
             sphereCollider.radius = maxSize * 0.5f + ExpandColliderRadius;

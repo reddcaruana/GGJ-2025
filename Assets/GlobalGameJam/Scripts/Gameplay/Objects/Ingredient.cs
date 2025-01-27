@@ -3,14 +3,26 @@ using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
+    /// <summary>
+    /// Represents an ingredient that can be carried, used, and thrown in the game.
+    /// </summary>
     public class Ingredient : Carryable, IUsable, IIngredientData, IThrowable
     {
+        /// <summary>
+        /// The amount to expand the collider radius.
+        /// </summary>
         private const float ExpandColliderRadius = 0.1f;
 
-        public event System.Action OnUsed; 
+        /// <summary>
+        /// Event triggered when the ingredient is used.
+        /// </summary>
+        public event System.Action OnUsed;
 
 #region Methods
 
+        /// <summary>
+        /// Clears the ingredient data.
+        /// </summary>
         public void Clear()
         {
             Data = null;
@@ -38,10 +50,10 @@ namespace GlobalGameJam.Gameplay
             {
                 return;
             }
-            
+
             playerContext.Bag.Carry(Data);
             OnUsed?.Invoke();
-            
+
             if (AttachedRigidbody.isKinematic == false)
             {
                 Despawn();

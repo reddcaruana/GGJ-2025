@@ -5,6 +5,6 @@ namespace GlobalGameJam.Gameplay
         public Movement Movement;
         public Interaction Interaction;
 		public Bag Bag;
-        public ThrowMechanic ThrowMechanic;
+        public Throw Throw;
     }
 }
