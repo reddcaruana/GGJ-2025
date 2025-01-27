@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8312590779940156114}
   - component: {fileID: 795832523459134292}
   m_Layer: 0
-  m_Name: ChestsBatch
+  m_Name: P_ChestsBatch_Setup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

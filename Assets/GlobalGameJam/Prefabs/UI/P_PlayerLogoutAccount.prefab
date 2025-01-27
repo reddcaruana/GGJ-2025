@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 2036348816885771835}
   - component: {fileID: 179316435874224385}
   m_Layer: 5
-  m_Name: P_ScoreInput
+  m_Name: P_PlayerLogoutAccount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5922,7 +5922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6305612533049162406}
   m_Layer: 0
-  m_Name: Environment
+  m_Name: P_Environment_Setup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

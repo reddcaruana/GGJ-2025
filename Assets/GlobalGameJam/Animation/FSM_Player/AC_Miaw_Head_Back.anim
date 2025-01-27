@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_Player_Idle_Back
+  m_Name: AC_Miaw_Head_Back
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,36 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
-    attribute: m_Sprite
-    path: Body
-    classID: 212
-    script: {fileID: 0}
-    flags: 2
-  - serializedVersion: 2
-    curve:
-    - time: 0
       value: {fileID: 21300000, guid: 68bd5e92cb8484819afa999942b3d9be, type: 3}
     attribute: m_Sprite
     path: Head
-    classID: 212
-    script: {fileID: 0}
-    flags: 2
-  - serializedVersion: 2
-    curve:
-    - time: 0
-      value: {fileID: 21300000, guid: e3092db330d2e49b4a12c5a230707573, type: 3}
-    attribute: m_Sprite
-    path: LeftArm
-    classID: 212
-    script: {fileID: 0}
-    flags: 2
-  - serializedVersion: 2
-    curve:
-    - time: 0
-      value: {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
-    attribute: m_Sprite
-    path: RightArm
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -62,15 +35,6 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2073732236
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
-    - serializedVersion: 2
       path: 130111906
       attribute: 0
       script: {fileID: 0}
@@ -79,29 +43,8 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-    - serializedVersion: 2
-      path: 3951233754
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
-    - serializedVersion: 2
-      path: 1806956327
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-      isIntCurve: 0
-      isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 2b01489d3ae0e46d5a487c422e53f695, type: 3}
     - {fileID: 21300000, guid: 68bd5e92cb8484819afa999942b3d9be, type: 3}
-    - {fileID: 21300000, guid: e3092db330d2e49b4a12c5a230707573, type: 3}
-    - {fileID: 21300000, guid: 4e4cf813a825e4eb1bd87c6b780a3f50, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
