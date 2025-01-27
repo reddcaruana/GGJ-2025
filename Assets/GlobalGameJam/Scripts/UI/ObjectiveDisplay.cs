@@ -1,5 +1,4 @@
 using GlobalGameJam.Data;
-using GlobalGameJam.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,18 +8,6 @@ namespace GlobalGameJam.UI
     {
         [SerializeField] private Image potionImage;
         [SerializeField] private Image[] ingredientImages;
-
-        private CauldronContext cauldronContext;
-
-#region Methods
-
-        public void Bind(CauldronContext context)
-        {
-            cauldronContext = context;
-            cauldronContext.Objective.OnChanged += TargetPotionChangedHandler;
-        }
-
-#endregion
 
 #region Event Handlers
         

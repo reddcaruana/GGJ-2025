@@ -12,8 +12,6 @@ namespace GlobalGameJam.Gameplay
 
         public LoginScreen LoginScreen; 
             
-        public CauldronManager CauldronManager;
-
         public ObjectiveDisplay ObjectiveDisplay;
 
         public TimerDisplay TimerDisplay;
@@ -38,7 +36,6 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private ChestBatch[] chestBatches;
         [SerializeField] private LoginScreen loginScreen;
-        [SerializeField] private CauldronManager cauldronManager;
         [SerializeField] private ObjectiveDisplay objectiveDisplay;
         [SerializeField] private ScoreManager score;
         [SerializeField] private LeaderboardManager leaderboard;
@@ -62,7 +59,6 @@ namespace GlobalGameJam.Gameplay
                 PlayerBehaviors = playerBehaviors,
                 ChestBatches = chestBatches,
                 
-                CauldronManager = cauldronManager,
                 ShippingBin = shippingBin,
                 
                 ObjectiveDisplay = objectiveDisplay,
@@ -91,7 +87,6 @@ namespace GlobalGameJam.Gameplay
             
             levelContext.Score.Bind(levelContext.ShippingBin);
             
-            levelContext.ObjectiveDisplay.Bind(cauldronManager.GetContext());
             levelContext.TimerDisplay.Bind(levelContext.GameTimer);
         }
 
@@ -119,6 +114,7 @@ namespace GlobalGameJam.Gameplay
             {
                 playerBehaviors[i].Bind(i);
             }
+            
         }
 
 #endregion

@@ -4,16 +4,36 @@ using GlobalGameJam.Data;
 
 namespace GlobalGameJam.Gameplay
 {
+    /// <summary>
+    /// Manages the brewing process by listening for expected ingredient changes and handling added ingredients.
+    /// </summary>
     public class Brew : ExpectedIngredientChangeListener
     {
+        /// <summary>
+        /// The currently expected ingredient.
+        /// </summary>
         private IngredientData expected;
+
+        /// <summary>
+        /// The list of ingredients that have been added.
+        /// </summary>
         private readonly List<IngredientData> ingredients = new();
 
+        /// <summary>
+        /// The potion data for a failed potion.
+        /// </summary>
         private PotionData failedPotion;
+
+        /// <summary>
+        /// The target potion data.
+        /// </summary>
         private PotionData target;
 
+        /// <summary>
+        /// Event binding for the added ingredient event.
+        /// </summary>
         private EventBinding<CauldronEvents.AddedIngredient> onAddedIngredientBinding;
-        
+
 #region Overrides of ExpectedIngredientChangeListener
 
         /// <inheritdoc />
@@ -50,10 +70,13 @@ namespace GlobalGameJam.Gameplay
 
 #region Methods
 
+        /// <summary>
+        /// Handles the failure of the brewing process by clearing ingredients and raising a failure event.
+        /// </summary>
         private void Fail()
         {
             ingredients.Clear();
-            EventBus<CauldronEvents.ConcoctedPotion>.Raise(new CauldronEvents.ConcoctedPotion
+            EventBus<CauldronEvents.EvaluatePotion>.Raise(new CauldronEvents.EvaluatePotion
             {
                 Outcome = OutcomeType.Failure,
                 Potion = failedPotion
@@ -63,7 +86,11 @@ namespace GlobalGameJam.Gameplay
 #endregion
 
 #region Event Handlers
-        
+
+        /// <summary>
+        /// Handles the event when an ingredient is added.
+        /// </summary>
+        /// <param name="event">The added ingredient event data.</param>
         private void OnAddedIngredientHandler(CauldronEvents.AddedIngredient @event)
         {
             if (@event.Ingredient != expected)
@@ -71,7 +98,7 @@ namespace GlobalGameJam.Gameplay
                 Fail();
                 return;
             }
-            
+
             ingredients.Add(@event.Ingredient);
 
             var required = target.Ingredients.ToList();
@@ -91,17 +118,26 @@ namespace GlobalGameJam.Gameplay
             // Not complete
             if (required.Count < added.Count)
             {
+                EventBus<CauldronEvents.EvaluatePotion>.Raise(new CauldronEvents.EvaluatePotion
+                {
+                    Outcome = OutcomeType.None,
+                    Potion = target
+                });
                 return;
             }
-            
+
             ingredients.Clear();
-            EventBus<CauldronEvents.ConcoctedPotion>.Raise(new CauldronEvents.ConcoctedPotion
+            EventBus<CauldronEvents.EvaluatePotion>.Raise(new CauldronEvents.EvaluatePotion
             {
                 Outcome = OutcomeType.Success,
                 Potion = target
             });
         }
 
+        /// <summary>
+        /// Updates the target potion data.
+        /// </summary>
+        /// <param name="potion">The new target potion data.</param>
         public void OnTargetPotionChanged(PotionData potion)
         {
             target = potion;

@@ -25,7 +25,7 @@ using UnityEngine;
                 /// <summary>
                 /// Event binding for the concocted potion event.
                 /// </summary>
-                private EventBinding<CauldronEvents.ConcoctedPotion> onConcoctedPotionEventBinding;
+                private EventBinding<CauldronEvents.EvaluatePotion> onConcoctedPotionEventBinding;
         
                 #region Lifecycle Events
         
@@ -34,7 +34,7 @@ using UnityEngine;
                 /// </summary>
                 private void Awake()
                 {
-                    onConcoctedPotionEventBinding = new EventBinding<CauldronEvents.ConcoctedPotion>(OnConcoctedPotionHandler);
+                    onConcoctedPotionEventBinding = new EventBinding<CauldronEvents.EvaluatePotion>(OnConcoctedPotionHandler);
                 }
         
                 /// <summary>
@@ -42,7 +42,7 @@ using UnityEngine;
                 /// </summary>
                 private void OnEnable()
                 {
-                    EventBus<CauldronEvents.ConcoctedPotion>.Register(onConcoctedPotionEventBinding);
+                    EventBus<CauldronEvents.EvaluatePotion>.Register(onConcoctedPotionEventBinding);
                 }
         
                 /// <summary>
@@ -50,7 +50,7 @@ using UnityEngine;
                 /// </summary>
                 private void OnDisable()
                 {
-                    EventBus<CauldronEvents.ConcoctedPotion>.Deregister(onConcoctedPotionEventBinding);
+                    EventBus<CauldronEvents.EvaluatePotion>.Deregister(onConcoctedPotionEventBinding);
                 }
         
                 #endregion
@@ -61,7 +61,7 @@ using UnityEngine;
                 /// Handles the concocted potion event by generating and throwing a potion.
                 /// </summary>
                 /// <param name="event">The concocted potion event data.</param>
-                private void OnConcoctedPotionHandler(CauldronEvents.ConcoctedPotion @event)
+                private void OnConcoctedPotionHandler(CauldronEvents.EvaluatePotion @event)
                 {
                     var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionManager>();
                     
