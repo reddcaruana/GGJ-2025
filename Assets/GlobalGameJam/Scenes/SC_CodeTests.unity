@@ -851,6 +851,26 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 4284055420054101847, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 4.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284055420054101847, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284055420054101847, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.a
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284055420054101847, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[0].properties
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4284055420054101847, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4471389246289204225, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
@@ -7084,8 +7104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb4830348d9457fb46f247a4fe1456a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cycleDuration: 1.5
-  colorChangeDuration: 0.5
+  cycleDuration: 1.75
+  colorChangeDuration: 0.15
   cauldronRenderer: {fileID: 2083404670}
   cauldronGlow: {fileID: 1431411102}
 --- !u!1 &1548613054
