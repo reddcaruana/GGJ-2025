@@ -12,8 +12,6 @@ namespace GlobalGameJam.Gameplay
 
         public LoginScreen LoginScreen; 
             
-        public Timer GameTimer;
-
         public ChestBatch[] ChestBatches;
 
         public LeaderboardManager Leaderboard;
@@ -23,7 +21,6 @@ namespace GlobalGameJam.Gameplay
     
     public class LevelManager : MonoBehaviour
     {
-        public event System.Action OnLevelStart;
         public event System.Action OnLevelStop;
 
         [SerializeField] private PlayerBehavior[] playerBehaviors;
@@ -31,7 +28,6 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private LoginScreen loginScreen;
         [SerializeField] private LeaderboardManager leaderboard;
         [SerializeField] private PlayableDirector timeline;
-        [SerializeField] private Timer gameTimer;
 
         private LevelContext levelContext;
 
@@ -50,9 +46,7 @@ namespace GlobalGameJam.Gameplay
                 
                 Leaderboard = leaderboard,
                 
-                Timeline = timeline,    
-                
-                GameTimer = gameTimer
+                Timeline = timeline
             };
         }
 
@@ -85,15 +79,11 @@ namespace GlobalGameJam.Gameplay
         {
             levelContext.LoginScreen.enabled = false;
             
-            levelContext.GameTimer.Activate();
-            levelContext.GameTimer.OnComplete += OnTimerCompleteHandler;
-            OnLevelStart?.Invoke();
-
+            EventBus<LevelEvents.Start>.Raise(LevelEvents.Start.Default);
             for (var i = 0; i < playerBehaviors.Length; i++)
             {
                 playerBehaviors[i].Bind(i);
             }
-            
         }
 
 #endregion
