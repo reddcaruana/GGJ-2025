@@ -7,7 +7,7 @@ namespace GlobalGameJam.Gameplay
     /// <summary>
     /// Manages the brewing process by listening for expected ingredient changes and handling added ingredients.
     /// </summary>
-    public class Brew : ExpectedIngredientChangeListener
+    public class CauldronBrew : ExpectedIngredientChangeListener
     {
         /// <summary>
         /// The currently expected ingredient.
@@ -32,7 +32,12 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for the added ingredient event.
         /// </summary>
-        private EventBinding<CauldronEvents.AddedIngredient> onAddedIngredientBinding;
+        private EventBinding<CauldronEvents.AddedIngredient> onAddedIngredientEventBinding;
+
+        /// <summary>
+        /// Event binding for the objective updated event.
+        /// </summary>
+        private EventBinding<LevelEvents.ObjectiveUpdated> onObjectiveUpdatedEventBinding;
 
 #region Overrides of ExpectedIngredientChangeListener
 
@@ -40,7 +45,8 @@ namespace GlobalGameJam.Gameplay
         protected override void Awake()
         {
             base.Awake();
-            onAddedIngredientBinding = new EventBinding<CauldronEvents.AddedIngredient>(OnAddedIngredientHandler);
+            onAddedIngredientEventBinding = new EventBinding<CauldronEvents.AddedIngredient>(OnAddedIngredientEventHandler);
+            onObjectiveUpdatedEventBinding = new EventBinding<LevelEvents.ObjectiveUpdated>(OnObjectiveUpdatedEventHandler);
 
             var potionRegistry = Singleton.GetOrCreateScriptableObject<PotionRegistry>();
             failedPotion = potionRegistry.Pootion;
@@ -50,14 +56,16 @@ namespace GlobalGameJam.Gameplay
         protected override void OnEnable()
         {
             base.OnEnable();
-            EventBus<CauldronEvents.AddedIngredient>.Register(onAddedIngredientBinding);
+            EventBus<CauldronEvents.AddedIngredient>.Register(onAddedIngredientEventBinding);
+            EventBus<LevelEvents.ObjectiveUpdated>.Register(onObjectiveUpdatedEventBinding);
         }
 
         /// <inheritdoc />
         protected override void OnDisable()
         {
             base.OnDisable();
-            EventBus<CauldronEvents.AddedIngredient>.Deregister(onAddedIngredientBinding);
+            EventBus<CauldronEvents.AddedIngredient>.Deregister(onAddedIngredientEventBinding);
+            EventBus<LevelEvents.ObjectiveUpdated>.Deregister(onObjectiveUpdatedEventBinding);
         }
 
         /// <inheritdoc />
@@ -91,7 +99,7 @@ namespace GlobalGameJam.Gameplay
         /// Handles the event when an ingredient is added.
         /// </summary>
         /// <param name="event">The added ingredient event data.</param>
-        private void OnAddedIngredientHandler(CauldronEvents.AddedIngredient @event)
+        private void OnAddedIngredientEventHandler(CauldronEvents.AddedIngredient @event)
         {
             if (@event.Ingredient != expected)
             {
@@ -135,12 +143,12 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
-        /// Updates the target potion data.
+        /// Handles the event when an objective is updated.
         /// </summary>
-        /// <param name="potion">The new target potion data.</param>
-        public void OnTargetPotionChanged(PotionData potion)
+        /// <param name="event">The objective updated event data.</param>
+        private void OnObjectiveUpdatedEventHandler(LevelEvents.ObjectiveUpdated @event)
         {
-            target = potion;
+            target = @event.Potion;
         }
 
 #endregion

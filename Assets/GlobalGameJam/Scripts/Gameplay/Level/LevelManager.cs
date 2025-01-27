@@ -12,7 +12,7 @@ namespace GlobalGameJam.Gameplay
 
         public LoginScreen LoginScreen; 
             
-        public ObjectiveDisplay ObjectiveDisplay;
+        public ObjectiveUI ObjectiveUI;
 
         public TimerDisplay TimerDisplay;
         
@@ -36,7 +36,7 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private ChestBatch[] chestBatches;
         [SerializeField] private LoginScreen loginScreen;
-        [SerializeField] private ObjectiveDisplay objectiveDisplay;
+        [SerializeField] private ObjectiveUI objectiveUI;
         [SerializeField] private ScoreManager score;
         [SerializeField] private LeaderboardManager leaderboard;
         [SerializeField] private PlayableDirector timeline;
@@ -61,7 +61,7 @@ namespace GlobalGameJam.Gameplay
                 
                 ShippingBin = shippingBin,
                 
-                ObjectiveDisplay = objectiveDisplay,
+                ObjectiveUI = objectiveUI,
                 TimerDisplay = timerDisplay,
                 
                 Score = score,
