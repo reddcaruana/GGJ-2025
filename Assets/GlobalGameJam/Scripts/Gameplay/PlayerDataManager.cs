@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GlobalGameJam.Players;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,17 +12,13 @@ namespace GlobalGameJam.Gameplay
     public class PlayerDataManager : MonoBehaviour
     {
         /// <summary>
-        /// Event triggered when a player joins.
+        /// A dictionary mapping player indices to their PlayerInput instances.
         /// </summary>
-        public event System.Action<int> OnPlayerJoined;
-
-        /// <summary>
-        /// Event triggered when a player leaves.
-        /// </summary>
-        public event System.Action<int> OnPlayerLeft;
-
         private readonly Dictionary<int, PlayerInput> playerInputMap = new();
 
+        /// <summary>
+        /// The player input manager responsible for handling player input.
+        /// </summary>
         private PlayerInputManager playerInputManager;
 
 #region Lifecycle Events
@@ -121,21 +118,6 @@ namespace GlobalGameJam.Gameplay
             return playerInputMap.GetValueOrDefault(playerNumber, null);
         }
 
-        /// <summary>
-        /// Removes a player from the game.
-        /// </summary>
-        /// <param name="playerNumber">The player number to remove.</param>
-        public void Leave(int playerNumber)
-        {
-            if (playerInputMap.TryGetValue(playerNumber, out var playerInput) == false)
-            {
-                Debug.LogWarning($"Player Number {playerNumber} was not registered.");
-                return;
-            }
-
-            Destroy(playerInput.gameObject);
-        }
-
 #endregion
 
 #region Event Handlers
@@ -159,7 +141,11 @@ namespace GlobalGameJam.Gameplay
             playerInputObject.name = $"PlayerInput_{index}";
             playerInputObject.transform.SetParent(transform);
 
-            OnPlayerJoined?.Invoke(index);
+            EventBus<PlayerEvents.Joined>.Raise(new PlayerEvents.Joined
+            {
+                PlayerID = index,
+                PlayerInput = playerInput
+            });
         }
 
         /// <summary>
@@ -173,8 +159,13 @@ namespace GlobalGameJam.Gameplay
                 if (map.Value == playerInput)
                 {
                     playerInputMap[map.Key] = null;
-                    OnPlayerLeft?.Invoke(map.Key);
 
+                    EventBus<PlayerEvents.Left>.Raise(new PlayerEvents.Left
+                    {
+                        PlayerID = map.Key,
+                        PlayerInput = playerInput
+                    });
+                    
                     playerInputManager.EnableJoining();
                     return;
                 }

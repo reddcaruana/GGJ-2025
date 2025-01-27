@@ -1,7 +1,6 @@
 using GlobalGameJam.Data;
-using GlobalGameJam.Gameplay;
+using GlobalGameJam.Players;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace GlobalGameJam.Lobby
 {
@@ -14,9 +13,16 @@ namespace GlobalGameJam.Lobby
         /// Array of player accounts.
         /// </summary>
         [SerializeField] private PlayerAccount[] playerAccounts;
-        
-        private PlayerDataManager playerDataManager;
-        private LevelManager levelManager;
+
+        /// <summary>
+        /// The event binding for handling player joined events.
+        /// </summary>
+        private EventBinding<PlayerEvents.Joined> onPlayerJoinedEventBinding;
+
+        /// <summary>
+        /// The event binding for handling player left events.
+        /// </summary>
+        private EventBinding<PlayerEvents.Left> onPlayerLeftEventBinding;
 
 #region Lifecycle Events
 
@@ -25,8 +31,26 @@ namespace GlobalGameJam.Lobby
         /// </summary>
         private void Awake()
         {
-            playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
-            levelManager = Singleton.GetOrCreateMonoBehaviour<LevelManager>();
+            onPlayerJoinedEventBinding = new EventBinding<PlayerEvents.Joined>(OnPlayerJoinedEventHandler);
+            onPlayerLeftEventBinding = new EventBinding<PlayerEvents.Left>(OnPlayerLeftEventHandler);
+        }
+
+        /// <summary>
+        /// Registers event bindings when the object is enabled.
+        /// </summary>
+        private void OnEnable()
+        {
+            EventBus<PlayerEvents.Joined>.Register(onPlayerJoinedEventBinding);
+            EventBus<PlayerEvents.Left>.Register(onPlayerLeftEventBinding);
+        }
+
+        /// <summary>
+        /// Deregisters event bindings when the object is disabled.
+        /// </summary>
+        private void OnDisable()
+        {
+            EventBus<PlayerEvents.Joined>.Deregister(onPlayerJoinedEventBinding);
+            EventBus<PlayerEvents.Left>.Deregister(onPlayerLeftEventBinding);
         }
 
         /// <summary>
@@ -43,16 +67,6 @@ namespace GlobalGameJam.Lobby
                 account.Setup(profiles[i]);
                 account.enabled = false;
             }
-
-            Activate();
-        }
-
-        /// <summary>
-        /// Called when the object becomes disabled.
-        /// </summary>
-        private void OnDisable()
-        {
-            Deactivate();
         }
 
         /// <summary>
@@ -65,51 +79,30 @@ namespace GlobalGameJam.Lobby
 
 #endregion
 
-#region Methods
-
-        /// <summary>
-        /// Activates the login screen by subscribing to player events.
-        /// </summary>
-        public void Activate()
-        {
-            playerDataManager.OnPlayerJoined += OnPlayerJoinedHandler;
-            playerDataManager.OnPlayerLeft += OnPlayerLeftHandler;
-        }
-
-        /// <summary>
-        /// Deactivates the login screen by unsubscribing from player events.
-        /// </summary>
-        public void Deactivate()
-        {
-            playerDataManager.OnPlayerJoined -= OnPlayerJoinedHandler;
-            playerDataManager.OnPlayerLeft -= OnPlayerLeftHandler;
-        }
-
-#endregion
-
 #region Event Handlers
-
-        /// <summary>
-        /// Handles the event when a player joins.
-        /// </summary>
-        /// <param name="playerNumber">The number of the player who joined.</param>
-        private void OnPlayerJoinedHandler(int playerNumber)
-        {
-            var account = playerAccounts[playerNumber];
-
-            account.enabled = true;
-            account.Bind(playerNumber);
-        }
 
         /// <summary>
         /// Handles the event when a player leaves.
         /// </summary>
-        /// <param name="playerNumber">The number of the player who left.</param>
-        private void OnPlayerLeftHandler(int playerNumber)
+        /// <param name="event">The player left event.</param>
+        private void OnPlayerLeftEventHandler(PlayerEvents.Left @event)
         {
-            var account = playerAccounts[playerNumber];
+            var account = playerAccounts[@event.PlayerID];
+
             account.Release();
             account.enabled = false;
+        }
+
+        /// <summary>
+        /// Handles the event when a player joins.
+        /// </summary>
+        /// <param name="event">The player joined event.</param>
+        private void OnPlayerJoinedEventHandler(PlayerEvents.Joined @event)
+        {
+            var account = playerAccounts[@event.PlayerID];
+
+            account.enabled = true;
+            account.Bind(@event.PlayerID);
         }
 
 #endregion

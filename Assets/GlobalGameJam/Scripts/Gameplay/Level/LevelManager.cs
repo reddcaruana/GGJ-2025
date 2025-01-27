@@ -83,7 +83,7 @@ namespace GlobalGameJam.Gameplay
 
         public void Begin()
         {
-            levelContext.LoginScreen.Deactivate();
+            levelContext.LoginScreen.enabled = false;
             
             levelContext.GameTimer.Activate();
             levelContext.GameTimer.OnComplete += OnTimerCompleteHandler;
