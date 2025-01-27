@@ -23,5 +23,10 @@ namespace GlobalGameJam.Gameplay
         {
             public PotionData Potion;
         }
+
+        public struct TimerUpdate : IEvent
+        {
+            public float Remaining;
+        }
     }
 }

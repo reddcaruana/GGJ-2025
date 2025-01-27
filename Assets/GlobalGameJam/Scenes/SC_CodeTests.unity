@@ -3171,6 +3171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 767402450}
   - component: {fileID: 767402451}
+  - component: {fileID: 767402452}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -3206,6 +3207,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Duration>k__BackingField: 181
+--- !u!114 &767402452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767402449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41bcc81cb6bc497c8673d07d2130e29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &783714615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3719,12 +3732,8 @@ MonoBehaviour:
   - {fileID: 1620336737}
   - {fileID: 395378358}
   loginScreen: {fileID: 997298381}
-  objectiveUI: {fileID: 0}
-  score: {fileID: 0}
   leaderboard: {fileID: 1150300387}
   timeline: {fileID: 1678753694}
-  shippingBin: {fileID: 1009595465}
-  timerUI: {fileID: 0}
   gameTimer: {fileID: 767402451}
 --- !u!114 &879054465
 MonoBehaviour:
@@ -4731,17 +4740,6 @@ MonoBehaviour:
   - {fileID: 1779707429}
   - {fileID: 1905236050}
   - {fileID: 1590565539}
---- !u!114 &1009595465 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5689296763160192046, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
-  m_PrefabInstance: {fileID: 96457835}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e460988a13cc4fe0999a363c8524c92e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1015509992
 GameObject:
   m_ObjectHideFlags: 0

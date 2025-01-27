@@ -12,17 +12,11 @@ namespace GlobalGameJam.Gameplay
 
         public LoginScreen LoginScreen; 
             
-        public ObjectiveUI ObjectiveUI;
-
-        public TimerUI TimerUI;
-        
         public Timer GameTimer;
 
         public ChestBatch[] ChestBatches;
 
         public LeaderboardManager Leaderboard;
-
-        public ShippingBin ShippingBin;
 
         public PlayableDirector Timeline;
     }
@@ -35,11 +29,8 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private ChestBatch[] chestBatches;
         [SerializeField] private LoginScreen loginScreen;
-        [SerializeField] private ObjectiveUI objectiveUI;
         [SerializeField] private LeaderboardManager leaderboard;
         [SerializeField] private PlayableDirector timeline;
-        [SerializeField] private ShippingBin shippingBin;
-        [SerializeField] private TimerUI timerUI;
         [SerializeField] private Timer gameTimer;
 
         private LevelContext levelContext;
@@ -56,11 +47,6 @@ namespace GlobalGameJam.Gameplay
                 
                 PlayerBehaviors = playerBehaviors,
                 ChestBatches = chestBatches,
-                
-                ShippingBin = shippingBin,
-                
-                ObjectiveUI = objectiveUI,
-                TimerUI = timerUI,
                 
                 Leaderboard = leaderboard,
                 
@@ -81,8 +67,6 @@ namespace GlobalGameJam.Gameplay
             var randomIndex = Random.Range(0, chestBatches.Length);
             chestBatches[randomIndex].gameObject.SetActive(true);
             chestBatches[randomIndex].SetChests(ingredientRegistry.Ingredients);
-            
-            levelContext.TimerUI.Bind(levelContext.GameTimer);
         }
 
 #endregion
