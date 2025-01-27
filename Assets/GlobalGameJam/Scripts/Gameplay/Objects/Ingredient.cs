@@ -23,7 +23,7 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public override void Despawn()
         {
-            var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
+            var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientPool>();
             ingredientManager.Release(this);
         }
 

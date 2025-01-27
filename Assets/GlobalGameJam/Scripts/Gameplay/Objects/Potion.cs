@@ -21,7 +21,7 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public override void Despawn()
         {
-            var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionManager>();
+            var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionPool>();
             potionManager.Release(this);
         }
 

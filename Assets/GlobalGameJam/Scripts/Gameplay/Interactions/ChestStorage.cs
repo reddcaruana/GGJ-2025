@@ -55,7 +55,7 @@ namespace GlobalGameJam.Gameplay
             switch (data)
             {
                 case IngredientData ingredientData:
-                    var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
+                    var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientPool>();
                     storedInstance = ingredientManager.Generate(ingredientData, ingredientAnchor);
 
                     ingredientSprite.sprite = ingredientData.Sprite;

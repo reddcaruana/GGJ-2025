@@ -63,7 +63,7 @@ using UnityEngine;
                 /// <param name="event">The concocted potion event data.</param>
                 private void OnConcoctedPotionHandler(CauldronEvents.EvaluatePotion @event)
                 {
-                    var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionManager>();
+                    var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionPool>();
                     
                     var potion = potionManager.Generate(@event.Potion, transform);
                     potion.Throw(direction.ToVector(), force, angle);

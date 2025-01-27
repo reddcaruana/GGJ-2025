@@ -20,7 +20,7 @@ namespace GlobalGameJam.Gameplay
                 return;
             }
 
-            var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientManager>();
+            var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientPool>();
             var ingredient = ingredientManager.Generate(ingredientData, bag.GetAnchor());
             ingredient.Throw(direction.ToVector(), speed, angle);
             
