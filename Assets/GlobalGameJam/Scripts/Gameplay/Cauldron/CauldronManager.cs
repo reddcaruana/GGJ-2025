@@ -1,3 +1,4 @@
+using GlobalGameJam.Data;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -39,7 +40,8 @@ namespace GlobalGameJam.Gameplay
             cauldronContext.IngredientSequencer.OnChanged += cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
             cauldronContext.IngredientCatcher.OnAdded += cauldronContext.CauldronMixture.OnIngredientAddedHandler;
 
-            cauldronContext.CauldronMixture.OnSuccess += Spawn;
+            cauldronContext.CauldronMixture.OnSuccess += OnMixtureSuccess;
+            cauldronContext.CauldronMixture.OnFailure += OnMixtureFailure;
         }
 
         private void OnDisable()
@@ -48,7 +50,8 @@ namespace GlobalGameJam.Gameplay
             cauldronContext.IngredientSequencer.OnChanged -= cauldronContext.CauldronMixture.OnExpectedIngredientChangedHandler;
             cauldronContext.IngredientCatcher.OnAdded -= cauldronContext.CauldronMixture.OnIngredientAddedHandler;
             
-            cauldronContext.CauldronMixture.OnSuccess -= Spawn;
+            cauldronContext.CauldronMixture.OnSuccess -= OnMixtureSuccess;
+            cauldronContext.CauldronMixture.OnFailure -= OnMixtureFailure;
         }
 
         private void Start()
@@ -65,15 +68,30 @@ namespace GlobalGameJam.Gameplay
             return cauldronContext;
         }
 
-        public void Spawn()
+        private void SpawnPotion(PotionData potionData)
         {
-            var data = cauldronContext.CauldronObjective.Target;
             var potionManager = Singleton.GetOrCreateMonoBehaviour<PotionManager>();
 
-            var potion = potionManager.Generate(data, cauldronContext.ThrowAnchor);
+            var potion = potionManager.Generate(potionData, cauldronContext.ThrowAnchor);
             potion.Throw(throwDirection.ToVector(), throwSpeed, throwAngle);
 
             cauldronContext.CauldronObjective.Next();
+        }
+
+#endregion
+
+#region Event Handlers
+
+        private void OnMixtureSuccess()
+        {
+            var data = cauldronContext.CauldronObjective.Target;
+            SpawnPotion(data);
+        }
+
+        private void OnMixtureFailure()
+        {
+            var potionRegistry = Singleton.GetOrCreateScriptableObject<PotionRegistry>();
+            SpawnPotion(potionRegistry.Pootion);
         }
 
 #endregion

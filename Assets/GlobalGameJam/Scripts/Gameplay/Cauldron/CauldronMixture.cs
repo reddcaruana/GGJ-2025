@@ -22,7 +22,7 @@ namespace GlobalGameJam.Gameplay
             if (ingredient != expected)
             {
                 ingredients.Clear();
-                Debug.Log("Bad ingredient (not expected).");
+                OnFailure?.Invoke();
                 return;
             }
             ingredients.Add(ingredient);
