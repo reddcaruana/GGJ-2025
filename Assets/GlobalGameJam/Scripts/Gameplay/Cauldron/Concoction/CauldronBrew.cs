@@ -124,7 +124,7 @@ namespace GlobalGameJam.Gameplay
             }
 
             // Not complete
-            if (required.Count < added.Count)
+            if (required.Count > 0)
             {
                 EventBus<CauldronEvents.EvaluatePotion>.Raise(new CauldronEvents.EvaluatePotion
                 {

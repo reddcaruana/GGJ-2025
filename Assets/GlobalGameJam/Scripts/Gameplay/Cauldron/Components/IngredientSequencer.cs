@@ -31,6 +31,11 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private Queue<IngredientData> ingredientQueue;
 
+        /// <summary>
+        /// Event binding for handling objective updated events.
+        /// </summary>
+        private EventBinding<LevelEvents.ObjectiveUpdated> onObjectiveUpdatedEventBinding;
+
 #region Lifecycle Events
 
         /// <summary>
@@ -40,6 +45,24 @@ namespace GlobalGameJam.Gameplay
         {
             var registry = Singleton.GetOrCreateScriptableObject<IngredientRegistry>();
             ingredientQueue = new Queue<IngredientData>(registry.Ingredients);
+
+            onObjectiveUpdatedEventBinding = new EventBinding<LevelEvents.ObjectiveUpdated>(OnObjectiveUpdatedEventHandler);
+        }
+
+        /// <summary>
+        /// Registers the event binding when the object is enabled.
+        /// </summary>
+        private void OnEnable()
+        {
+            EventBus<LevelEvents.ObjectiveUpdated>.Register(onObjectiveUpdatedEventBinding);
+        }
+
+        /// <summary>
+        /// Deregisters the event binding when the object is disabled.
+        /// </summary>
+        private void OnDisable()
+        {
+            EventBus<LevelEvents.ObjectiveUpdated>.Deregister(onObjectiveUpdatedEventBinding);
         }
 
         /// <summary>
@@ -48,6 +71,22 @@ namespace GlobalGameJam.Gameplay
         private void Start()
         {
             StartCoroutine(IngredientCycleRoutine());
+        }
+
+#endregion
+
+#region Event Handlers
+
+        /// <summary>
+        /// Handles the event when an objective is updated.
+        /// </summary>
+        /// <param name="event">The objective updated event.</param>
+        private void OnObjectiveUpdatedEventHandler(LevelEvents.ObjectiveUpdated @event)
+        {
+            var ingredients = @event.Potion.Ingredients;
+
+            ingredientQueue = new Queue<IngredientData>(ingredients);
+            current = null;
         }
 
 #endregion
