@@ -15,7 +15,8 @@ MonoBehaviour:
   <Name>k__BackingField: Potion1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 48bec67002e5b4c9c810403f0d9b54c2, type: 3}
   <Ingredients>k__BackingField:
+  - {fileID: 11400000, guid: 9fc0b8a546fc24b449cc797a53ad6bbf, type: 2}
+  - {fileID: 11400000, guid: 0e4d21a7b0bf84ec98250c79d0809088, type: 2}
   - {fileID: 11400000, guid: a805a5f4e202141f49bdf622becaa251, type: 2}
-  - {fileID: 11400000, guid: 5edbcd13b4cea4cc089143824b58654f, type: 2}
-  - {fileID: 11400000, guid: 2b7d38d8e4c1f428882a585f84255edc, type: 2}
-  <Cost>k__BackingField: 25
+  - {fileID: 11400000, guid: 7a697755e66e04915b822564ed1b6264, type: 2}
+  <Cost>k__BackingField: 60

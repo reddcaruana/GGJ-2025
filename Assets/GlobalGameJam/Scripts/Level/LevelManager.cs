@@ -116,7 +116,7 @@ namespace GlobalGameJam.Level
             levelContext.GameTimer.OnComplete += OnTimerCompleteHandler;
             OnLevelStart?.Invoke();
 
-            for (var i = 0; i < 1; i++)
+            for (var i = 0; i < playerBehaviors.Length; i++)
             {
                 playerBehaviors[i].Bind(i);
             }

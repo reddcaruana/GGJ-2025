@@ -25,7 +25,7 @@ namespace GlobalGameJam.Endgame
             var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
             playerInput = playerDataManager.GetPlayerInput(playerNumber);
             
-            playerInput.SwitchCurrentActionMap("Player");
+            playerInput.SwitchCurrentActionMap("Scoring");
 
             aAction = playerInput.currentActionMap.FindAction("A");
             aAction.started += AHandler;
