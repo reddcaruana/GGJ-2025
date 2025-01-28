@@ -19,3 +19,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9fc0b8a546fc24b449cc797a53ad6bbf, type: 2}
   - {fileID: 11400000, guid: 0e4d21a7b0bf84ec98250c79d0809088, type: 2}
   <Cost>k__BackingField: 40
+  <Time>k__BackingField: 10

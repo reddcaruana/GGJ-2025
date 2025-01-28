@@ -2485,7 +2485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8692062350490f9fab59fd03a5bf50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Duration>k__BackingField: 1
+  <Duration>k__BackingField: 180
 --- !u!114 &767402452
 MonoBehaviour:
   m_ObjectHideFlags: 0
