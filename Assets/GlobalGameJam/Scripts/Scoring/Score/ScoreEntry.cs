@@ -1,5 +1,6 @@
 namespace GlobalGameJam
 {
+    [System.Serializable]
     public struct ScoreEntry
     {
         public string Name;

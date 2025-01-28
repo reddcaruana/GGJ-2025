@@ -34,13 +34,9 @@ namespace GlobalGameJam
         {
             onAddEntryEventBinding = new EventBinding<LeaderboardEvents.Add>(OnAddEntryEventHandler);
             onBroadcastEventBinding = new EventBinding<LeaderboardEvents.Broadcast>(OnBroadcastEventHandler);
-            
-            Entries.Add(new ScoreEntry
-            {
-                Name = "ABBA",
-                Score = 10,
-                Time = 40
-            });
+
+            var scores = FileUtility.LoadScores();
+            Entries = new List<ScoreEntry>(scores);
         }
 
         /// <summary>
@@ -76,7 +72,9 @@ namespace GlobalGameJam
         {
             Entries.Add(@event.Entry);
             Entries = Entries.OrderBy(entry => entry.Score).ToList();
-
+            
+            FileUtility.SaveScores(Entries.ToArray());
+            
             EventBus<LeaderboardEvents.Broadcast>.Raise(LeaderboardEvents.Broadcast.Default);
         }
 

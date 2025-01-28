@@ -445,6 +445,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2507285800536442015, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4821616701461091543, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_Name
       value: ---------- Environment ----------
@@ -2481,7 +2485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c8692062350490f9fab59fd03a5bf50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Duration>k__BackingField: 60
+  <Duration>k__BackingField: 1
 --- !u!114 &767402452
 MonoBehaviour:
   m_ObjectHideFlags: 0

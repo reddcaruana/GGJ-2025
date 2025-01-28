@@ -20,7 +20,7 @@ namespace GlobalGameJam
         
         public struct Submit : IEvent
         {
-            public ScoreEntry Score;
+            public static Submit Default = new();
         }
     }
 }
