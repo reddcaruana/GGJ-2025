@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.01041, z: 0.0049}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.0125, y: 0.0125, z: 0.0125}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1650353468437843474}
@@ -132,7 +132,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0.32219538, b: 0.013207495, a: 1}
   m_Intensity: 11
-  m_Range: 1.5
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -253,15 +253,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_Name
-      value: chest
+      value: P_Chest
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -410,7 +410,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4, y: 2, z: 2.4}
+  m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4120064519269466810
 MonoBehaviour:

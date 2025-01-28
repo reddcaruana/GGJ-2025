@@ -27,7 +27,6 @@ namespace GlobalGameJam
 #region Lifecycle Events
 
         /// <summary>
-        /// Called when the script instance is being loaded.
         /// Initializes the event binding for adding entries.
         /// </summary>
         private void Awake()
@@ -36,11 +35,10 @@ namespace GlobalGameJam
             onBroadcastEventBinding = new EventBinding<LeaderboardEvents.Broadcast>(OnBroadcastEventHandler);
 
             var scores = FileUtility.LoadScores();
-            Entries = new List<ScoreEntry>(scores);
+            Entries = scores.OrderByDescending(entry => entry.Score).ToList();
         }
 
         /// <summary>
-        /// Called when the object becomes enabled and active.
         /// Registers the event binding for adding entries.
         /// </summary>
         private void OnEnable()
@@ -50,7 +48,6 @@ namespace GlobalGameJam
         }
 
         /// <summary>
-        /// Called when the object becomes disabled or inactive.
         /// Deregisters the event binding for adding entries.
         /// </summary>
         private void OnDisable()
@@ -71,7 +68,7 @@ namespace GlobalGameJam
         private void OnAddEntryEventHandler(LeaderboardEvents.Add @event)
         {
             Entries.Add(@event.Entry);
-            Entries = Entries.OrderBy(entry => entry.Score).ToList();
+            Entries = Entries.OrderByDescending(entry => entry.Score).ToList();
             
             FileUtility.SaveScores(Entries.ToArray());
             

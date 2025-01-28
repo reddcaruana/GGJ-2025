@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 namespace GlobalGameJam.Gameplay
@@ -23,13 +24,20 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private float interactionRadius = 0.5f;
         [SerializeField] private LayerMask interactionLayer;
 
-        [Header("Bag")] [SerializeField] private Transform bagAnchor;
+        [Header("Bag")]
+        [SerializeField] private Transform bagAnchor;
         [SerializeField] private SpriteRenderer bagSpriteRenderer;
 
-        [Header("Throwing")] [SerializeField] private float throwSpeed = 10f;
+        [Header("Throwing")]
+        [SerializeField] private float throwSpeed = 10f;
         [SerializeField] private float throwAngle = 45f;
 
-        [Header("Add-Ons")] [SerializeField] private Transform throwDirection;
+        [Header("Add-Ons")]
+        [SerializeField] private Transform throwDirection;
+
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip throwSound;
 
         private PlayerContext playerContext;
 
@@ -52,6 +60,7 @@ namespace GlobalGameJam.Gameplay
 
             playerContext = new PlayerContext
             {
+                AudioSource = audioSource,
                 Movement = new Movement(speed, attachedRigidbody),
                 Interaction = new Interaction(interactionAnchor, interactionDistance, interactionRadius, interactionLayer),
                 Bag = new Bag(bagAnchor, bagSpriteRenderer),
@@ -192,6 +201,7 @@ namespace GlobalGameJam.Gameplay
             if (playerContext.Bag.IsFull)
             {
                 playerContext.Throw.Drop(playerContext.Bag, facingDirection);
+                playerContext.AudioSource.PlayOneShot(throwSound);
             }
 
             playerRenderer.Animator.SetBool(AnimatorIsCarryingObjectBool, playerContext.Bag.IsFull);

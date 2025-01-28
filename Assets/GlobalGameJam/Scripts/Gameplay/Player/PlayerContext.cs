@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace GlobalGameJam.Gameplay
 {
     public struct PlayerContext
@@ -6,5 +8,7 @@ namespace GlobalGameJam.Gameplay
         public Interaction Interaction;
 		public Bag Bag;
         public Throw Throw;
+
+        public AudioSource AudioSource;
     }
 }

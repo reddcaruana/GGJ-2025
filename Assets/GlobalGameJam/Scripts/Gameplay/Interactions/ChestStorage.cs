@@ -95,7 +95,7 @@ namespace GlobalGameJam.Gameplay
                     var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientPool>();
                     storedInstance = ingredientManager.Generate(ingredientData, ingredientAnchor);
 
-                    ingredientSprite.sprite = ingredientData.Sprite;
+                    ingredientSprite.sprite = ingredientData.CrateLabel ?? ingredientData.Sprite;
                     glowLight.color = ingredientData.Color;
 
                     break;
