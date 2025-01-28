@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 6207360770082189660}
   - component: {fileID: 5402488328714514245}
   m_Layer: 5
-  m_Name: P_LeaderboardEntry
+  m_Name: P_LeaderboardEntryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

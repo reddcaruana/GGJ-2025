@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace GlobalGameJam.UI
 {
@@ -12,12 +15,12 @@ namespace GlobalGameJam.UI
         /// <summary>
         /// The image component used to display the potion.
         /// </summary>
-        [SerializeField] private Image potionImage;
+        [SerializeField] private ObjectiveItemUI potionTarget;
 
         /// <summary>
         /// The array of image components used to display the ingredients.
         /// </summary>
-        [SerializeField] private Image[] ingredientImages;
+        [SerializeField] private ObjectiveItemUI[] ingredientTargets;
 
         /// <summary>
         /// Event binding for the objective updated event.
@@ -62,25 +65,62 @@ namespace GlobalGameJam.UI
         {
             if (@event.Potion is null)
             {
-                Debug.Log($"Potion will not be displayed because it is null.");
+                Debug.Log("Potion will not be displayed because it is null.");
                 return;
             }
 
-            potionImage.sprite = @event.Potion.Sprite;
-            potionImage.preserveAspect = true;
+            StartCoroutine(OnChangeObjectiveRoutine(@event.Potion));
+        }
 
-            for (var i = 0; i < ingredientImages.Length; i++)
+#endregion
+
+#region Coroutines
+
+        /// <summary>
+        /// Coroutine to handle the change of the objective by updating the displayed potion and ingredients.
+        /// </summary>
+        /// <param name="potion">The potion data containing the target potion and its ingredients.</param>
+        /// <returns>An IEnumerator for the coroutine.</returns>
+        private IEnumerator OnChangeObjectiveRoutine(PotionData potion)
+        {
+            const float objectiveRefreshInterval = 0.9f;
+            const float componentInterval = 0.1f;
+            const float componentIntervalNoise = 0.1f;
+
+            var components = new List<ObjectiveItemUI>(ingredientTargets) { potionTarget };
+            var indices = Enumerable.Range(0, components.Count).OrderBy(_ => Random.value).ToArray();
+
+            foreach (var index in indices)
             {
-                if (i >= @event.Potion.Ingredients.Length)
+                Debug.Log("Clearing ingredient");
+                components[index].gameObject.SetActive(true);
+                components[index].ClearSprite();
+
+                var interval = componentInterval + Random.value * componentIntervalNoise;
+                yield return new WaitForSeconds(interval);
+            }
+
+            yield return objectiveRefreshInterval;
+
+            components.Remove(potionTarget);
+            indices = Enumerable.Range(0, components.Count).OrderBy(_ => Random.value).ToArray();
+
+            foreach (var index in indices)
+            {
+                Debug.Log("Setting ingredient");
+                if (index >= potion.IngredientCount)
                 {
-                    ingredientImages[i].sprite = null;
-                    ingredientImages[i].color = Color.clear;
+                    components[index].gameObject.SetActive(false);
                     continue;
                 }
 
-                ingredientImages[i].sprite = @event.Potion.Ingredients[i].Sprite;
-                ingredientImages[i].color = Color.white;
+                components[index].SetSprite(potion.Ingredients[index].Sprite);
+
+                var interval = componentInterval + Random.value * componentIntervalNoise;
+                yield return new WaitForSeconds(interval);
             }
+
+            potionTarget.SetSprite(potion.Sprite);
         }
 
 #endregion
