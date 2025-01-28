@@ -90,12 +90,12 @@ namespace GlobalGameJam.Gameplay
         /// <param name="event">The added ingredient event.</param>
         private void OnAddedIngredientEventHandler(CauldronEvents.AddedIngredient @event)
         {
-            if (index >= ingredients.Length)
+            if (evaluationOutcome is not OutcomeType.None)
             {
                 return;
             }
 
-            if (evaluationOutcome is not OutcomeType.None)
+            if (index >= ingredients.Length)
             {
                 return;
             }
@@ -125,6 +125,7 @@ namespace GlobalGameJam.Gameplay
             }
 
             index = 0;
+            evaluationOutcome = OutcomeType.None;
         }
 
 #endregion

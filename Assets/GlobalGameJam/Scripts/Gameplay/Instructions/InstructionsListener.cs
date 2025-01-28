@@ -52,6 +52,11 @@ namespace GlobalGameJam.Gameplay
         {
             EventBus<DirectorEvents.Resume>.Deregister(onResumeDirectorEventBinding);
             EventBus<LevelEvents.Instructions>.Deregister(onInstructionsEventBinding);
+
+            foreach (var player in players)
+            {
+                player.Release();
+            }
         }
 
         /// <summary>

@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using GlobalGameJam.Gameplay;
 using UnityEngine;
 
 namespace GlobalGameJam.Data
