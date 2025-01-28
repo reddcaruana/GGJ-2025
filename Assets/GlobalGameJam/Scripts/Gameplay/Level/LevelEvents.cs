@@ -19,6 +19,11 @@ namespace GlobalGameJam.Gameplay
             public static End Default => new();
         }
 
+        public struct ChangeScreens : IEvent
+        {
+            public ScreenSetupMode Mode;
+        }
+
         public struct ObjectiveUpdated : IEvent
         {
             public PotionData Potion;

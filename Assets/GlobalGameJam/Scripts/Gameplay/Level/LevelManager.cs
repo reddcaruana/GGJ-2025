@@ -1,53 +1,30 @@
 using GlobalGameJam.Data;
-using GlobalGameJam.Lobby;
-using GlobalGameJam.UI;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace GlobalGameJam.Gameplay
 {
-    public struct LevelContext
-    {
-        public PlayerBehavior[] PlayerBehaviors;
-
-        public LoginScreen LoginScreen; 
-            
-        public ChestBatch[] ChestBatches;
-
-        public Leaderboard Leaderboard;
-
-        public PlayableDirector Timeline;
-    }
-    
     public class LevelManager : MonoBehaviour
     {
-        public event System.Action OnLevelStop;
-
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private ChestBatch[] chestBatches;
-        [SerializeField] private LoginScreen loginScreen;
-        [SerializeField] private Leaderboard leaderboard;
-        [SerializeField] private PlayableDirector timeline;
 
-        private LevelContext levelContext;
+        private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
 
-        private ScoreEntry scoreEntry;
-        
 #region Lifecycle Events
 
         private void Awake()
         {
-            levelContext = new LevelContext
-            {
-                LoginScreen = loginScreen,
-                
-                PlayerBehaviors = playerBehaviors,
-                ChestBatches = chestBatches,
-                
-                Leaderboard = leaderboard,
-                
-                Timeline = timeline
-            };
+            onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
+        }
+
+        private void OnEnable()
+        {
+            EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
+        }
+
+        private void OnDisable()
+        {
+            EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
         }
 
         private void Reset()
@@ -71,18 +48,7 @@ namespace GlobalGameJam.Gameplay
         {
             if (index >= 0)
             {
-                timeline.Play();
-            }
-        }
-
-        public void Begin()
-        {
-            levelContext.LoginScreen.enabled = false;
-            
-            EventBus<LevelEvents.Start>.Raise(LevelEvents.Start.Default);
-            for (var i = 0; i < playerBehaviors.Length; i++)
-            {
-                playerBehaviors[i].Bind(i);
+                EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
             }
         }
 
@@ -90,14 +56,11 @@ namespace GlobalGameJam.Gameplay
 
 #region Event Handlers
 
-        private void OnTimerCompleteHandler()
+        private void OnLevelStartEventHandler(LevelEvents.Start @event)
         {
-            OnLevelStop?.Invoke();
-            levelContext.Timeline.Play();
-
-            foreach (var player in playerBehaviors)
+            for (var i = 0; i < playerBehaviors.Length; i++)
             {
-                player.Release();
+                playerBehaviors[i].Bind(i);
             }
         }
 

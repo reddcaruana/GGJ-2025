@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -8,6 +9,8 @@ namespace GlobalGameJam.Gameplay
     [RequireComponent(typeof(Timer))]
     public class LevelTimer : MonoBehaviour
     {
+        [SerializeField] private float timerDelay = 0.5f;
+
         /// <summary>
         /// The timer component used to track the level time.
         /// </summary>
@@ -18,6 +21,11 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
 
+        /// <summary>
+        /// Binding for the change screen event.
+        /// </summary>
+        private EventBinding<LevelEvents.ChangeScreens> onChangeScreenEventBinding;
+        
 #region Lifecycle Events
 
         /// <summary>
@@ -27,6 +35,7 @@ namespace GlobalGameJam.Gameplay
         {
             timer = GetComponent<Timer>();
 
+            onChangeScreenEventBinding = new EventBinding<LevelEvents.ChangeScreens>(OnChangeScreenEventHandler);
             onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
         }
 
@@ -37,6 +46,7 @@ namespace GlobalGameJam.Gameplay
         {
             timer.OnUpdate += OnTimerUpdateHandler;
 
+            EventBus<LevelEvents.ChangeScreens>.Register(onChangeScreenEventBinding);
             EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
         }
 
@@ -47,6 +57,7 @@ namespace GlobalGameJam.Gameplay
         {
             timer.OnUpdate -= OnTimerUpdateHandler;
 
+            EventBus<LevelEvents.ChangeScreens>.Deregister(onChangeScreenEventBinding);
             EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
         }
 
@@ -55,13 +66,27 @@ namespace GlobalGameJam.Gameplay
 #region Event Handlers
 
         /// <summary>
+        /// Event handler for the change screen event.
+        /// Deactivates the timer and raises a timer update event with the remaining time.
+        /// </summary>
+        /// <param name="event">The change screen event data.</param>
+        private void OnChangeScreenEventHandler(LevelEvents.ChangeScreens @event)
+        {
+            timer.Deactivate();
+            EventBus<LevelEvents.TimerUpdate>.Raise(new LevelEvents.TimerUpdate
+            {
+                Remaining = timer.Duration
+            });
+        }
+
+        /// <summary>
         /// Event handler for the level start event.
         /// Activates the timer when the level starts.
         /// </summary>
-        /// <param name="obj">The level start event data.</param>
-        private void OnLevelStartEventHandler(LevelEvents.Start obj)
+        /// <param name="event">The level start event data.</param>
+        private void OnLevelStartEventHandler(LevelEvents.Start @event)
         {
-            timer.Activate();
+            StartCoroutine(ActivateTimerRoutine());
         }
 
         /// <summary>
@@ -75,6 +100,21 @@ namespace GlobalGameJam.Gameplay
             {
                 Remaining = duration - current
             });
+        }
+
+#endregion
+
+#region Coroutines
+
+        /// <summary>
+        /// Coroutine to activate the timer after a delay.
+        /// </summary>
+        /// <returns>IEnumerator for the coroutine.</returns>
+        private IEnumerator ActivateTimerRoutine()
+        {
+            yield return new WaitForSeconds(timerDelay);
+            Debug.Log("Timer!");
+            timer.Activate();
         }
 
 #endregion

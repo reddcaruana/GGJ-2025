@@ -18,7 +18,7 @@ namespace GlobalGameJam.UI
         /// The event binding for handling level timer update events.
         /// </summary>
         private EventBinding<LevelEvents.TimerUpdate> onLevelTimerUpdateEventBinding;
-
+        
 #region Lifecycle Events
 
         /// <summary>
