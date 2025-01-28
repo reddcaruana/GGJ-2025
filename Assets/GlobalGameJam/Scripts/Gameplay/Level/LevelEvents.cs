@@ -4,34 +4,34 @@ namespace GlobalGameJam.Gameplay
 {
     public static class LevelEvents
     {
-        public struct AddScore : IEvent
+        public struct ChangeScreens : IEvent
         {
-            public int Value;
-        }
-    
-        public struct Start : IEvent
-        {
-            public static Start Default => new();
+            public ScreenSetupMode Mode;
         }
 
         public struct End : IEvent
         {
             public static End Default => new();
         }
-
-        public struct ChangeScreens : IEvent
+        
+        public struct Instructions : IEvent
         {
-            public ScreenSetupMode Mode;
+            public static Instructions Default => new();
+        }
+
+        public struct Leaderboard : IEvent
+        {
+            public static Leaderboard Default => new();
         }
 
         public struct ObjectiveUpdated : IEvent
         {
             public PotionData Potion;
         }
-
-        public struct TimerUpdate : IEvent
+        
+        public struct Start : IEvent
         {
-            public float Remaining;
+            public static Start Default => new();
         }
     }
 }

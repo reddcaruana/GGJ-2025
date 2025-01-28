@@ -27,6 +27,11 @@ namespace GlobalGameJam.Gameplay
             {
                 Value = potionData.Cost
             });
+
+            EventBus<TimerEvents.Extend>.Raise(new TimerEvents.Extend
+            {
+                Duration = potionData.Time
+            });
         }
 
 #endregion

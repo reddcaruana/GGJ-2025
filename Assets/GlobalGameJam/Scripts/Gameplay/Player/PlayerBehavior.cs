@@ -44,7 +44,6 @@ namespace GlobalGameJam.Gameplay
 #region Lifecycle Events
 
         /// <summary>
-        /// Called when the script instance is being loaded.
         /// Initializes the player context with movement, interaction, bag, and throw components.
         /// </summary>
         private void Awake()
@@ -61,7 +60,6 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
-        /// Called every fixed framerate frame.
         /// Moves the player based on the input value.
         /// </summary>
         private void FixedUpdate()
@@ -70,12 +68,21 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
-        /// Called when the MonoBehaviour will be destroyed.
         /// Releases the input actions.
         /// </summary>
         private void OnDestroy()
         {
             Release();
+        }
+        
+        /// <summary>
+        /// Move the player out of view.
+        /// </summary>
+        private void Start()
+        {
+            var position = transform.position;
+            position.y = -10;
+            transform.position = position;
         }
 
 #endregion
@@ -122,6 +129,11 @@ namespace GlobalGameJam.Gameplay
             var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
             playerInput = playerDataManager.GetPlayerInput(playerNumber);
 
+            if (playerInput is null)
+            {
+                return;
+            }
+
             playerInput.SwitchCurrentActionMap("Player");
 
             moveAction = playerInput.currentActionMap.FindAction("Move");
@@ -131,6 +143,10 @@ namespace GlobalGameJam.Gameplay
 
             interactionAction = playerInput.currentActionMap.FindAction("Interact");
             interactionAction.started += InteractionHandler;
+
+            var position = transform.position;
+            position.y = 0;
+            transform.position = position;
         }
 
         /// <inheritdoc />

@@ -22,10 +22,15 @@ namespace GlobalGameJam.Gameplay
         private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
 
         /// <summary>
+        /// Binding for the timer extension event.
+        /// </summary>
+        private EventBinding<TimerEvents.Extend> onExtendTimerEventBinding;
+
+        /// <summary>
         /// Binding for the change screen event.
         /// </summary>
         private EventBinding<LevelEvents.ChangeScreens> onChangeScreenEventBinding;
-        
+
 #region Lifecycle Events
 
         /// <summary>
@@ -35,6 +40,7 @@ namespace GlobalGameJam.Gameplay
         {
             timer = GetComponent<Timer>();
 
+            onExtendTimerEventBinding = new EventBinding<TimerEvents.Extend>(OnExtendTimerEventHandler);
             onChangeScreenEventBinding = new EventBinding<LevelEvents.ChangeScreens>(OnChangeScreenEventHandler);
             onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
         }
@@ -45,9 +51,12 @@ namespace GlobalGameJam.Gameplay
         private void OnEnable()
         {
             timer.OnUpdate += OnTimerUpdateHandler;
-
+            timer.OnComplete += OnTimerCompleteHandler;
+            
             EventBus<LevelEvents.ChangeScreens>.Register(onChangeScreenEventBinding);
             EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
+            
+            EventBus<TimerEvents.Extend>.Register(onExtendTimerEventBinding);
         }
 
         /// <summary>
@@ -56,9 +65,12 @@ namespace GlobalGameJam.Gameplay
         private void OnDisable()
         {
             timer.OnUpdate -= OnTimerUpdateHandler;
+            timer.OnComplete -= OnTimerCompleteHandler;
 
             EventBus<LevelEvents.ChangeScreens>.Deregister(onChangeScreenEventBinding);
             EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
+            
+            EventBus<TimerEvents.Extend>.Deregister(onExtendTimerEventBinding);
         }
 
 #endregion
@@ -73,10 +85,20 @@ namespace GlobalGameJam.Gameplay
         private void OnChangeScreenEventHandler(LevelEvents.ChangeScreens @event)
         {
             timer.Deactivate();
-            EventBus<LevelEvents.TimerUpdate>.Raise(new LevelEvents.TimerUpdate
+            EventBus<TimerEvents.Update>.Raise(new TimerEvents.Update
             {
                 Remaining = timer.Duration
             });
+        }
+
+        /// <summary>
+        /// Event handler for extending the timer.
+        /// Extends the timer duration by the specified amount.
+        /// </summary>
+        /// <param name="event">The event data containing the duration to extend.</param>
+        private void OnExtendTimerEventHandler(TimerEvents.Extend @event)
+        {
+            timer.Extend(@event.Duration);
         }
 
         /// <summary>
@@ -90,13 +112,22 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
+        /// Event handler for when the timer completes.
+        /// Raises the level end event.
+        /// </summary>
+        private void OnTimerCompleteHandler()
+        {
+            EventBus<LevelEvents.End>.Raise(LevelEvents.End.Default);
+        }
+
+        /// <summary>
         /// Handles the timer update event, raising a level timer update event with the remaining time.
         /// </summary>
         /// <param name="current">The current time of the timer.</param>
         /// <param name="duration">The total duration of the timer.</param>
         private void OnTimerUpdateHandler(float current, float duration)
         {
-            EventBus<LevelEvents.TimerUpdate>.Raise(new LevelEvents.TimerUpdate
+            EventBus<TimerEvents.Update>.Raise(new TimerEvents.Update
             {
                 Remaining = duration - current
             });
@@ -113,7 +144,6 @@ namespace GlobalGameJam.Gameplay
         private IEnumerator ActivateTimerRoutine()
         {
             yield return new WaitForSeconds(timerDelay);
-            Debug.Log("Timer!");
             timer.Activate();
         }
 

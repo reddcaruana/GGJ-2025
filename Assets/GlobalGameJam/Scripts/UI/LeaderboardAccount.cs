@@ -1,31 +1,42 @@
+using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-namespace GlobalGameJam.Endgame
+namespace GlobalGameJam.UI
 {
-    public class ScorePlayerInput : MonoBehaviour, IBindable
+    public class LeaderboardAccount : MonoBehaviour, IBindable
     {
-        private int playerID;
+        [SerializeField] private Image image;
+        [SerializeField] private TMP_Text username;
+        [SerializeField] private TMP_Text characterText;
+
+        [SerializeField] private CanvasGroup canvasGroup;
+
         private PlayerInput playerInput;
-        
+
         private InputAction aAction;
         private InputAction bAction;
         private InputAction xAction;
         private InputAction yAction;
 
-        [SerializeField] private TMP_Text characterText;
-        
+#region Implementation of IBindable
+
+
         /// <inheritdoc />
         public void Bind(int playerNumber)
         {
-            playerID = playerNumber;
-            
             var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
             playerInput = playerDataManager.GetPlayerInput(playerNumber);
-            
-            playerInput.SwitchCurrentActionMap("Scoring");
+
+            if (playerInput is null)
+            {
+                return;
+            }
+
+            playerInput.SwitchCurrentActionMap("Leaderboard");
 
             aAction = playerInput.currentActionMap.FindAction("A");
             aAction.started += AHandler;
@@ -47,56 +58,77 @@ namespace GlobalGameJam.Endgame
             {
                 aAction.started -= AHandler;
             }
+
             aAction = null;
-            
+
             if (bAction is not null)
             {
                 bAction.started -= BHandler;
             }
+
             bAction = null;
-            
+
             if (xAction is not null)
             {
                 xAction.started -= XHandler;
             }
+
             xAction = null;
-            
+
             if (yAction is not null)
             {
                 yAction.started -= YHandler;
             }
+
             yAction = null;
 
             playerInput = null;
         }
 
+#endregion
+
+#region Event Handlers
+
+
         private void YHandler(InputAction.CallbackContext obj)
         {
-            SetName('Y');
+            SetCharacter('Y');
         }
 
         private void XHandler(InputAction.CallbackContext obj)
         {
-            SetName('X');
+            SetCharacter('X');
         }
 
         private void BHandler(InputAction.CallbackContext obj)
         {
-            SetName('B');
+            SetCharacter('B');
         }
 
         private void AHandler(InputAction.CallbackContext obj)
         {
-            SetName('A');
+            SetCharacter('A');
         }
 
-        private void SetName(char character)
+#endregion
+
+#region Methods
+
+        public void Setup(ProfileData profileData)
         {
-            var manager = Singleton.GetOrCreateMonoBehaviour<ScoreScreenManager>();
-            manager.SetName(playerID, character);
-
-            Release();
-            characterText.text = character.ToString();
+            image.sprite = profileData.Sprite;
+            username.text = profileData.Username;
         }
+
+        private void SetCharacter(char character)
+        {
+            Release();
+
+            canvasGroup.alpha = 0.3f;
+            characterText.text = character.ToString();
+            characterText.gameObject.SetActive(true);
+        }
+
+#endregion
     }
 }

@@ -768,7 +768,57 @@
             ]
         },
         {
-            "name": "Scoring",
+            "name": "Instructions",
+            "id": "33fb01ce-4340-452c-8485-fc068b4f53ef",
+            "actions": [
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "d534a9af-9cfc-459c-9b5a-a0c75d45dd16",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "84441097-493c-45fd-ace8-90007b4094df",
+                    "path": "<HID::usb gamepad           >/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12879c81-e1b2-47d1-9e3e-4238bd4cf582",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2123f2fd-28a3-4580-9d68-6509a28dda0b",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Leaderboard",
             "id": "645b8113-abbb-4f89-8630-1128a2845114",
             "actions": [
                 {

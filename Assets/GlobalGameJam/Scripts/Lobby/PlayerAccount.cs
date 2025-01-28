@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
+using GlobalGameJam.Players;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,7 +37,7 @@ namespace GlobalGameJam.Lobby
         private int attempts = 1;
         private bool canLogIn;
         private Coroutine activeCoroutine;
-        private int playerID;
+        private int playerID = -1;
 
 #region Lifecycle Events
 
@@ -168,6 +169,7 @@ namespace GlobalGameJam.Lobby
             joinAction = null;
 
             playerInput = null;
+            playerID = -1;
         }
 
 #endregion
@@ -189,9 +191,10 @@ namespace GlobalGameJam.Lobby
             }
             
             animator.Play(LoggedInAnimatorHash);
-
-            var levelManager = Singleton.GetOrCreateMonoBehaviour<LevelManager>();
-            levelManager.AddPlayer(playerID);
+            EventBus<PlayerEvents.Add>.Raise(new PlayerEvents.Add
+            {
+                PlayerID = playerID
+            });
         }
         
         /// <summary>
@@ -200,6 +203,11 @@ namespace GlobalGameJam.Lobby
         /// <param name="context">The callback context of the input action.</param>
         private void LeaveHandler(InputAction.CallbackContext context)
         {
+            EventBus<PlayerEvents.Remove>.Raise(new PlayerEvents.Remove
+            {
+                PlayerID = playerID
+            });
+            
             input.text = string.Empty;
             canLogIn = false;
             attempts = data.Attempts;
@@ -214,7 +222,6 @@ namespace GlobalGameJam.Lobby
             Release();
             
             animator.Play(LoggedOutAnimatorHash);
-
             Destroy(targetPlayerInput.gameObject);
         }
 

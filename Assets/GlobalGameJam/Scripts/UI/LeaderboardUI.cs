@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using GlobalGameJam.Gameplay;
-using GlobalGameJam.UI;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace GlobalGameJam
+namespace GlobalGameJam.UI
 {
     /// <summary>
     /// Manages the UI for displaying the leaderboard.

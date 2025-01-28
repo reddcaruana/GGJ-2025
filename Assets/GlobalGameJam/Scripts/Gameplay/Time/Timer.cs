@@ -74,6 +74,15 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
+        /// Extends the timer by a given value.
+        /// </summary>
+        /// <param name="value">The timer value.</param>
+        public void Extend(float value)
+        {
+            Current -= value;
+        }
+
+        /// <summary>
         /// Pauses the timer without resetting the current time.
         /// </summary>
         public void Pause()

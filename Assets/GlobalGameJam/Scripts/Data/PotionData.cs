@@ -10,6 +10,7 @@ namespace GlobalGameJam.Data
     {
         [field: SerializeField] public IngredientData[] Ingredients { get; private set; }
         [field: SerializeField] public int Cost { get; private set; }
+        [field: SerializeField] public float Time { get; private set; }
 
         public int IngredientCount => Ingredients.Length;
     }

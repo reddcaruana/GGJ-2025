@@ -17,7 +17,7 @@ namespace GlobalGameJam.UI
         /// <summary>
         /// The event binding for handling level timer update events.
         /// </summary>
-        private EventBinding<LevelEvents.TimerUpdate> onLevelTimerUpdateEventBinding;
+        private EventBinding<TimerEvents.Update> onLevelTimerUpdateEventBinding;
         
 #region Lifecycle Events
 
@@ -26,7 +26,7 @@ namespace GlobalGameJam.UI
         /// </summary>
         private void Awake()
         {
-            onLevelTimerUpdateEventBinding = new EventBinding<LevelEvents.TimerUpdate>(OnLevelTimerUpdateEventHandler);
+            onLevelTimerUpdateEventBinding = new EventBinding<TimerEvents.Update>(OnLevelTimerUpdateEventHandler);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace GlobalGameJam.UI
         /// </summary>
         private void OnEnable()
         {
-            EventBus<LevelEvents.TimerUpdate>.Register(onLevelTimerUpdateEventBinding);
+            EventBus<TimerEvents.Update>.Register(onLevelTimerUpdateEventBinding);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace GlobalGameJam.UI
         /// </summary>
         private void OnDisable()
         {
-            EventBus<LevelEvents.TimerUpdate>.Deregister(onLevelTimerUpdateEventBinding);
+            EventBus<TimerEvents.Update>.Deregister(onLevelTimerUpdateEventBinding);
         }
 
 #endregion
@@ -53,7 +53,7 @@ namespace GlobalGameJam.UI
         /// Handles the level timer update event, updating the timer text.
         /// </summary>
         /// <param name="event">The timer update event containing the remaining time.</param>
-        private void OnLevelTimerUpdateEventHandler(LevelEvents.TimerUpdate @event)
+        private void OnLevelTimerUpdateEventHandler(TimerEvents.Update @event)
         {
             timerText.text = TimeUtility.ToString(@event.Remaining);
         }

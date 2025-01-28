@@ -1,3 +1,4 @@
+using GlobalGameJam.Gameplay;
 using UnityEngine;
 
 namespace GlobalGameJam
@@ -13,9 +14,19 @@ namespace GlobalGameJam
         private int score;
 
         /// <summary>
+        /// The time extensions applied.
+        /// </summary>
+        private float time;
+
+        /// <summary>
         /// Event binding for the add score event.
         /// </summary>
         private EventBinding<ScoreEvents.Add> onAddEventBinding;
+
+        /// <summary>
+        /// Event binding for handling extensions in time.
+        /// </summary>
+        private EventBinding<TimerEvents.Extend> onExtendTimerEventBinding;
 
 #region Lifecycle Events
 
@@ -50,14 +61,23 @@ namespace GlobalGameJam
         /// <summary>
         /// Handles the add score event by updating the score and raising a score update event.
         /// </summary>
-        /// <param name="obj">The add score event data.</param>
-        private void OnAddEventHandler(ScoreEvents.Add obj)
+        /// <param name="event">The add score event data.</param>
+        private void OnAddEventHandler(ScoreEvents.Add @event)
         {
-            score += obj.Value;
+            score += @event.Value;
             EventBus<ScoreEvents.Update>.Raise(new ScoreEvents.Update
             {
                 Value = score
             });
+        }
+
+        /// <summary>
+        /// Handles the timer extension event by adding the duration to the current time.
+        /// </summary>
+        /// <param name="event">The timer extension event data.</param>
+        private void OnExtendTimerEventHandler(TimerEvents.Extend @event)
+        {
+            time += @event.Duration;
         }
 
 #endregion

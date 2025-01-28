@@ -1,4 +1,5 @@
 using GlobalGameJam.Data;
+using GlobalGameJam.Gameplay;
 using GlobalGameJam.Players;
 using UnityEngine;
 
@@ -24,6 +25,11 @@ namespace GlobalGameJam.Lobby
         /// </summary>
         private EventBinding<PlayerEvents.Left> onPlayerLeftEventBinding;
 
+        /// <summary>
+        /// The event binding for handling director resume events.
+        /// </summary>
+        private EventBinding<DirectorEvents.Resume> onResumeDirectorEventBinding;
+
 #region Lifecycle Events
 
         /// <summary>
@@ -31,6 +37,8 @@ namespace GlobalGameJam.Lobby
         /// </summary>
         private void Awake()
         {
+            onResumeDirectorEventBinding = new EventBinding<DirectorEvents.Resume>(OnResumeDirectorEventHandler);
+            
             onPlayerJoinedEventBinding = new EventBinding<PlayerEvents.Joined>(OnPlayerJoinedEventHandler);
             onPlayerLeftEventBinding = new EventBinding<PlayerEvents.Left>(OnPlayerLeftEventHandler);
         }
@@ -42,6 +50,8 @@ namespace GlobalGameJam.Lobby
         {
             EventBus<PlayerEvents.Joined>.Register(onPlayerJoinedEventBinding);
             EventBus<PlayerEvents.Left>.Register(onPlayerLeftEventBinding);
+            
+            EventBus<DirectorEvents.Resume>.Register(onResumeDirectorEventBinding);
         }
 
         /// <summary>
@@ -51,6 +61,8 @@ namespace GlobalGameJam.Lobby
         {
             EventBus<PlayerEvents.Joined>.Deregister(onPlayerJoinedEventBinding);
             EventBus<PlayerEvents.Left>.Deregister(onPlayerLeftEventBinding);
+            
+            EventBus<DirectorEvents.Resume>.Deregister(onResumeDirectorEventBinding);
         }
 
         /// <summary>
@@ -103,6 +115,18 @@ namespace GlobalGameJam.Lobby
 
             account.enabled = true;
             account.Bind(@event.PlayerID);
+        }
+
+        /// <summary>
+        /// Handles the event when the director resumes.
+        /// </summary>
+        /// <param name="obj">The director resume event.</param>
+        private void OnResumeDirectorEventHandler(DirectorEvents.Resume obj)
+        {
+            foreach (var account in playerAccounts)
+            {
+                account.Release();
+            }
         }
 
 #endregion
