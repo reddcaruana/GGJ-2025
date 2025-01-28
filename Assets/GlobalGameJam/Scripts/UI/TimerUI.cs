@@ -55,16 +55,7 @@ namespace GlobalGameJam.UI
         /// <param name="event">The timer update event containing the remaining time.</param>
         private void OnLevelTimerUpdateEventHandler(LevelEvents.TimerUpdate @event)
         {
-            var minutes = Mathf.FloorToInt(@event.Remaining / 60);
-            var seconds = Mathf.FloorToInt(@event.Remaining % 60);
-
-            if (@event.Remaining <= 0)
-            {
-                minutes = 0;
-                seconds = 0;
-            }
-
-            timerText.text = $"{minutes:00}:{seconds:00}";
+            timerText.text = TimeUtility.ToString(@event.Remaining);
         }
 
 #endregion

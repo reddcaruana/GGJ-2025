@@ -14,7 +14,7 @@ namespace GlobalGameJam.Gameplay
             
         public ChestBatch[] ChestBatches;
 
-        public LeaderboardManager Leaderboard;
+        public Leaderboard Leaderboard;
 
         public PlayableDirector Timeline;
     }
@@ -26,12 +26,12 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private PlayerBehavior[] playerBehaviors;
         [SerializeField] private ChestBatch[] chestBatches;
         [SerializeField] private LoginScreen loginScreen;
-        [SerializeField] private LeaderboardManager leaderboard;
+        [SerializeField] private Leaderboard leaderboard;
         [SerializeField] private PlayableDirector timeline;
 
         private LevelContext levelContext;
 
-        private SessionOutcome sessionOutcome;
+        private ScoreEntry scoreEntry;
         
 #region Lifecycle Events
 

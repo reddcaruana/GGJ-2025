@@ -123,3 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1d7a272d3e4f249790a69fc0a6ae77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angularVelocity: 5
+  radius: 0.2
+  speed: 0.1
+  noiseOffset: {x: 0.2, y: 0.2}
