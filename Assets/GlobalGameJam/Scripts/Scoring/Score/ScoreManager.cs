@@ -19,9 +19,24 @@ namespace GlobalGameJam
         private float time;
 
         /// <summary>
+        /// The score initials.
+        /// </summary>
+        private readonly char[] initials = new char[4];
+
+        /// <summary>
         /// Event binding for the add score event.
         /// </summary>
         private EventBinding<ScoreEvents.Add> onAddEventBinding;
+
+        /// <summary>
+        /// Event binding to set the player's initial.
+        /// </summary>
+        private EventBinding<ScoreEvents.SetInitial> onSetInitialEventBinding;
+
+        /// <summary>
+        /// Event binding to submit the team score.
+        /// </summary>
+        private EventBinding<ScoreEvents.Submit> onSubmitEventBinding;
 
         /// <summary>
         /// Event binding for handling extensions in time.
@@ -36,6 +51,10 @@ namespace GlobalGameJam
         private void Awake()
         {
             onAddEventBinding = new EventBinding<ScoreEvents.Add>(OnAddEventHandler);
+            onSetInitialEventBinding = new EventBinding<ScoreEvents.SetInitial>(OnSetInitialEventHandler);
+            onSubmitEventBinding = new EventBinding<ScoreEvents.Submit>(OnSubmitEventHandler);
+
+            onExtendTimerEventBinding = new EventBinding<TimerEvents.Extend>(OnExtendTimerEventHandler);
         }
 
         /// <summary>
@@ -44,6 +63,10 @@ namespace GlobalGameJam
         private void OnEnable()
         {
             EventBus<ScoreEvents.Add>.Register(onAddEventBinding);
+            EventBus<ScoreEvents.SetInitial>.Register(onSetInitialEventBinding);
+            EventBus<ScoreEvents.Submit>.Register(onSubmitEventBinding);
+
+            EventBus<TimerEvents.Extend>.Register(onExtendTimerEventBinding);
         }
 
         /// <summary>
@@ -52,6 +75,10 @@ namespace GlobalGameJam
         private void OnDisable()
         {
             EventBus<ScoreEvents.Add>.Deregister(onAddEventBinding);
+            EventBus<ScoreEvents.SetInitial>.Deregister(onSetInitialEventBinding);
+            EventBus<ScoreEvents.Submit>.Deregister(onSubmitEventBinding);
+
+            EventBus<TimerEvents.Extend>.Deregister(onExtendTimerEventBinding);
         }
 
 #endregion
@@ -78,6 +105,33 @@ namespace GlobalGameJam
         private void OnExtendTimerEventHandler(TimerEvents.Extend @event)
         {
             time += @event.Duration;
+        }
+
+        /// <summary>
+        /// Handles the event where the player sets their initial.
+        /// </summary>
+        /// <param name="event">The set initial event data.</param>
+        private void OnSetInitialEventHandler(ScoreEvents.SetInitial @event)
+        {
+            initials[@event.PlayerID] = @event.Initial;
+        }
+
+        /// <summary>
+        /// Handles the event where the player submits their score.
+        /// </summary>
+        private void OnSubmitEventHandler(ScoreEvents.Submit @event)
+        {
+            var entry = new ScoreEntry
+            {
+                Name = new string(initials),
+                Score = score,
+                Time = time
+            };
+
+            EventBus<LeaderboardEvents.Add>.Raise(new LeaderboardEvents.Add
+            {
+                Entry = entry
+            });
         }
 
 #endregion

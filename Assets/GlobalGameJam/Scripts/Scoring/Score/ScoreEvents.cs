@@ -7,9 +7,20 @@ namespace GlobalGameJam
             public int Value;
         }
 
+        public struct SetInitial : IEvent
+        {
+            public int PlayerID;
+            public char Initial;
+        }
+
         public struct Update : IEvent
         {
             public int Value;
+        }
+        
+        public struct Submit : IEvent
+        {
+            public ScoreEntry Score;
         }
     }
 }

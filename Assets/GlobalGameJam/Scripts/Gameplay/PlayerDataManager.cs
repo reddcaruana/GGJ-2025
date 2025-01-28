@@ -21,6 +21,11 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private PlayerInputManager playerInputManager;
 
+        /// <summary>
+        /// The number of registered players.
+        /// </summary>
+        public int Count => playerInputMap.Count;
+
 #region Lifecycle Events
 
         /// <summary>

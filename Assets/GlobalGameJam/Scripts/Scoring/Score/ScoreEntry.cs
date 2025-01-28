@@ -4,6 +4,6 @@ namespace GlobalGameJam
     {
         public string Name;
         public int Score;
-        public int Time;
+        public float Time;
     }
 }

@@ -16,6 +16,7 @@ namespace GlobalGameJam.UI
         [SerializeField] private CanvasGroup canvasGroup;
 
         private PlayerInput playerInput;
+        private int playerID = -1;
 
         private InputAction aAction;
         private InputAction bAction;
@@ -28,6 +29,8 @@ namespace GlobalGameJam.UI
         /// <inheritdoc />
         public void Bind(int playerNumber)
         {
+            playerID = playerNumber;
+            
             var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
             playerInput = playerDataManager.GetPlayerInput(playerNumber);
 
@@ -58,31 +61,28 @@ namespace GlobalGameJam.UI
             {
                 aAction.started -= AHandler;
             }
-
             aAction = null;
 
             if (bAction is not null)
             {
                 bAction.started -= BHandler;
             }
-
             bAction = null;
 
             if (xAction is not null)
             {
                 xAction.started -= XHandler;
             }
-
             xAction = null;
 
             if (yAction is not null)
             {
                 yAction.started -= YHandler;
             }
-
             yAction = null;
 
             playerInput = null;
+            playerID = -1;
         }
 
 #endregion
@@ -122,11 +122,17 @@ namespace GlobalGameJam.UI
 
         private void SetCharacter(char character)
         {
-            Release();
-
             canvasGroup.alpha = 0.3f;
             characterText.text = character.ToString();
             characterText.gameObject.SetActive(true);
+            
+            EventBus<ScoreEvents.SetInitial>.Raise(new ScoreEvents.SetInitial
+            {
+                PlayerID = playerID,
+                Initial = character
+            });
+
+            Release();
         }
 
 #endregion
