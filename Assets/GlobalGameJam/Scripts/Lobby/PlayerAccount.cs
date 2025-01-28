@@ -34,7 +34,7 @@ namespace GlobalGameJam.Lobby
         private InputAction leaveAction;
 
         private int attempts = 1;
-        private bool canLogIn = false;
+        private bool canLogIn;
         private Coroutine activeCoroutine;
         private int playerID;
 
@@ -74,6 +74,7 @@ namespace GlobalGameJam.Lobby
         private void OnDisable()
         {
             canvasGroup.alpha = 0.5f;
+            canLogIn = false;
         }
 
 #endregion

@@ -92,7 +92,6 @@ namespace GlobalGameJam.UI
 
             foreach (var index in indices)
             {
-                Debug.Log("Clearing ingredient");
                 components[index].gameObject.SetActive(true);
                 components[index].ClearSprite();
 
@@ -107,7 +106,6 @@ namespace GlobalGameJam.UI
 
             foreach (var index in indices)
             {
-                Debug.Log("Setting ingredient");
                 if (index >= potion.IngredientCount)
                 {
                     components[index].gameObject.SetActive(false);
