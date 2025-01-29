@@ -37,7 +37,6 @@ namespace GlobalGameJam.UI
 #region Lifecycle Events
 
         /// <summary>
-        /// Called when the script instance is being loaded.
         /// Initializes the object pool and event binding.
         /// </summary>
         private void Awake()
@@ -51,7 +50,6 @@ namespace GlobalGameJam.UI
         }
 
         /// <summary>
-        /// Called when the object becomes enabled and active.
         /// Registers the event binding for leaderboard updates.
         /// </summary>
         private void OnEnable()
@@ -60,7 +58,6 @@ namespace GlobalGameJam.UI
         }
 
         /// <summary>
-        /// Called when the object becomes disabled or inactive.
         /// Deregisters the event binding for leaderboard updates.
         /// </summary>
         private void OnDisable()
@@ -69,7 +66,6 @@ namespace GlobalGameJam.UI
         }
 
         /// <summary>
-        /// Called when the script instance is started.
         /// Raises a broadcast event if an update has not been requested.
         /// </summary>
         private void Start()

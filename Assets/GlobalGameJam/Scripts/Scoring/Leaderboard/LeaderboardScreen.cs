@@ -1,5 +1,6 @@
 using GlobalGameJam.Data;
 using GlobalGameJam.Gameplay;
+using GlobalGameJam.Players;
 using GlobalGameJam.UI;
 using UnityEngine;
 
@@ -26,6 +27,16 @@ namespace GlobalGameJam
         private EventBinding<ScoreEvents.SetInitial> onSetInitialEventBinding;
 
         /// <summary>
+        /// Event binding for the PlayerEvents.Joined event.
+        /// </summary>
+        private EventBinding<PlayerEvents.Joined> onPlayerJoinedEventBinding;
+
+        /// <summary>
+        /// Event binding for the PlayerEvents.Left event.
+        /// </summary>
+        private EventBinding<PlayerEvents.Left> onPlayerLeftEventBinding;
+
+        /// <summary>
         /// Counter for the number of initials submitted by players.
         /// </summary>
         private int initialsSubmitted;
@@ -33,33 +44,38 @@ namespace GlobalGameJam
 #region Lifecycle Events
 
         /// <summary>
-        /// Called when the script instance is being loaded.
-        /// Initializes the event bindings for the leaderboard and score events.
         /// </summary>
         private void Awake()
         {
             onLeaderboardEventBinding = new EventBinding<LevelEvents.Leaderboard>(OnLeaderboardEventHandler);
             onSetInitialEventBinding = new EventBinding<ScoreEvents.SetInitial>(OnSetInitialEventHandler);
+
+            onPlayerJoinedEventBinding = new EventBinding<PlayerEvents.Joined>(OnPlayerJoinedEventHandler);
+            onPlayerLeftEventBinding = new EventBinding<PlayerEvents.Left>(OnPlayerLeftEventHandler);
         }
 
         /// <summary>
-        /// Called when the script instance is enabled.
         /// Registers the event bindings for the leaderboard and score events.
         /// </summary>
         private void OnEnable()
         {
             EventBus<LevelEvents.Leaderboard>.Register(onLeaderboardEventBinding);
             EventBus<ScoreEvents.SetInitial>.Register(onSetInitialEventBinding);
+            
+            EventBus<PlayerEvents.Joined>.Register(onPlayerJoinedEventBinding);
+            EventBus<PlayerEvents.Left>.Register(onPlayerLeftEventBinding);
         }
 
         /// <summary>
-        /// Called when the script instance is disabled.
         /// Deregisters the event bindings for the leaderboard and score events.
         /// </summary>
         private void OnDisable()
         {
             EventBus<LevelEvents.Leaderboard>.Deregister(onLeaderboardEventBinding);
             EventBus<ScoreEvents.SetInitial>.Deregister(onSetInitialEventBinding);
+            
+            EventBus<PlayerEvents.Joined>.Deregister(onPlayerJoinedEventBinding);
+            EventBus<PlayerEvents.Left>.Deregister(onPlayerLeftEventBinding);
         }
 
         /// <summary>
@@ -83,6 +99,7 @@ namespace GlobalGameJam
             {
                 var account = playerAccounts[i];
                 account.Setup(profiles[i]);
+                account.gameObject.SetActive(false);
             }
         }
 
@@ -101,6 +118,26 @@ namespace GlobalGameJam
             {
                 playerAccounts[i].Bind(i);
             }
+        }
+
+        /// <summary>
+        /// Handles the Player joined event.
+        /// </summary>
+        /// <param name="event">The PlayerEvents.Joined event.</param>
+        private void OnPlayerJoinedEventHandler(PlayerEvents.Joined @event)
+        {
+            var playerID = @event.PlayerID;
+            playerAccounts[playerID].gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Handles the Player left event.
+        /// </summary>
+        /// <param name="event">The PlayerEvents.Left event.</param>
+        private void OnPlayerLeftEventHandler(PlayerEvents.Left @event)
+        {
+            var playerID = @event.PlayerID;
+            playerAccounts[playerID].gameObject.SetActive(false);
         }
 
         /// <summary>
