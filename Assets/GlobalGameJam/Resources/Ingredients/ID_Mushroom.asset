@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ID_Mushroom
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Mushroom
-  <Sprite>k__BackingField: {fileID: 21300000, guid: e63769f954c3c4c3aacc86cdf2729885, type: 3}
-  <CrateLabel>k__BackingField: {fileID: 21300000, guid: 735992dcd12ce4882a793c33444463e0, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 46ea0b42ea45e424ea0971a677e9463d, type: 3}
+  <CrateLabel>k__BackingField: {fileID: 21300000, guid: 46ea0b42ea45e424ea0971a677e9463d, type: 3}
   <Color>k__BackingField: {r: 0.70980394, g: 0.07450981, b: 0.13333334, a: 1}

@@ -23,7 +23,7 @@ namespace GlobalGameJam.UI
 
             if (timeText is not null)
             {
-                timeText.text = TimeUtility.ToString(entry.Time);
+                timeText.text =  $"<sprite index=1> {TimeUtility.ToString(entry.Time)}";
             }
         }
     }

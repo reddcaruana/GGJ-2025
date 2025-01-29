@@ -534,8 +534,8 @@ MonoBehaviour:
     m_Bits: 8
   bagAnchor: {fileID: 4547176660479118518}
   bagSpriteRenderer: {fileID: 0}
-  throwSpeed: 11
-  throwAngle: 50
+  throwSpeed: 10
+  throwAngle: 47.5
   throwDirection: {fileID: 1224883257406806750}
   audioSource: {fileID: 4851850175953748271}
   throwSound: {fileID: 8300000, guid: 6897859b00186499090135cda5239ad9, type: 3}
