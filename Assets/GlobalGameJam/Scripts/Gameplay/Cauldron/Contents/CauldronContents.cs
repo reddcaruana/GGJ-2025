@@ -125,7 +125,6 @@ namespace GlobalGameJam.Gameplay
             }
 
             index = 0;
-            evaluationOutcome = OutcomeType.None;
         }
 
 #endregion
