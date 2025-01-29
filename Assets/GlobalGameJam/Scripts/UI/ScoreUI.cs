@@ -54,7 +54,7 @@ namespace GlobalGameJam.UI
         /// <param name="event">The score update event data.</param>
         private void OnScoreUpdateEventHandler(ScoreEvents.Update @event)
         {
-            scoreText.text = @event.Value.ToString("N0");
+            scoreText.text = $"$ {@event.Value:N0}";
         }
 
 #endregion

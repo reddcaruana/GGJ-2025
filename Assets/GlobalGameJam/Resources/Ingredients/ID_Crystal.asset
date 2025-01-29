@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ID_Crystal
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Crystal
-  <Sprite>k__BackingField: {fileID: 21300000, guid: f7fe7def0b8b64b499889322fed604a3, type: 3}
-  <CrateLabel>k__BackingField: {fileID: 21300000, guid: f7fe7def0b8b64b499889322fed604a3, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 27258474ddaf54bd7b247777bb56c046, type: 3}
+  <CrateLabel>k__BackingField: {fileID: 21300000, guid: bb9161eadb12a4f5d856cf274fd31644, type: 3}
   <Color>k__BackingField: {r: 0.9490196, g: 0.3254902, b: 0.5176471, a: 1}

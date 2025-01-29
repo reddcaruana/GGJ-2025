@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ID_EyeOfNewt
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Eye of Newt
-  <Sprite>k__BackingField: {fileID: 21300000, guid: dcc8b2a6ae88f49d1982acdac5c78e7e, type: 3}
-  <CrateLabel>k__BackingField: {fileID: 21300000, guid: dcc8b2a6ae88f49d1982acdac5c78e7e, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 93b0335b4abcb4df58d6d14eade4133d, type: 3}
+  <CrateLabel>k__BackingField: {fileID: 21300000, guid: e777186c5647f4d72a3142528b3e315d, type: 3}
   <Color>k__BackingField: {r: 1, g: 0.3433735, b: 0, a: 1}

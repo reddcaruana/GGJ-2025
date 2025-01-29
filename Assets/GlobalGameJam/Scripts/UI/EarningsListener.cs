@@ -66,7 +66,7 @@ namespace GlobalGameJam.UI
         /// <param name="event">The ScoreEvents.Update event.</param>
         private void OnScoreUpdateEventHandler(ScoreEvents.Update @event)
         {
-            text.text = $"Today's Earnings: <sprite index=\"0\"> {@event.Value}";
+            text.text = $"Today's Earnings: $ {@event.Value:N0}";
         }
 
 #endregion
