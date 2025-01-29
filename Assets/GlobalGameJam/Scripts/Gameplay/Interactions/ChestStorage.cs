@@ -34,6 +34,11 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private CarryableData data;
 
         /// <summary>
+        /// The audio clip for the creaking sound.
+        /// </summary>
+        [SerializeField] private AudioClip creakClip;
+
+        /// <summary>
         /// The instance of the carryable item currently stored.
         /// </summary>
         private Carryable storedInstance;
@@ -43,6 +48,11 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private Animator animator;
 
+        /// <summary>
+        /// THe audio source component for the chest.
+        /// </summary>
+        private AudioSource audioSource;
+
 #region Lifecycle Events
 
         /// <summary>
@@ -51,6 +61,7 @@ namespace GlobalGameJam.Gameplay
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
         }
 
 #endregion
@@ -119,6 +130,7 @@ namespace GlobalGameJam.Gameplay
         private void OnUsedHandler()
         {
             animator.Play(CollectTriggerHash);
+            audioSource.PlayOneShot(creakClip);
         }
 
 #endregion

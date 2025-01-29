@@ -222,7 +222,11 @@ namespace GlobalGameJam.Lobby
             Release();
             
             animator.Play(LoggedOutAnimatorHash);
-            Destroy(targetPlayerInput.gameObject);
+
+            if (targetPlayerInput is not null)
+            {
+                Destroy(targetPlayerInput.gameObject);
+            }
         }
 
 #endregion

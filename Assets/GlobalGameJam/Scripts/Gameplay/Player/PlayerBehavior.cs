@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GlobalGameJam.Data;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -152,10 +153,6 @@ namespace GlobalGameJam.Gameplay
 
             interactionAction = playerInput.currentActionMap.FindAction("Interact");
             interactionAction.started += InteractionHandler;
-
-            var position = transform.position;
-            position.y = 0;
-            transform.position = position;
         }
 
         /// <inheritdoc />
@@ -198,7 +195,7 @@ namespace GlobalGameJam.Gameplay
                 return;
             }
 
-            if (playerContext.Bag.IsFull)
+            if (playerContext.Bag.IsFull && playerContext.Bag.Contents is IngredientData)
             {
                 playerContext.Throw.Drop(playerContext.Bag, facingDirection);
                 playerContext.AudioSource.PlayOneShot(throwSound);

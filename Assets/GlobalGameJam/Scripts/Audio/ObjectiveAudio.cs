@@ -71,11 +71,17 @@ namespace GlobalGameJam.Audio
             switch (@event.Outcome)
             {
                 case OutcomeType.Success:
-                    audioSource.PlayOneShot(successClip);
+                    if (successClip)
+                    {
+                        audioSource.PlayOneShot(successClip);
+                    }
                     break;
 
                 case OutcomeType.Failure:
-                    audioSource.PlayOneShot(failureClip);
+                    if (failureClip)
+                    {
+                        audioSource.PlayOneShot(failureClip);
+                    }
                     break;
             }
         }

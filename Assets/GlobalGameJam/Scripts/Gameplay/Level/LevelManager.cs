@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GlobalGameJam.Data;
 using GlobalGameJam.Players;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace GlobalGameJam.Gameplay
 
         private EventBinding<PlayerEvents.Add> onAddPlayerEventBinding;
         private EventBinding<PlayerEvents.Remove> onRemovePlayerEventBinding;
+
+        private List<int> joinedPlayers = new();
         
 #region Lifecycle Events
 
@@ -63,14 +66,33 @@ namespace GlobalGameJam.Gameplay
 
         private void OnAddPlayerEventHandler(PlayerEvents.Add @event)
         {
-            if (@event.PlayerID >= 0)
+            var position = playerBehaviors[@event.PlayerID].transform.position;
+            position.y = 0;
+            playerBehaviors[@event.PlayerID].transform.position = position;
+
+            if (joinedPlayers.Contains(@event.PlayerID) == false)
+            {
+                joinedPlayers.Add(@event.PlayerID);
+            }
+            
+            var playerManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
+            if (joinedPlayers.Count >= playerManager.GetActivePlayers().Length)
             {
                 EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
             }
         }
 
         private void OnRemovePlayerEventHandler(PlayerEvents.Remove @event)
-        { }
+        {
+            var position = playerBehaviors[@event.PlayerID].transform.position;
+            position.y = -10;
+            playerBehaviors[@event.PlayerID].transform.position = position;
+
+            if (joinedPlayers.Contains(@event.PlayerID))
+            {
+                joinedPlayers.Remove(@event.PlayerID);
+            }
+        }
         
         private void OnLevelStartEventHandler(LevelEvents.Start @event)
         {

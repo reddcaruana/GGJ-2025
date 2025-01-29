@@ -49,6 +49,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b3d25fe2-9397-4244-9c21-71e221de9eeb",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f1bed157-0536-4812-9f86-007d231cf953",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -62,6 +73,17 @@
                     "name": "",
                     "id": "4c8c335a-937f-46df-8900-37c8d6742f14",
                     "path": "<HID::usb gamepad           >/button3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Leave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fd6966b-5f34-4885-9cd6-fa0ff5872f83",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -95,6 +117,17 @@
                 }
             ],
             "bindings": [
+                {
+                    "name": "",
+                    "id": "19b7cedf-88e8-493f-b5d2-94be7ec74462",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "",
                     "id": "05cd52e1-65ef-412e-a23c-0bfdd7d722ef",
