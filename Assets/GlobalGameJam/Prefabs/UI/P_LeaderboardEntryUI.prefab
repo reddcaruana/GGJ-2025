@@ -152,7 +152,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 110
+  m_PreferredWidth: 140
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 110
+  m_PreferredWidth: 140
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
@@ -484,7 +484,7 @@ GameObject:
   - component: {fileID: 4183066199072540419}
   - component: {fileID: 7774573552173869665}
   m_Layer: 5
-  m_Name: TMP_Money
+  m_Name: TMP_Earnings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -748,5 +748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupText: {fileID: 4448495586350456358}
-  scoreText: {fileID: 4183066199072540419}
-  timeText: {fileID: 5148270172359503438}
+  earningsText: {fileID: 4183066199072540419}
+  potionsText: {fileID: 5148270172359503438}
+  litterText: {fileID: 380614212035961277}

@@ -39,6 +39,21 @@ namespace GlobalGameJam.Gameplay
             ingredientManager.Release(this);
         }
 
+        /// <inheritdoc />
+        protected override void OnLevelEndEventHandler(LevelEvents.End @event)
+        {
+            if (AttachedRigidbody.isKinematic)
+            {
+                return;
+            }
+            
+            EventBus<ScoreEvents.Add>.Raise(new ScoreEvents.Add
+            {
+                Litter = 1,
+                Deductions = Data.LitterDeduction
+            });
+        }
+
 #endregion
 
 #region Implementation of IUsable

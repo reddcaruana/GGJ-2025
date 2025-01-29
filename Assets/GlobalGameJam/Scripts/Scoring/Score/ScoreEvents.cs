@@ -4,7 +4,11 @@ namespace GlobalGameJam
     {
         public struct Add : IEvent
         {
-            public int Value;
+            public int Potions;
+            public int Litter;
+            
+            public int Earnings;
+            public int Deductions;
         }
 
         public struct SetInitial : IEvent
@@ -15,7 +19,9 @@ namespace GlobalGameJam
 
         public struct Update : IEvent
         {
-            public int Value;
+            public int PotionCount;
+            public int LitterCount;
+            public int Earnings;
         }
         
         public struct Submit : IEvent

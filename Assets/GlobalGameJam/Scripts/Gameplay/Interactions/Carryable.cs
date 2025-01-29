@@ -28,6 +28,11 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         public Rigidbody AttachedRigidbody { get; private set; }
 
+        /// <summary>
+        /// Event binding for the LevelEvents.End event.
+        /// </summary>
+        private EventBinding<LevelEvents.End> onLevelEndEventBinding;
+
 #region Lifecycle Events
 
         /// <summary>
@@ -36,14 +41,28 @@ namespace GlobalGameJam.Gameplay
         protected virtual void Awake()
         {
             AttachedRigidbody = GetComponent<Rigidbody>();
+
+            onLevelEndEventBinding = new EventBinding<LevelEvents.End>(OnLevelEndEventHandler);
+        }
+
+        /// <summary>
+        /// Called when the script instance is enabled.
+        /// Registers the LevelEvents.End event binding.
+        /// </summary>
+        protected virtual void OnEnable()
+        {
+            EventBus<LevelEvents.End>.Register(onLevelEndEventBinding);
         }
 
         /// <summary>
         /// Called when the object becomes disabled.
+        /// Clears the trail renderer and deregisters the LevelEvents.End event binding.
         /// </summary>
         protected virtual void OnDisable()
         {
             trailRenderer.Clear();
+            
+            EventBus<LevelEvents.End>.Deregister(onLevelEndEventBinding);
         }
 
 #endregion
@@ -54,6 +73,16 @@ namespace GlobalGameJam.Gameplay
         /// Despawns the carryable object.
         /// </summary>
         public abstract void Despawn();
+
+#endregion
+
+#region Event Handlers
+
+        /// <summary>
+        /// Handles the LevelEvents.End event.
+        /// </summary>
+        /// <param name="event">The LevelEvents.End event.</param>
+        protected abstract void OnLevelEndEventHandler(LevelEvents.End @event);
 
 #endregion
     }

@@ -34,6 +34,16 @@ namespace GlobalGameJam.Gameplay
             potionManager.Release(this);
         }
 
+        /// <inheritdoc />
+        protected override void OnLevelEndEventHandler(LevelEvents.End @event)
+        {
+            EventBus<ScoreEvents.Add>.Raise(new ScoreEvents.Add
+            {
+                Litter = 1,
+                Deductions = Data.LitterDeduction
+            });
+        }
+
 #endregion
 
 #region Implementation of IUsable

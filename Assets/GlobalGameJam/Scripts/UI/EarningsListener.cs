@@ -11,7 +11,17 @@ namespace GlobalGameJam.UI
         /// <summary>
         /// The TextMeshPro text component to display the earnings.
         /// </summary>
-        [SerializeField] private TMP_Text text;
+        [SerializeField] private TMP_Text earningsText;
+        
+        /// <summary>
+        /// The TextMeshPro text component to display the potion count.
+        /// </summary>
+        [SerializeField] private TMP_Text potionsText;
+        
+        /// <summary>
+        /// The TextMeshPro text component to display the litter count.
+        /// </summary>
+        [SerializeField] private TMP_Text litterText;
 
         /// <summary>
         /// Event binding for the ScoreEvents.Update event.
@@ -47,14 +57,6 @@ namespace GlobalGameJam.UI
             EventBus<ScoreEvents.Update>.Deregister(onScoreUpdateEventBinding);
         }
 
-        /// <summary>
-        /// Resets the text field to the TMP_Text component found on this GameObject.
-        /// </summary>
-        private void Reset()
-        {
-            text = GetComponent<TMP_Text>();
-        }
-
 #endregion
 
 #region Event Handlers
@@ -66,7 +68,20 @@ namespace GlobalGameJam.UI
         /// <param name="event">The ScoreEvents.Update event.</param>
         private void OnScoreUpdateEventHandler(ScoreEvents.Update @event)
         {
-            text.text = $"Today's Earnings: $ {@event.Value:N0}";
+            if (earningsText is not null)
+            {
+                earningsText.text = $"$ {@event.Earnings:N0}";
+            }
+
+            if (potionsText is not null)
+            {
+                potionsText.text = $"<sprite index=0> {@event.PotionCount}";
+            }
+
+            if (litterText is not null)
+            {
+                litterText.text = $"<sprite index=1> {@event.LitterCount}";
+            }
         }
 
 #endregion

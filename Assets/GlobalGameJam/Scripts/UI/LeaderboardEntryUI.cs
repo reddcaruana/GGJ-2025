@@ -19,7 +19,8 @@ namespace GlobalGameJam.UI
 
             if (earningsText is not null)
             {
-                earningsText.text = $"${entry.Earnings}";
+                var earnings = entry.Earnings - entry.Deductions;
+                earningsText.text = $"$ {earnings}";
             }
 
             if (potionsText is not null)

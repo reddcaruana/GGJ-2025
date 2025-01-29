@@ -9,9 +9,24 @@ namespace GlobalGameJam
     public class ScoreManager : MonoBehaviour
     {
         /// <summary>
-        /// The current score.
+        /// The current earnings.
         /// </summary>
-        private int score;
+        private int earnings;
+
+        /// <summary>
+        /// The current deductions.
+        /// </summary>
+        private int deductions;
+
+        /// <summary>
+        /// The number of generated potions.
+        /// </summary>
+        private int potionCount;
+
+        /// <summary>
+        /// The number of items on the ground.
+        /// </summary>
+        private int litterCount;
 
         /// <summary>
         /// The time extensions applied.
@@ -91,10 +106,16 @@ namespace GlobalGameJam
         /// <param name="event">The add score event data.</param>
         private void OnAddEventHandler(ScoreEvents.Add @event)
         {
-            score += @event.Value;
+            potionCount += @event.Potions;
+            litterCount += @event.Litter;
+            earnings += @event.Earnings;
+            deductions += @event.Deductions;
+            
             EventBus<ScoreEvents.Update>.Raise(new ScoreEvents.Update
             {
-                Value = score
+                PotionCount = potionCount,
+                LitterCount = litterCount,
+                Earnings = earnings - deductions
             });
         }
 
@@ -124,7 +145,13 @@ namespace GlobalGameJam
             var entry = new ScoreEntry
             {
                 GroupName = new string(initials),
-                Earnings = score,
+                
+                Earnings = earnings,
+                Deductions = deductions,
+                
+                PotionCount = potionCount,
+                LitterCount = litterCount,
+                
                 Overtime = time
             };
 

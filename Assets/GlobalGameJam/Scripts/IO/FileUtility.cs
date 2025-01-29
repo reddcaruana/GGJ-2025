@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace GlobalGameJam
@@ -20,7 +21,7 @@ namespace GlobalGameJam
         /// <param name="scoreEntries">The array of ScoreEntry to save.</param>
         public static void SaveScores(ScoreEntry[] scoreEntries)
         {
-            var json = JsonUtility.ToJson(new ScoreEntryList { Entries = scoreEntries });
+            var json = JsonUtility.ToJson(new ScoreEntryList { Entries = scoreEntries.Take(100).ToArray() });
             var path = Path.Combine(Application.persistentDataPath, ScoreFileName);
             
             File.WriteAllText(path, json);
