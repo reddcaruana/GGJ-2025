@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Pootion
   <Sprite>k__BackingField: {fileID: 21300000, guid: ef411096949504fd8b925689d257cf63, type: 3}
+  <LitterDeduction>k__BackingField: 5
   <Ingredients>k__BackingField: []
   <Cost>k__BackingField: -10
+  <Time>k__BackingField: 0

@@ -123,9 +123,9 @@ namespace GlobalGameJam
         {
             var entry = new ScoreEntry
             {
-                Name = new string(initials),
-                Score = score,
-                Time = time
+                GroupName = new string(initials),
+                Earnings = score,
+                Overtime = time
             };
 
             EventBus<LeaderboardEvents.Add>.Raise(new LeaderboardEvents.Add

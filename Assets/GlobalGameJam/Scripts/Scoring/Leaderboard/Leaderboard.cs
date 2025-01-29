@@ -35,7 +35,7 @@ namespace GlobalGameJam
             onBroadcastEventBinding = new EventBinding<LeaderboardEvents.Broadcast>(OnBroadcastEventHandler);
 
             var scores = FileUtility.LoadScores();
-            Entries = scores.OrderByDescending(entry => entry.Score).ToList();
+            Entries = scores.OrderByDescending(entry => entry.Earnings).ToList();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace GlobalGameJam
         private void OnAddEntryEventHandler(LeaderboardEvents.Add @event)
         {
             Entries.Add(@event.Entry);
-            Entries = Entries.OrderByDescending(entry => entry.Score).ToList();
+            Entries = Entries.OrderByDescending(entry => entry.Earnings).ToList();
             
             FileUtility.SaveScores(Entries.ToArray());
             
