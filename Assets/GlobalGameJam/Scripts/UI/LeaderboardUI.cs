@@ -106,6 +106,11 @@ namespace GlobalGameJam.UI
                 item.SetData(entry);
 
                 entries.Add(item);
+
+                if (entries.Count >= 8)
+                {
+                    break;
+                }
             }
         }
 
