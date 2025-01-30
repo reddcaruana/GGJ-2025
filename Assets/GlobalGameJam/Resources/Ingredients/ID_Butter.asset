@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ID_Butter
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Butter
-  <Sprite>k__BackingField: {fileID: 21300000, guid: cecd53c2106d44213a0bf27ddae68233, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 5050cbd2ab9024ba5b4e1b4cba64e6db, type: 3}
   <LitterDeduction>k__BackingField: 2
-  <CrateLabel>k__BackingField: {fileID: 21300000, guid: cecd53c2106d44213a0bf27ddae68233, type: 3}
+  <CrateLabel>k__BackingField: {fileID: 21300000, guid: 8e2acfeb474ac4ae5ae9d9c66c0b6087, type: 3}
   <Color>k__BackingField: {r: 0.9433962, g: 0.85988665, b: 0, a: 1}

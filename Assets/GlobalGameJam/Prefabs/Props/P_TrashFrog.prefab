@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 376a7b4d74bcbca4cb24f9d8588956c6, type: 2}
     - target: {fileID: 919132149155446097, guid: 1b0529837a4a4fa4ab5030f8414e3236, type: 3}
       propertyPath: m_Name
-      value: TrashFrog
+      value: P_TrashFrog
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1b0529837a4a4fa4ab5030f8414e3236, type: 3}
       propertyPath: m_StaticEditorFlags

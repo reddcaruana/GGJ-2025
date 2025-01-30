@@ -114,8 +114,8 @@ Transform:
   m_GameObject: {fileID: 6865916912231132101}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.023724552, y: 1.1292744, z: 0.06555177}
-  m_LocalScale: {x: 1.6080996, y: 1.6080999, z: 1.6080996}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 11, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6174825758019750303}
@@ -131,8 +131,8 @@ Light:
   serializedVersion: 11
   m_Type: 2
   m_Color: {r: 1, g: 0.32219538, b: 0.013207495, a: 1}
-  m_Intensity: 11
-  m_Range: 1
+  m_Intensity: 30
+  m_Range: 1.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -232,8 +232,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9041918420029269709}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.63, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -321,7 +321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1128009853963812683, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: m_RenderingLayerMask
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1128009853963812683, guid: a9a968c09803ef441ae2d2f73105f2f0, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

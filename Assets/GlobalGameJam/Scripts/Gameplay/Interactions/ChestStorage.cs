@@ -114,6 +114,9 @@ namespace GlobalGameJam.Gameplay
 
             if (storedInstance is Ingredient ingredient)
             {
+                var sprite = ingredient.GetComponentInChildren<SpriteRenderer>();
+                sprite.transform.eulerAngles = Vector3.right * 45.0f;
+                
                 ingredient.OnUsed += OnUsedHandler;
             }
 
