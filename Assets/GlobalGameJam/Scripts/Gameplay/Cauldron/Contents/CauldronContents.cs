@@ -90,8 +90,10 @@ namespace GlobalGameJam.Gameplay
         /// <param name="event">The added ingredient event.</param>
         private void OnAddedIngredientEventHandler(CauldronEvents.AddedIngredient @event)
         {
+            Debug.Log(evaluationOutcome);
             if (evaluationOutcome is not OutcomeType.None)
             {
+                evaluationOutcome = OutcomeType.None;
                 return;
             }
 

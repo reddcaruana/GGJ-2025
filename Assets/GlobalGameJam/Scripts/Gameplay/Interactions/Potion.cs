@@ -8,6 +8,8 @@ namespace GlobalGameJam.Gameplay
     /// </summary>
     public class Potion : Carryable, IThrowable, IUsable, IPotionData, IShippable
     {
+        private static PotionRegistry potionRegistry;
+        
         /// <summary>
         /// The amount to expand the collider radius.
         /// </summary>
@@ -26,6 +28,13 @@ namespace GlobalGameJam.Gameplay
 #endregion
 
 #region Overrides of Carryable
+
+        /// <inheritdoc />
+        protected override void Awake()
+        {
+            base.Awake();
+            potionRegistry ??= Singleton.GetOrCreateScriptableObject<PotionRegistry>();
+        }
 
         /// <inheritdoc />
         public override void Despawn()
@@ -52,6 +61,12 @@ namespace GlobalGameJam.Gameplay
         public void Use(PlayerContext playerContext)
         {
             playerContext.Bag.Carry(Data);
+
+            if (Data == potionRegistry.Pootion)
+            {
+                EventBus<TrashcanEvents.Excite>.Raise(TrashcanEvents.Excite.Default);
+            }
+            
             Despawn();
         }
 
