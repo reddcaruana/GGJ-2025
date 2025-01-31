@@ -30,7 +30,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// The direction of the interaction.
         /// </summary>
-        public Direction Direction;
+        public Vector3 Direction;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Interaction"/> class with the specified parameters.
@@ -55,7 +55,7 @@ namespace GlobalGameJam.Gameplay
         /// <param name="playerContext">The context of the player performing the interaction.</param>
         public void Interact(PlayerContext playerContext)
         {
-            var anchorPosition = anchor.position + Direction.ToVector() * distance;
+            var anchorPosition = anchor.position + Direction * distance;
 
             var results = new Collider[8];
             var numCollisions = Physics.OverlapSphereNonAlloc(anchorPosition, radius, results, layer);

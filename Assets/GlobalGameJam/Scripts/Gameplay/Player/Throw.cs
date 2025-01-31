@@ -1,4 +1,5 @@
 using GlobalGameJam.Data;
+using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
 {
@@ -35,7 +36,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         /// <param name="bag">The bag containing the ingredient.</param>
         /// <param name="direction">The direction to drop the ingredient.</param>
-        public void Drop(Bag bag, Direction direction)
+        public void Drop(Bag bag, Vector3 direction)
         {
             if (bag.Contents is not IngredientData ingredientData)
             {
@@ -44,7 +45,7 @@ namespace GlobalGameJam.Gameplay
 
             var ingredientManager = Singleton.GetOrCreateMonoBehaviour<IngredientPool>();
             var ingredient = ingredientManager.Generate(ingredientData, bag.GetAnchor());
-            ingredient.Throw(direction.ToVector(), speed, angle);
+            ingredient.Throw(direction, speed, angle);
 
             bag.Clear();
         }

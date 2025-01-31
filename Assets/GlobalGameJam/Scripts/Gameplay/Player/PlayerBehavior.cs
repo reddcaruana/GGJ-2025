@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
 using GlobalGameJam.Data;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 namespace GlobalGameJam.Gameplay
@@ -48,7 +45,7 @@ namespace GlobalGameJam.Gameplay
         private InputAction interactionAction;
 
         private Vector3 inputValue;
-        private Direction facingDirection;
+        private Vector3 interactionDirection;
 
 #region Lifecycle Events
 
@@ -100,33 +97,31 @@ namespace GlobalGameJam.Gameplay
 #region Methods
 
         /// <summary>
-        /// Gets the direction based on the input vector.
+        /// Updates the X-axis value for the player renderer.
+        /// Flips the sprite renderer based on the input value.
         /// </summary>
-        /// <param name="vector">The input vector.</param>
-        /// <returns>The direction corresponding to the input vector.</returns>
-        public Direction GetDirection(Vector3 vector)
+        /// <param name="value">The input value for the X-axis.</param>
+        private void UpdateAxisX(float value)
         {
-            var dotProducts = new Dictionary<Direction, float>();
-            var directions = System.Enum.GetValues(typeof(Direction)).Cast<Direction>();
-
-            foreach (var direction in directions)
+            foreach (var spriteRenderer in playerRenderer.SpriteRenderers)
             {
-                dotProducts.Add(direction, Vector3.Dot(inputValue, direction.ToVector()));
+                spriteRenderer.flipX = value < 0;
             }
-
-            var maxDot = -1f;
-            var selection = Direction.East;
-
-            foreach (var dotProduct in dotProducts)
+        }
+        
+        /// <summary>
+        /// Updates the Y-axis value for the player renderer.
+        /// Sets the animator float parameter for the Y-axis direction.
+        /// </summary>
+        /// <param name="value">The input value for the Y-axis.</param>
+        private void UpdateAxisY(float value)
+        {
+            if (Mathf.Abs(value) <= Mathf.Epsilon)
             {
-                if (dotProduct.Value > maxDot)
-                {
-                    maxDot = dotProduct.Value;
-                    selection = dotProduct.Key;
-                }
+                return;
             }
-
-            return selection;
+        
+            playerRenderer.Animator.SetFloat(AnimatorDirectionYFloat, value);
         }
 
 #endregion
@@ -197,7 +192,7 @@ namespace GlobalGameJam.Gameplay
 
             if (playerContext.Bag.IsFull && playerContext.Bag.Contents is IngredientData)
             {
-                playerContext.Throw.Drop(playerContext.Bag, facingDirection);
+                playerContext.Throw.Drop(playerContext.Bag, interactionDirection);
                 playerContext.AudioSource.PlayOneShot(throwSound);
             }
 
@@ -215,28 +210,18 @@ namespace GlobalGameJam.Gameplay
 
             if (inputValue.sqrMagnitude > Mathf.Epsilon)
             {
-                facingDirection = GetDirection(inputValue);
+                interactionDirection = inputValue.normalized;
                 var interaction = playerContext.Interaction;
-                interaction.Direction = facingDirection;
+                interaction.Direction = interactionDirection;
                 playerContext.Interaction = interaction;
 
-                throwDirection.rotation = Quaternion.LookRotation(facingDirection.ToVector());
+                throwDirection.rotation = Quaternion.LookRotation(interactionDirection);
             }
 
             playerRenderer.Animator.SetBool(AnimatorIsMovingBool, inputValue.sqrMagnitude > Mathf.Epsilon);
-
-            if (Mathf.Abs(value.y) > Mathf.Epsilon)
-            {
-                playerRenderer.Animator.SetFloat(AnimatorDirectionYFloat, value.y);
-            }
-
-            if (Mathf.Abs(value.x) > Mathf.Epsilon)
-            {
-                foreach (var spriteRenderer in playerRenderer.SpriteRenderers)
-                {
-                    spriteRenderer.flipX = value.x < 0;
-                }
-            }
+            
+            UpdateAxisX(value.x);
+            UpdateAxisY(value.y);
         }
 
 #endregion
