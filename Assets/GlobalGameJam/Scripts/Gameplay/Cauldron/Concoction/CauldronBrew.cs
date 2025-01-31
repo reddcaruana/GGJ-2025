@@ -126,10 +126,9 @@ namespace GlobalGameJam.Gameplay
             // Not complete
             if (required.Count > 0)
             {
-                EventBus<CauldronEvents.EvaluatePotion>.Raise(new CauldronEvents.EvaluatePotion
+                EventBus<CauldronEvents.EmergedIngredient>.Raise(new CauldronEvents.EmergedIngredient()
                 {
-                    Outcome = OutcomeType.None,
-                    Potion = target
+                    Ingredient = @event.Ingredient
                 });
                 return;
             }

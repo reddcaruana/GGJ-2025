@@ -15,6 +15,11 @@ namespace GlobalGameJam.Gameplay
             public float ColorChangeDuration;
         }
 
+        public struct EmergedIngredient : IEvent
+        {
+            public IngredientData Ingredient;
+        }
+
         public struct EvaluatePotion : IEvent
         {
             public OutcomeType Outcome; 

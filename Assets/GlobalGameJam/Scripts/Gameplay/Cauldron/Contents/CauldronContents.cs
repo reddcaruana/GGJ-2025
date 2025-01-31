@@ -13,11 +13,6 @@ namespace GlobalGameJam.Gameplay
         [SerializeField] private CauldronIngredient[] ingredients;
 
         /// <summary>
-        /// The outcome of the potion evaluation.
-        /// </summary>
-        private OutcomeType evaluationOutcome = OutcomeType.None;
-
-        /// <summary>
         /// The current index of the ingredient being added.
         /// </summary>
         private int index;
@@ -25,7 +20,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for handling the addition of an ingredient.
         /// </summary>
-        private EventBinding<CauldronEvents.AddedIngredient> onAddedIngredientEventBinding;
+        private EventBinding<CauldronEvents.EmergedIngredient> onEmergedIngredientEventBinding;
 
         /// <summary>
         /// Event binding for handling the evaluation of the potion.
@@ -39,7 +34,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void Awake()
         {
-            onAddedIngredientEventBinding = new EventBinding<CauldronEvents.AddedIngredient>(OnAddedIngredientEventHandler);
+            onEmergedIngredientEventBinding = new EventBinding<CauldronEvents.EmergedIngredient>(OnEmergedIngredientEventHandler);
             onEvaluatePotionEventBinding = new EventBinding<CauldronEvents.EvaluatePotion>(OnEvaluatePotionEventHandler);
         }
 
@@ -48,7 +43,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnEnable()
         {
-            EventBus<CauldronEvents.AddedIngredient>.Register(onAddedIngredientEventBinding);
+            EventBus<CauldronEvents.EmergedIngredient>.Register(onEmergedIngredientEventBinding);
             EventBus<CauldronEvents.EvaluatePotion>.Register(onEvaluatePotionEventBinding);
         }
 
@@ -57,7 +52,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnDisable()
         {
-            EventBus<CauldronEvents.AddedIngredient>.Deregister(onAddedIngredientEventBinding);
+            EventBus<CauldronEvents.EmergedIngredient>.Deregister(onEmergedIngredientEventBinding);
             EventBus<CauldronEvents.EvaluatePotion>.Deregister(onEvaluatePotionEventBinding);
         }
 
@@ -85,18 +80,11 @@ namespace GlobalGameJam.Gameplay
 #region Event Handlers
 
         /// <summary>
-        /// Handles the event when an ingredient is added to the cauldron.
+        /// Handles the event when an ingredient is to be added to the cauldron.
         /// </summary>
         /// <param name="event">The added ingredient event.</param>
-        private void OnAddedIngredientEventHandler(CauldronEvents.AddedIngredient @event)
+        private void OnEmergedIngredientEventHandler(CauldronEvents.EmergedIngredient @event)
         {
-            Debug.Log(evaluationOutcome);
-            if (evaluationOutcome is not OutcomeType.None)
-            {
-                evaluationOutcome = OutcomeType.None;
-                return;
-            }
-
             if (index >= ingredients.Length)
             {
                 return;
@@ -114,12 +102,6 @@ namespace GlobalGameJam.Gameplay
         /// <param name="event">The evaluate potion event.</param>
         private void OnEvaluatePotionEventHandler(CauldronEvents.EvaluatePotion @event)
         {
-            evaluationOutcome = @event.Outcome;
-            if (evaluationOutcome is OutcomeType.None)
-            {
-                return;
-            }
-
             for (var i = 0; i < index; i++)
             {
                 var ingredient = ingredients[i];
@@ -127,7 +109,6 @@ namespace GlobalGameJam.Gameplay
             }
 
             index = 0;
-            evaluationOutcome = OutcomeType.None;
         }
 
 #endregion

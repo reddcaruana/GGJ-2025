@@ -1542,6 +1542,14 @@ PrefabInstance:
       propertyPath: m_RenderingLayers
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 6535862930552059151, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6535862930552059151, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6551794635281272233, guid: 096faa404337f45cbbc3a2c544df5e1f, type: 3}
       propertyPath: m_Enabled
       value: 0
