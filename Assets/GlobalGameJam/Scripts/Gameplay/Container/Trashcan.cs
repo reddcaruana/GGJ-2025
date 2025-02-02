@@ -32,10 +32,14 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private EventBinding<TrashcanEvents.Excite> onExciteEventBinding;
 
+        /// <summary>
+        /// The number of trash items being held.
+        /// </summary>
+        private int availableTrash;
+
 #region Lifecycle Events
 
         /// <summary>
-        /// Called when the script instance is being loaded.
         /// Initializes the event binding for the TrashcanEvents.Excite event.
         /// </summary>
         private void Awake()
@@ -44,7 +48,6 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
-        /// Called when the script instance is enabled.
         /// Registers the TrashcanEvents.Excite event binding.
         /// </summary>
         private void OnEnable()
@@ -53,7 +56,6 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
-        /// Called when the script instance is disabled.
         /// Deregisters the TrashcanEvents.Excite event binding.
         /// </summary>
         private void OnDisable()
@@ -77,8 +79,9 @@ namespace GlobalGameJam.Gameplay
             }
 
             trashSprite.sprite = playerContext.Bag.Contents.Sprite;
-            
-            animator.SetBool(AnimatorExcitedHash, false);
+
+            availableTrash--;
+            animator.SetBool(AnimatorExcitedHash, availableTrash > 0);
             animator.SetTrigger(AnimatorEatHash);
 
             playerContext.Bag.Clear();
@@ -95,7 +98,8 @@ namespace GlobalGameJam.Gameplay
         /// <param name="event">The TrashcanEvents.Excite event.</param>
         private void OnExciteEventHandler(TrashcanEvents.Excite @event)
         {
-            animator.SetBool(AnimatorExcitedHash, true);
+            availableTrash++;
+            animator.SetBool(AnimatorExcitedHash, availableTrash > 0);
         }
 
 #endregion
