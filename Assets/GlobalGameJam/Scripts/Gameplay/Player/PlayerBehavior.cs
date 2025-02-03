@@ -216,12 +216,12 @@ namespace GlobalGameJam.Gameplay
                 playerContext.Interaction = interaction;
 
                 throwDirection.rotation = Quaternion.LookRotation(interactionDirection);
+                
+                UpdateAxisX(value.x);
+                UpdateAxisY(value.y);
             }
 
             playerRenderer.Animator.SetBool(AnimatorIsMovingBool, inputValue.sqrMagnitude > Mathf.Epsilon);
-            
-            UpdateAxisX(value.x);
-            UpdateAxisY(value.y);
         }
 
 #endregion
