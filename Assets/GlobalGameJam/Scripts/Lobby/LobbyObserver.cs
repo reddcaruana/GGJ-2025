@@ -147,9 +147,8 @@ namespace GlobalGameJam.Lobby
         /// <summary>
         /// Handles the event when the timer completes.
         /// </summary>
-        private void OnTimerComplete()
+        private static void OnTimerComplete()
         {
-            timerText.text = "READY!";
             EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
         }
 
