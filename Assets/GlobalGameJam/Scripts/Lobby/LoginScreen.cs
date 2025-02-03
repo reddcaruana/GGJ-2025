@@ -120,13 +120,15 @@ namespace GlobalGameJam.Lobby
         /// <summary>
         /// Handles the event when the director resumes.
         /// </summary>
-        /// <param name="obj">The director resume event.</param>
-        private void OnResumeDirectorEventHandler(DirectorEvents.Resume obj)
+        /// <param name="event">The director resume event.</param>
+        private void OnResumeDirectorEventHandler(DirectorEvents.Resume @event)
         {
             foreach (var account in playerAccounts)
             {
                 account.Release();
             }
+
+            enabled = false;
         }
 
 #endregion

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GlobalGameJam.Gameplay
+namespace GlobalGameJam
 {
     /// <summary>
     /// Manages a timer that can be activated, deactivated, and paused.
