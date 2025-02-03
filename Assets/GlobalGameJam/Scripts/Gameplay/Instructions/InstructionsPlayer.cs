@@ -14,9 +14,14 @@ namespace GlobalGameJam.Gameplay
         private PlayerInput playerInput;
 
         /// <summary>
-        /// The input action for confirming instructions.
+        /// The input action for moving to the next instructions.
         /// </summary>
-        private InputAction confirmAction;
+        private InputAction nextAction;
+
+        /// <summary>
+        /// The input action for returning to the previous instruction.
+        /// </summary>
+        private InputAction backAction;
 
 #region Implementation of IBindable
 
@@ -36,8 +41,11 @@ namespace GlobalGameJam.Gameplay
 
             playerInput.SwitchCurrentActionMap("Instructions");
 
-            confirmAction = playerInput.currentActionMap.FindAction("Confirm");
-            confirmAction.started += ConfirmHandler;
+            nextAction = playerInput.currentActionMap.FindAction("Next");
+            nextAction.started += NextHandler;
+
+            backAction = playerInput.currentActionMap.FindAction("Back");
+            backAction.started += BackHandler;
         }
 
         /// <summary>
@@ -45,11 +53,17 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         public void Release()
         {
-            if (confirmAction is not null)
+            if (nextAction is not null)
             {
-                confirmAction.started -= ConfirmHandler;
+                nextAction.started -= NextHandler;
             }
-            confirmAction = null;
+            nextAction = null;
+
+            if (backAction is not null)
+            {
+                backAction.started -= BackHandler;
+            }
+            backAction = null;
 
             playerInput = null;
         }
@@ -59,13 +73,21 @@ namespace GlobalGameJam.Gameplay
 #region Event Handlers
 
         /// <summary>
-        /// Handles the confirm action input.
-        /// Raises the Resume event when the confirm action is triggered.
+        /// Handles the input action for going back to the previous instruction.
         /// </summary>
         /// <param name="context">The context of the input action.</param>
-        private void ConfirmHandler(InputAction.CallbackContext context)
+        private static void BackHandler(InputAction.CallbackContext context)
         {
-            EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
+            EventBus<InstructionsEvent.Back>.Raise(InstructionsEvent.Back.Default);
+        }
+
+        /// <summary>
+        /// Handles the input action for moving to the next instruction.
+        /// </summary>
+        /// <param name="context">The context of the input action.</param>
+        private static void NextHandler(InputAction.CallbackContext context)
+        {
+            EventBus<InstructionsEvent.Next>.Raise(InstructionsEvent.Next.Default);
         }
 
 #endregion
