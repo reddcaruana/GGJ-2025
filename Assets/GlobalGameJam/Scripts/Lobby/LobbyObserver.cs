@@ -161,7 +161,14 @@ namespace GlobalGameJam.Lobby
         private void OnTimerUpdate(float current, float duration)
         {
             var remaining = Mathf.Max(0, Mathf.FloorToInt(duration - current));
-            timerText.text = $"Match starting in {remaining}";
+
+            var output = $"Match starting in {remaining}";
+            if (remaining == 0)
+            {
+                output = "Match starting NOW";
+            }
+
+            timerText.text = output;
         }
 
 #endregion
