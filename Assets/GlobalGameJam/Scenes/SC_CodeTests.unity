@@ -2331,10 +2331,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.5
     y: 0
-    width: 1
-    height: 1
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 2
   field of view: 60
@@ -2345,7 +2345,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 9d1b2bc0f60604984814ee590e99e456, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: b57a179cf048540cb81c187a1d2c1619, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -2539,8 +2539,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 2
   field of view: 60
@@ -2551,7 +2551,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 74588eea5760b43d0a7668a47ed97d6d, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: b57a179cf048540cb81c187a1d2c1619, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -5274,9 +5274,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.5
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 2
   field of view: 60
@@ -5287,7 +5287,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: b57042f63626f4dde8657eb62287cd1c, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: b57a179cf048540cb81c187a1d2c1619, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
