@@ -1,4 +1,4 @@
-namespace GlobalGameJam
+namespace GlobalGameJam.Events
 {
     public static class ScoreEvents
     {

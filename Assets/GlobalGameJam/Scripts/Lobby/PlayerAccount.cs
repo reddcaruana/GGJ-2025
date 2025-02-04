@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Linq;
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
-using GlobalGameJam.Players;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;

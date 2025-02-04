@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
 using UnityEngine;
 
@@ -37,6 +38,11 @@ namespace GlobalGameJam
         /// The score initials.
         /// </summary>
         private readonly char[] initials = new char[4];
+
+        /// <summary>
+        /// Counter for the number of initials submitted by players.
+        /// </summary>
+        private int initialsSubmitted;
 
         /// <summary>
         /// Event binding for the add score event.
@@ -135,6 +141,18 @@ namespace GlobalGameJam
         private void OnSetInitialEventHandler(ScoreEvents.SetInitial @event)
         {
             initials[@event.PlayerID] = @event.Initial;
+            initialsSubmitted++;
+            
+            var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
+            if (initialsSubmitted < playerDataManager.GetActivePlayers().Length)
+            {
+                return;
+            }
+
+            initialsSubmitted = 0;
+            
+            EventBus<ScoreEvents.Submit>.Raise(ScoreEvents.Submit.Default);
+            EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
         }
 
         /// <summary>

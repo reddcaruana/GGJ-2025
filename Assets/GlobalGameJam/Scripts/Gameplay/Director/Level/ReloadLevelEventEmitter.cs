@@ -5,19 +5,19 @@ using UnityEngine.Timeline;
 namespace GlobalGameJam.Gameplay
 {
     [RequireComponent(typeof(SignalReceiver))]
-    public class IntroScreenChangeEventEmitter : MonoBehaviour, IEmit
+    public class ReloadLevelEventEmitter : MonoBehaviour, IEmit
     {
 #region Implementation of IEmit
-
+    
         /// <inheritdoc />
         public void Emit()
         {
-            EventBus<LevelEvents.SetMonitors>.Raise(new LevelEvents.SetMonitors
+            EventBus<LevelEvents.Reload>.Raise(new LevelEvents.Reload
             {
-                Mode = MonitorMode.Intro
+                Delay = 0.1f
             });
         }
-
+    
 #endregion
     }
 }

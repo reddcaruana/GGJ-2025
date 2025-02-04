@@ -1,4 +1,4 @@
-namespace GlobalGameJam.Gameplay
+namespace GlobalGameJam.Events
 {
     public static class TimerEvents
     {

@@ -109,6 +109,11 @@ namespace GlobalGameJam.Gameplay
         /// <param name="event">The level start event data.</param>
         private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
+            if (@event.Mode is not LevelMode.Start)
+            {
+                return;
+            }
+            
             StartCoroutine(ActivateTimerRoutine());
         }
 

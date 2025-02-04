@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using TMPro;
 using UnityEngine;
 

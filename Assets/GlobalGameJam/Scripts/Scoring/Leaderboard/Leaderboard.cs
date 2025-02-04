@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam

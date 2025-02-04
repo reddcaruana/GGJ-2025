@@ -1,4 +1,5 @@
 using System.Collections;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay

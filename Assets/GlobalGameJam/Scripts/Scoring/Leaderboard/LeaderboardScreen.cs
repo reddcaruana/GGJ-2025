@@ -1,7 +1,6 @@
 using GlobalGameJam.Data;
 using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
-using GlobalGameJam.Players;
 using GlobalGameJam.UI;
 using UnityEngine;
 
@@ -23,11 +22,6 @@ namespace GlobalGameJam
         private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
         /// <summary>
-        /// Event binding for the ScoreEvents.SetInitial event.
-        /// </summary>
-        private EventBinding<ScoreEvents.SetInitial> onSetInitialEventBinding;
-
-        /// <summary>
         /// Event binding for the PlayerEvents.Joined event.
         /// </summary>
         private EventBinding<PlayerEvents.Joined> onPlayerJoinedEventBinding;
@@ -37,11 +31,6 @@ namespace GlobalGameJam
         /// </summary>
         private EventBinding<PlayerEvents.Left> onPlayerLeftEventBinding;
 
-        /// <summary>
-        /// Counter for the number of initials submitted by players.
-        /// </summary>
-        private int initialsSubmitted;
-
 #region Lifecycle Events
 
         /// <summary>
@@ -49,7 +38,6 @@ namespace GlobalGameJam
         private void Awake()
         {
             onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
-            onSetInitialEventBinding = new EventBinding<ScoreEvents.SetInitial>(OnSetInitialEventHandler);
 
             onPlayerJoinedEventBinding = new EventBinding<PlayerEvents.Joined>(OnPlayerJoinedEventHandler);
             onPlayerLeftEventBinding = new EventBinding<PlayerEvents.Left>(OnPlayerLeftEventHandler);
@@ -61,7 +49,6 @@ namespace GlobalGameJam
         private void OnEnable()
         {
             EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
-            EventBus<ScoreEvents.SetInitial>.Register(onSetInitialEventBinding);
             
             EventBus<PlayerEvents.Joined>.Register(onPlayerJoinedEventBinding);
             EventBus<PlayerEvents.Left>.Register(onPlayerLeftEventBinding);
@@ -73,7 +60,6 @@ namespace GlobalGameJam
         private void OnDisable()
         {
             EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
-            EventBus<ScoreEvents.SetInitial>.Deregister(onSetInitialEventBinding);
             
             EventBus<PlayerEvents.Joined>.Deregister(onPlayerJoinedEventBinding);
             EventBus<PlayerEvents.Left>.Deregister(onPlayerLeftEventBinding);
@@ -144,26 +130,6 @@ namespace GlobalGameJam
         {
             var playerID = @event.PlayerID;
             playerAccounts[playerID].gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// Handles the ScoreEvents.SetInitial event.
-        /// Increments the initials submitted counter and logs a message when all initials are submitted.
-        /// </summary>
-        /// <param name="event">The ScoreEvents.SetInitial event.</param>
-        private void OnSetInitialEventHandler(ScoreEvents.SetInitial @event)
-        {
-            var playerDataManager = Singleton.GetOrCreateMonoBehaviour<PlayerDataManager>();
-
-            initialsSubmitted++;
-            if (initialsSubmitted < playerDataManager.GetActivePlayers().Length)
-            {
-                return;
-            }
-
-            initialsSubmitted = 0;
-
-            EventBus<ScoreEvents.Submit>.Raise(ScoreEvents.Submit.Default);
         }
 
 #endregion

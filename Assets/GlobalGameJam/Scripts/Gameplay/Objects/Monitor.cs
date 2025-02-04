@@ -64,7 +64,7 @@ namespace GlobalGameJam.Gameplay
             for (var i = 0; i < screenTransforms.Length; i++)
             {
                 var screenTransform = screenTransforms[i];
-                if (!screenTransform)
+                if (!screenTransform || (screenTransform == screenTransforms[index] && i != index))
                 {
                     continue;
                 }

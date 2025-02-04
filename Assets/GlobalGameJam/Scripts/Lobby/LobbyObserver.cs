@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
-using GlobalGameJam.Players;
 using TMPro;
 using UnityEngine;
 

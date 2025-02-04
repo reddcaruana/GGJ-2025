@@ -1,7 +1,6 @@
 using System.Collections;
 using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
-using GlobalGameJam.Players;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -86,25 +85,25 @@ namespace GlobalGameJam.Loader
         {
             SetPercentage(0.0f);
             yield return new WaitForSeconds(1.0f);
-
-            yield return StartCoroutine(UpdatePercentageOverTime(1.0f, 0.1f));
+        
+            yield return StartCoroutine(UpdatePercentageOverTime(1.0f, Random.Range(0.08f, 0.12f), 0.0f));
             yield return new WaitForSeconds(1.0f);
-
-            SetPercentage(0.3f);
+        
+            SetPercentage(Random.Range(0.25f, 0.35f));
             yield return new WaitForSeconds(0.6f);
-
-            SetPercentage(0.5f);
+        
+            SetPercentage(Random.Range(0.49f, 0.51f));
             yield return new WaitForSeconds(0.65f);
-
-            yield return StartCoroutine(UpdatePercentageOverTime(0.15f, 0.75f, 0.5f));
+        
+            yield return StartCoroutine(UpdatePercentageOverTime(0.15f, Random.Range(0.72f, 0.77f), percentage));
             yield return new WaitForSeconds(1.0f);
-
-            SetPercentage(0.85f);
+        
+            SetPercentage(Random.Range(0.83f, 0.85f));
             yield return new WaitForSeconds(0.5f);
-
-            yield return StartCoroutine(UpdatePercentageOverTime(0.15f, 0.99f, 0.85f));
+        
+            yield return StartCoroutine(UpdatePercentageOverTime(0.5f, 0.99f, percentage));
             yield return new WaitForSeconds(1.5f);
-
+        
             SetPercentage(1.0f);
             yield return new WaitForSeconds(1.0f);
             

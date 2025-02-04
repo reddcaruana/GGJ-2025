@@ -1,6 +1,6 @@
 using UnityEngine.InputSystem;
 
-namespace GlobalGameJam.Players
+namespace GlobalGameJam.Events
 {
     public static class PlayerEvents
     {

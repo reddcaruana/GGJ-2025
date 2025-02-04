@@ -1,6 +1,6 @@
 using GlobalGameJam.Data;
 
-namespace GlobalGameJam.Gameplay
+namespace GlobalGameJam.Events
 {
     public static class CauldronEvents
     {

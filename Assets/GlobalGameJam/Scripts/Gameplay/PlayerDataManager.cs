@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using GlobalGameJam.Players;
+using GlobalGameJam.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -143,7 +143,6 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnEnableJoiningEventHandler()
         {
-            Debug.Log("Joining");
             playerInputManager.EnableJoining();
         }
         
