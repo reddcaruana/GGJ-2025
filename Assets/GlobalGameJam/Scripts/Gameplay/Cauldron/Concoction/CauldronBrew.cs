@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 
 namespace GlobalGameJam.Gameplay
 {

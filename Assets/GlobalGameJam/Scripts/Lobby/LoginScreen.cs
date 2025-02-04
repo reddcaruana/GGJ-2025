@@ -1,4 +1,5 @@
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
 using GlobalGameJam.Players;
 using UnityEngine;
@@ -25,11 +26,6 @@ namespace GlobalGameJam.Lobby
         /// </summary>
         private EventBinding<PlayerEvents.Left> onPlayerLeftEventBinding;
 
-        /// <summary>
-        /// The event binding for handling director resume events.
-        /// </summary>
-        private EventBinding<DirectorEvents.Resume> onResumeDirectorEventBinding;
-
 #region Lifecycle Events
 
         /// <summary>
@@ -37,8 +33,6 @@ namespace GlobalGameJam.Lobby
         /// </summary>
         private void Awake()
         {
-            onResumeDirectorEventBinding = new EventBinding<DirectorEvents.Resume>(OnResumeDirectorEventHandler);
-            
             onPlayerJoinedEventBinding = new EventBinding<PlayerEvents.Joined>(OnPlayerJoinedEventHandler);
             onPlayerLeftEventBinding = new EventBinding<PlayerEvents.Left>(OnPlayerLeftEventHandler);
         }
@@ -50,8 +44,6 @@ namespace GlobalGameJam.Lobby
         {
             EventBus<PlayerEvents.Joined>.Register(onPlayerJoinedEventBinding);
             EventBus<PlayerEvents.Left>.Register(onPlayerLeftEventBinding);
-            
-            EventBus<DirectorEvents.Resume>.Register(onResumeDirectorEventBinding);
         }
 
         /// <summary>
@@ -61,8 +53,6 @@ namespace GlobalGameJam.Lobby
         {
             EventBus<PlayerEvents.Joined>.Deregister(onPlayerJoinedEventBinding);
             EventBus<PlayerEvents.Left>.Deregister(onPlayerLeftEventBinding);
-            
-            EventBus<DirectorEvents.Resume>.Deregister(onResumeDirectorEventBinding);
         }
 
         /// <summary>

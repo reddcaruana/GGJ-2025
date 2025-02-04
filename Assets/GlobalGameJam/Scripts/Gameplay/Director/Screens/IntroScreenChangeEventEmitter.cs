@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -11,9 +12,9 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public void Emit()
         {
-            EventBus<LevelEvents.ChangeScreens>.Raise(new LevelEvents.ChangeScreens
+            EventBus<LevelEvents.SetMonitors>.Raise(new LevelEvents.SetMonitors
             {
-                Mode = ScreenSetupMode.Intro
+                Mode = MonitorMode.Intro
             });
         }
 

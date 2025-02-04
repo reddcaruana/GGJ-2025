@@ -1,4 +1,5 @@
 using System;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -13,7 +14,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for the ChangeScreens event.
         /// </summary>
-        private EventBinding<LevelEvents.ChangeScreens> onChangeScreensEventBinding;
+        private EventBinding<LevelEvents.SetMonitors> onChangeScreensEventBinding;
 
 #region Lifecycle Events
 
@@ -23,7 +24,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void Awake()
         {
-            onChangeScreensEventBinding = new EventBinding<LevelEvents.ChangeScreens>(OnChangeScreensEventHandler);
+            onChangeScreensEventBinding = new EventBinding<LevelEvents.SetMonitors>(OnChangeScreensEventHandler);
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnEnable()
         {
-            EventBus<LevelEvents.ChangeScreens>.Register(onChangeScreensEventBinding);
+            EventBus<LevelEvents.SetMonitors>.Register(onChangeScreensEventBinding);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnDisable()
         {
-            EventBus<LevelEvents.ChangeScreens>.Deregister(onChangeScreensEventBinding);
+            EventBus<LevelEvents.SetMonitors>.Deregister(onChangeScreensEventBinding);
         }
 
 #endregion
@@ -53,7 +54,7 @@ namespace GlobalGameJam.Gameplay
         /// The screen at the specified index will have a z-position of 0, while others will have a z-position of 1.
         /// </summary>
         /// <param name="index">The index of the screen to set to the front.</param>
-        public void SetIndex(int index)
+        private void SetIndex(int index)
         {
             if (index >= screenTransforms.Length)
             {
@@ -63,7 +64,11 @@ namespace GlobalGameJam.Gameplay
             for (var i = 0; i < screenTransforms.Length; i++)
             {
                 var screenTransform = screenTransforms[i];
-
+                if (!screenTransform)
+                {
+                    continue;
+                }
+                
                 var position = screenTransform.localPosition;
                 position.z = i == index ? 0 : 1;
                 screenTransform.localPosition = position;
@@ -79,18 +84,21 @@ namespace GlobalGameJam.Gameplay
         /// Sets the screen index based on the event's screen setup mode.
         /// </summary>
         /// <param name="event">The ChangeScreens event.</param>
-        private void OnChangeScreensEventHandler(LevelEvents.ChangeScreens @event)
+        private void OnChangeScreensEventHandler(LevelEvents.SetMonitors @event)
         {
             switch (@event.Mode)
             {
-                case ScreenSetupMode.Intro:
+                case MonitorMode.Intro:
                     SetIndex(0);
                     break;
-                case ScreenSetupMode.Gameplay:
+                case MonitorMode.Gameplay:
                     SetIndex(1);
                     break;
-                case ScreenSetupMode.Outro:
+                case MonitorMode.Outro:
                     SetIndex(2);
+                    break;
+                case MonitorMode.Crash:
+                    SetIndex(3);
                     break;
             }
         }

@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -29,9 +30,9 @@ namespace GlobalGameJam.Gameplay
         public Rigidbody AttachedRigidbody { get; private set; }
 
         /// <summary>
-        /// Event binding for the LevelEvents.End event.
+        /// Event binding for the LevelEvents.SetMode event.
         /// </summary>
-        private EventBinding<LevelEvents.End> onLevelEndEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
 #region Lifecycle Events
 
@@ -42,7 +43,7 @@ namespace GlobalGameJam.Gameplay
         {
             AttachedRigidbody = GetComponent<Rigidbody>();
 
-            onLevelEndEventBinding = new EventBinding<LevelEvents.End>(OnLevelEndEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         protected virtual void OnEnable()
         {
-            EventBus<LevelEvents.End>.Register(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace GlobalGameJam.Gameplay
         {
             trailRenderer.Clear();
             
-            EventBus<LevelEvents.End>.Deregister(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
         }
 
 #endregion
@@ -82,7 +83,7 @@ namespace GlobalGameJam.Gameplay
         /// Handles the LevelEvents.End event.
         /// </summary>
         /// <param name="event">The LevelEvents.End event.</param>
-        protected abstract void OnLevelEndEventHandler(LevelEvents.End @event);
+        protected abstract void OnSetLevelModeEventHandler(LevelEvents.SetMode @event);
 
 #endregion
     }

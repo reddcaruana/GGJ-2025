@@ -26,6 +26,8 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         public int Count => playerInputMap.Count;
 
+        private EventBinding<PlayerEvents.EnableJoining> onEnableJoiningEventBinding;
+
 #region Lifecycle Events
 
         /// <summary>
@@ -38,6 +40,10 @@ namespace GlobalGameJam.Gameplay
             {
                 playerInputMap.Add(i, null);
             }
+            
+            playerInputManager.DisableJoining();
+
+            onEnableJoiningEventBinding = new EventBinding<PlayerEvents.EnableJoining>(OnEnableJoiningEventHandler);
         }
 
         /// <summary>
@@ -47,6 +53,8 @@ namespace GlobalGameJam.Gameplay
         {
             playerInputManager.onPlayerJoined += OnPlayerJoinedHandler;
             playerInputManager.onPlayerLeft += OnPlayerLeftHandler;
+            
+            EventBus<PlayerEvents.EnableJoining>.Register(onEnableJoiningEventBinding);
         }
 
         /// <summary>
@@ -56,6 +64,9 @@ namespace GlobalGameJam.Gameplay
         {
             playerInputManager.onPlayerJoined -= OnPlayerJoinedHandler;
             playerInputManager.onPlayerLeft -= OnPlayerLeftHandler;
+            
+            EventBus<PlayerEvents.EnableJoining>.Deregister(onEnableJoiningEventBinding);
+
         }
 
 #if GAME_DEBUG
@@ -127,6 +138,15 @@ namespace GlobalGameJam.Gameplay
 
 #region Event Handlers
 
+        /// <summary>
+        /// Enables player joining.
+        /// </summary>
+        private void OnEnableJoiningEventHandler()
+        {
+            Debug.Log("Joining");
+            playerInputManager.EnableJoining();
+        }
+        
         /// <summary>
         /// Handles the event when a player joins.
         /// </summary>

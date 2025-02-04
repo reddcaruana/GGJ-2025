@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -27,7 +28,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for the level start event.
         /// </summary>
-        private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
 #region Lifecycle Events
 
@@ -42,7 +43,7 @@ namespace GlobalGameJam.Gameplay
             potions.AddRange(potionRegistry.Potions);
 
             onEvaluatePotionEventBinding = new EventBinding<CauldronEvents.EvaluatePotion>(OnEvaluatePotionEventHandler);
-            onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace GlobalGameJam.Gameplay
         private void OnEnable()
         {
             EventBus<CauldronEvents.EvaluatePotion>.Register(onEvaluatePotionEventBinding);
-            EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace GlobalGameJam.Gameplay
         private void OnDisable()
         {
             EventBus<CauldronEvents.EvaluatePotion>.Deregister(onEvaluatePotionEventBinding);
-            EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
         }
 
 #endregion
@@ -111,8 +112,13 @@ namespace GlobalGameJam.Gameplay
         /// Handles the level start event by selecting the next target potion.
         /// </summary>
         /// <param name="event">The level start event data.</param>
-        private void OnLevelStartEventHandler(LevelEvents.Start @event)
+        private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
+            if (@event.Mode is not LevelMode.Start)
+            {
+                return;
+            }
+            
             Next();
         }
 

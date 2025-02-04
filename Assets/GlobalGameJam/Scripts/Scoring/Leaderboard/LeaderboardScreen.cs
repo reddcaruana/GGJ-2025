@@ -1,4 +1,5 @@
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
 using GlobalGameJam.Players;
 using GlobalGameJam.UI;
@@ -19,7 +20,7 @@ namespace GlobalGameJam
         /// <summary>
         /// Event binding for the LevelEvents.Leaderboard event.
         /// </summary>
-        private EventBinding<LevelEvents.Leaderboard> onLeaderboardEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
         /// <summary>
         /// Event binding for the ScoreEvents.SetInitial event.
@@ -47,7 +48,7 @@ namespace GlobalGameJam
         /// </summary>
         private void Awake()
         {
-            onLeaderboardEventBinding = new EventBinding<LevelEvents.Leaderboard>(OnLeaderboardEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
             onSetInitialEventBinding = new EventBinding<ScoreEvents.SetInitial>(OnSetInitialEventHandler);
 
             onPlayerJoinedEventBinding = new EventBinding<PlayerEvents.Joined>(OnPlayerJoinedEventHandler);
@@ -59,7 +60,7 @@ namespace GlobalGameJam
         /// </summary>
         private void OnEnable()
         {
-            EventBus<LevelEvents.Leaderboard>.Register(onLeaderboardEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
             EventBus<ScoreEvents.SetInitial>.Register(onSetInitialEventBinding);
             
             EventBus<PlayerEvents.Joined>.Register(onPlayerJoinedEventBinding);
@@ -71,7 +72,7 @@ namespace GlobalGameJam
         /// </summary>
         private void OnDisable()
         {
-            EventBus<LevelEvents.Leaderboard>.Deregister(onLeaderboardEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
             EventBus<ScoreEvents.SetInitial>.Deregister(onSetInitialEventBinding);
             
             EventBus<PlayerEvents.Joined>.Deregister(onPlayerJoinedEventBinding);
@@ -112,8 +113,13 @@ namespace GlobalGameJam
         /// Binds the player accounts for each player.
         /// </summary>
         /// <param name="event">The LevelEvents.Leaderboard event.</param>
-        private void OnLeaderboardEventHandler(LevelEvents.Leaderboard @event)
+        private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
+            if (@event.Mode is not LevelMode.Leaderboard)
+            {
+                return;
+            }
+            
             for (var i = 0; i < playerAccounts.Length; i++)
             {
                 playerAccounts[i].Bind(i);

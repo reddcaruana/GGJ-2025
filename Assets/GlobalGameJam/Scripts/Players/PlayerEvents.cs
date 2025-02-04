@@ -25,5 +25,10 @@ namespace GlobalGameJam.Players
         {
             public int PlayerID;
         }
+
+        public struct EnableJoining : IEvent
+        {
+            public static EnableJoining Default => new();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using GlobalGameJam.Gameplay;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -20,45 +21,34 @@ namespace GlobalGameJam.Audio
         [SerializeField] private float transitionDuration = 2.0f;
 
         /// <summary>
-        /// Event binding for the LevelEvents.Start event.
+        /// Event binding for the LevelEvents.SetMode event.
         /// </summary>
-        private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
-
-        /// <summary>
-        /// Event binding for the LevelEvents.End event.
-        /// </summary>
-        private EventBinding<LevelEvents.End> onLevelEndEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
 #region Lifecycle Events
 
         /// <summary>
-        /// Called when the script instance is being loaded.
         /// Initializes the event binding for the LevelEvents.Start event.
         /// </summary>
         private void Awake()
         {
-            onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
-            onLevelEndEventBinding = new EventBinding<LevelEvents.End>(OnLevelEndEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
         }
 
         /// <summary>
-        /// Called when the script instance is enabled.
         /// Registers the LevelEvents.Start event binding.
         /// </summary>
         private void OnEnable()
         {
-            EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
-            EventBus<LevelEvents.End>.Register(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
         }
 
         /// <summary>
-        /// Called when the script instance is disabled.
         /// Deregisters the LevelEvents.Start event binding.
         /// </summary>
         private void OnDisable()
         {
-            EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
-            EventBus<LevelEvents.End>.Deregister(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
         }
 
 #endregion
@@ -81,21 +71,21 @@ namespace GlobalGameJam.Audio
 #region Event Handlers
 
         /// <summary>
-        /// Transitions the audio mixer to the "Game" snapshot.
+        /// Transitions the audio mixer to the correct snapshot.
         /// </summary>
-        /// <param name="event">The LevelEvents.Start event.</param>
-        private void OnLevelStartEventHandler(LevelEvents.Start @event)
+        /// <param name="event">The LevelEvents.SetMode event.</param>
+        private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
-            TransitionToSnapshot("Game");
-        }
-
-        /// <summary>
-        /// Transitions the audio mixer to the "Menu" snapshot.
-        /// </summary>
-        /// <param name="event">The LevelEvents.End event.</param>
-        private void OnLevelEndEventHandler(LevelEvents.End @event)
-        {
-            TransitionToSnapshot("Menu");
+            switch (@event.Mode)
+            {
+                case LevelMode.Start:
+                    TransitionToSnapshot("Game");
+                    break;
+                
+                case LevelMode.End:
+                    TransitionToSnapshot("Menu");
+                    break;
+            }
         }
 
 #endregion

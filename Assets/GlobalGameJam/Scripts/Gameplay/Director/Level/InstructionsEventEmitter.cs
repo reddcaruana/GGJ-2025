@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -11,7 +12,10 @@ namespace GlobalGameJam.Gameplay
         /// <inheritdoc />
         public void Emit()
         {
-            EventBus<LevelEvents.Instructions>.Raise(LevelEvents.Instructions.Default);
+            EventBus<LevelEvents.SetMode>.Raise(new LevelEvents.SetMode
+            {
+                Mode = LevelMode.Instructions
+            });
         }
     
 #endregion

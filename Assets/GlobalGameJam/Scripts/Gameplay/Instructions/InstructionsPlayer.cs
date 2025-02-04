@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -78,7 +79,10 @@ namespace GlobalGameJam.Gameplay
         /// <param name="context">The context of the input action.</param>
         private static void BackHandler(InputAction.CallbackContext context)
         {
-            EventBus<InstructionsEvent.Back>.Raise(InstructionsEvent.Back.Default);
+            EventBus<InstructionsEvent.Navigate>.Raise(new InstructionsEvent.Navigate
+            {
+                Navigation = NavigationMode.Previous
+            });
         }
 
         /// <summary>
@@ -87,7 +91,10 @@ namespace GlobalGameJam.Gameplay
         /// <param name="context">The context of the input action.</param>
         private static void NextHandler(InputAction.CallbackContext context)
         {
-            EventBus<InstructionsEvent.Next>.Raise(InstructionsEvent.Next.Default);
+            EventBus<InstructionsEvent.Navigate>.Raise(new InstructionsEvent.Navigate
+            {
+                Navigation = NavigationMode.Next
+            });
         }
 
 #endregion

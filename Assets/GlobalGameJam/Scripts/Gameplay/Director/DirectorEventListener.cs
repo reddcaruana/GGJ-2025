@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -22,7 +23,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for the LevelEvents.End event.
         /// </summary>
-        private EventBinding<LevelEvents.End> onLevelEndEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
 #region Lifecycle Events
 
@@ -34,7 +35,7 @@ namespace GlobalGameJam.Gameplay
             playableDirector = GetComponent<PlayableDirector>();
             
             onDirectorResumeEventBinding = new EventBinding<DirectorEvents.Resume>(OnDirectorResumeEventHandler);
-            onLevelEndEventBinding = new EventBinding<LevelEvents.End>(OnLevelEndEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace GlobalGameJam.Gameplay
         private void OnEnable()
         {
             EventBus<DirectorEvents.Resume>.Register(onDirectorResumeEventBinding);
-            EventBus<LevelEvents.End>.Register(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace GlobalGameJam.Gameplay
         private void OnDisable()
         {
             EventBus<DirectorEvents.Resume>.Deregister(onDirectorResumeEventBinding);
-            EventBus<LevelEvents.End>.Deregister(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
         }
 
 #endregion
@@ -74,8 +75,13 @@ namespace GlobalGameJam.Gameplay
         /// Plays the outro PlayableAsset using the PlayableDirector.
         /// </summary>
         /// <param name="event">The Level End event.</param>
-        private void OnLevelEndEventHandler(LevelEvents.End @event)
+        private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
+            if (@event.Mode is not LevelMode.End)
+            {
+                return;
+            }
+            
             playableDirector.Play(outroAsset);
         }
 

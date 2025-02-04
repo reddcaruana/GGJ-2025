@@ -5318,7 +5318,6 @@ GameObject:
   m_Component:
   - component: {fileID: 710881566695125211}
   - component: {fileID: 1331549947300278639}
-  - component: {fileID: 3734317921414297336}
   m_Layer: 0
   m_Name: TV.002
   m_TagString: Untagged
@@ -5360,51 +5359,6 @@ MonoBehaviour:
   screenTransforms:
   - {fileID: 7562843490046041617}
   - {fileID: 8428969565874427655}
---- !u!114 &3734317921414297336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2195232590971029080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Events:
-    m_Signals:
-    - {fileID: 11400000, guid: 3ce7e156ff84a4a2fba81e152202bf73, type: 2}
-    - {fileID: 11400000, guid: a7892cd1fa5f44be38bcc15e608b5aa8, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6467118546337487296}
-          m_TargetAssemblyTypeName: GlobalGameJam.Gameplay.Monitor, Assembly-CSharp
-          m_MethodName: SetIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6467118546337487296}
-          m_TargetAssemblyTypeName: GlobalGameJam.Gameplay.Monitor, Assembly-CSharp
-          m_MethodName: SetIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &2447737472972932798
 GameObject:
   m_ObjectHideFlags: 0
@@ -15498,7 +15452,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3140316771628912686}
   - component: {fileID: 6467118546337487296}
-  - component: {fileID: 5695221401256404483}
   m_Layer: 0
   m_Name: TV.001
   m_TagString: Untagged
@@ -15542,66 +15495,6 @@ MonoBehaviour:
   - {fileID: 1015190529124771159}
   - {fileID: 1006223311822844069}
   - {fileID: 531511283291595039}
---- !u!114 &5695221401256404483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3858395260585058224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Events:
-    m_Signals:
-    - {fileID: 11400000, guid: 3ce7e156ff84a4a2fba81e152202bf73, type: 2}
-    - {fileID: 11400000, guid: a7892cd1fa5f44be38bcc15e608b5aa8, type: 2}
-    - {fileID: 11400000, guid: 7bb98d802e6164f33b032a496a9df9d8, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6467118546337487296}
-          m_TargetAssemblyTypeName: GlobalGameJam.Gameplay.Monitor, Assembly-CSharp
-          m_MethodName: SetIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6467118546337487296}
-          m_TargetAssemblyTypeName: GlobalGameJam.Gameplay.Monitor, Assembly-CSharp
-          m_MethodName: SetIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6467118546337487296}
-          m_TargetAssemblyTypeName: GlobalGameJam.Gameplay.Monitor, Assembly-CSharp
-          m_MethodName: SetIndex
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &4116588947652571054
 GameObject:
   m_ObjectHideFlags: 0
@@ -16408,6 +16301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801663f3798942ddaa6447168ffb3d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  trashSprite: {fileID: 0}
 --- !u!136 &5726315548124740791
 CapsuleCollider:
   m_ObjectHideFlags: 0

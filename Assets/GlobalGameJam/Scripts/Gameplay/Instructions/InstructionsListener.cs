@@ -1,3 +1,4 @@
+using GlobalGameJam.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,15 @@ namespace GlobalGameJam.Gameplay
         /// Array of screen game objects.
         /// </summary>
         [SerializeField] private GameObject[] screens;
-        
+
         /// <summary>
         /// Array of InstructionsPlayer instances representing the players.
         /// </summary>
         [SerializeField] private InstructionsPlayer[] players;
 
-        [Header("Navigation Settings")]
-        [SerializeField] private Image backImage;
+        [Header("Navigation Settings")] [SerializeField]
+        private Image backImage;
+
         [SerializeField] private Image nextImage;
 
         [SerializeField] private Color disabledColor = Color.white;
@@ -28,17 +30,12 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for the Instructions event.
         /// </summary>
-        private EventBinding<LevelEvents.Instructions> onInstructionsEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
         /// <summary>
         /// Event binding for the back screen switch.
         /// </summary>
-        private EventBinding<InstructionsEvent.Back> onBackInstructionEventBinding;
-
-        /// <summary>
-        /// Event binding for the next screen switch.
-        /// </summary>
-        private EventBinding<InstructionsEvent.Next> onNextInstructionEventBinding;
+        private EventBinding<InstructionsEvent.Navigate> onNavigateInstructionEventBinding;
 
         /// <summary>
         /// Event binding for the Resume event.
@@ -58,10 +55,9 @@ namespace GlobalGameJam.Gameplay
         private void Awake()
         {
             onResumeDirectorEventBinding = new EventBinding<DirectorEvents.Resume>(OnResumeDirectorEventHandler);
-            onInstructionsEventBinding = new EventBinding<LevelEvents.Instructions>(OnInstructionsEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
 
-            onBackInstructionEventBinding = new EventBinding<InstructionsEvent.Back>(OnBackInstructionEventHandler);
-            onNextInstructionEventBinding = new EventBinding<InstructionsEvent.Next>(OnNextInstructionEventHandler);
+            onNavigateInstructionEventBinding = new EventBinding<InstructionsEvent.Navigate>(OnNavigateInstructionsEventHandler);
         }
 
         /// <summary>
@@ -70,10 +66,9 @@ namespace GlobalGameJam.Gameplay
         private void OnEnable()
         {
             EventBus<DirectorEvents.Resume>.Register(onResumeDirectorEventBinding);
-            EventBus<LevelEvents.Instructions>.Register(onInstructionsEventBinding);
-            
-            EventBus<InstructionsEvent.Next>.Register(onNextInstructionEventBinding);
-            EventBus<InstructionsEvent.Back>.Register(onBackInstructionEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
+
+            EventBus<InstructionsEvent.Navigate>.Register(onNavigateInstructionEventBinding);
         }
 
         /// <summary>
@@ -82,10 +77,9 @@ namespace GlobalGameJam.Gameplay
         private void OnDisable()
         {
             EventBus<DirectorEvents.Resume>.Deregister(onResumeDirectorEventBinding);
-            EventBus<LevelEvents.Instructions>.Deregister(onInstructionsEventBinding);
-            
-            EventBus<InstructionsEvent.Next>.Deregister(onNextInstructionEventBinding);
-            EventBus<InstructionsEvent.Back>.Deregister(onBackInstructionEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
+
+            EventBus<InstructionsEvent.Navigate>.Deregister(onNavigateInstructionEventBinding);
         }
 
         /// <summary>
@@ -99,6 +93,36 @@ namespace GlobalGameJam.Gameplay
 #endregion
 
 #region Methods
+
+        /// <summary>
+        /// Advances to the next screen. If the current screen is the last one, raises the Resume event.
+        /// </summary>
+        private void Next()
+        {
+            currentScreen++;
+
+            if (currentScreen >= screens.Length)
+            {
+                EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
+                return;
+            }
+
+            SetScreen(currentScreen);
+        }
+
+        /// <summary>
+        /// Goes back to the previous screen. If the current screen is the first one, does nothing.
+        /// </summary>
+        private void Previous()
+        {
+            if (currentScreen <= 0)
+            {
+                return;
+            }
+
+            currentScreen--;
+            SetScreen(currentScreen);
+        }
 
         /// <summary>
         /// Sets the screen visibility.
@@ -124,11 +148,16 @@ namespace GlobalGameJam.Gameplay
         /// Binds the player inputs for each player.
         /// </summary>
         /// <param name="event">The Instructions event.</param>
-        private void OnInstructionsEventHandler(LevelEvents.Instructions @event)
+        private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
+            if (@event.Mode is not LevelMode.Instructions)
+            {
+                return;
+            }
+
             currentScreen = 0;
             SetScreen(currentScreen);
-            
+
             for (var i = 0; i < players.Length; i++)
             {
                 var instructionsPlayer = players[i];
@@ -150,35 +179,21 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <summary>
-        /// Moves to the next screen.
+        /// Navigates between instructions pages.
         /// </summary>
         /// <param name="event">The Next event.</param>
-        private void OnNextInstructionEventHandler(InstructionsEvent.Next @event)
+        private void OnNavigateInstructionsEventHandler(InstructionsEvent.Navigate @event)
         {
-            currentScreen++;
-
-            if (currentScreen >= screens.Length)
+            switch (@event.Navigation)
             {
-                EventBus<DirectorEvents.Resume>.Raise(DirectorEvents.Resume.Default);
-                return;
-            }
-            
-            SetScreen(currentScreen);
-        }
+                case NavigationMode.Next:
+                    Next();
+                    break;
 
-        /// <summary>
-        /// Moves to the previous screen.
-        /// </summary>
-        /// <param name="event">The Next event.</param>
-        private void OnBackInstructionEventHandler(InstructionsEvent.Back @event)
-        {
-            if (currentScreen <= 0)
-            {
-                return;
+                default:
+                    Previous();
+                    break;
             }
-
-            currentScreen--;
-            SetScreen(currentScreen);
         }
 
 #endregion

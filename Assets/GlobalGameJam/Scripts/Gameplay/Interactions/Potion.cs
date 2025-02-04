@@ -1,4 +1,5 @@
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -44,8 +45,13 @@ namespace GlobalGameJam.Gameplay
         }
 
         /// <inheritdoc />
-        protected override void OnLevelEndEventHandler(LevelEvents.End @event)
+        protected override void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
+            if (@event.Mode is not LevelMode.End)
+            {
+                return;
+            }
+            
             EventBus<ScoreEvents.Add>.Raise(new ScoreEvents.Add
             {
                 Litter = 1,

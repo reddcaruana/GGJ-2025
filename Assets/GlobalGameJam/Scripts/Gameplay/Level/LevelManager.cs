@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using GlobalGameJam.Players;
 using UnityEngine;
 
@@ -25,8 +26,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         [SerializeField] private Timer startTimer;
 
-        private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
-        private EventBinding<LevelEvents.End> onLevelEndEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
         private EventBinding<PlayerEvents.Add> onAddPlayerEventBinding;
         private EventBinding<PlayerEvents.Remove> onRemovePlayerEventBinding;
@@ -40,8 +40,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void Awake()
         {
-            onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
-            onLevelEndEventBinding = new EventBinding<LevelEvents.End>(OnLevelEndEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnLevelStartEventHandler);
 
             onAddPlayerEventBinding = new EventBinding<PlayerEvents.Add>(OnAddPlayerEventHandler);
             onRemovePlayerEventBinding = new EventBinding<PlayerEvents.Remove>(OnRemovePlayerEventHandler);
@@ -52,8 +51,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnEnable()
         {
-            EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
-            EventBus<LevelEvents.End>.Register(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
 
             EventBus<PlayerEvents.Add>.Register(onAddPlayerEventBinding);
             EventBus<PlayerEvents.Remove>.Register(onRemovePlayerEventBinding);
@@ -64,8 +62,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnDisable()
         {
-            EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
-            EventBus<LevelEvents.End>.Deregister(onLevelEndEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
 
             EventBus<PlayerEvents.Add>.Deregister(onAddPlayerEventBinding);
             EventBus<PlayerEvents.Remove>.Deregister(onRemovePlayerEventBinding);
@@ -134,23 +131,23 @@ namespace GlobalGameJam.Gameplay
         /// Handles the event when the level starts.
         /// </summary>
         /// <param name="event">The level start event.</param>
-        private void OnLevelStartEventHandler(LevelEvents.Start @event)
+        private void OnLevelStartEventHandler(LevelEvents.SetMode @event)
         {
-            for (var i = 0; i < playerBehaviors.Length; i++)
+            switch (@event.Mode)
             {
-                playerBehaviors[i].Bind(i);
-            }
-        }
-
-        /// <summary>
-        /// Handles the event when the level ends.
-        /// </summary>
-        /// <param name="event">The level end event.</param>
-        private void OnLevelEndEventHandler(LevelEvents.End @event)
-        {
-            foreach (var playerBehavior in playerBehaviors)
-            {
-                playerBehavior.Release();
+                case LevelMode.Start:
+                    for (var i = 0; i < playerBehaviors.Length; i++)
+                    {
+                        playerBehaviors[i].Bind(i);
+                    }
+                    break;
+                
+                case LevelMode.End:
+                    foreach (var playerBehavior in playerBehaviors)
+                    {
+                        playerBehavior.Release();
+                    }
+                    break;
             }
         }
 

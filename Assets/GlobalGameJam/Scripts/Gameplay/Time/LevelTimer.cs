@@ -1,4 +1,5 @@
 using System.Collections;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -19,7 +20,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Binding for the level start event.
         /// </summary>
-        private EventBinding<LevelEvents.Start> onLevelStartEventBinding;
+        private EventBinding<LevelEvents.SetMode> onSetLevelModeEventBinding;
 
         /// <summary>
         /// Binding for the timer extension event.
@@ -29,7 +30,7 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Binding for the change screen event.
         /// </summary>
-        private EventBinding<LevelEvents.ChangeScreens> onChangeScreenEventBinding;
+        private EventBinding<LevelEvents.SetMonitors> onChangeScreenEventBinding;
 
 #region Lifecycle Events
 
@@ -41,8 +42,8 @@ namespace GlobalGameJam.Gameplay
             timer = GetComponent<Timer>();
 
             onExtendTimerEventBinding = new EventBinding<TimerEvents.Extend>(OnExtendTimerEventHandler);
-            onChangeScreenEventBinding = new EventBinding<LevelEvents.ChangeScreens>(OnChangeScreenEventHandler);
-            onLevelStartEventBinding = new EventBinding<LevelEvents.Start>(OnLevelStartEventHandler);
+            onChangeScreenEventBinding = new EventBinding<LevelEvents.SetMonitors>(OnChangeScreenEventHandler);
+            onSetLevelModeEventBinding = new EventBinding<LevelEvents.SetMode>(OnSetLevelModeEventHandler);
         }
 
         /// <summary>
@@ -53,8 +54,8 @@ namespace GlobalGameJam.Gameplay
             timer.OnUpdate += OnTimerUpdateHandler;
             timer.OnComplete += OnTimerCompleteHandler;
             
-            EventBus<LevelEvents.ChangeScreens>.Register(onChangeScreenEventBinding);
-            EventBus<LevelEvents.Start>.Register(onLevelStartEventBinding);
+            EventBus<LevelEvents.SetMonitors>.Register(onChangeScreenEventBinding);
+            EventBus<LevelEvents.SetMode>.Register(onSetLevelModeEventBinding);
             
             EventBus<TimerEvents.Extend>.Register(onExtendTimerEventBinding);
         }
@@ -67,8 +68,8 @@ namespace GlobalGameJam.Gameplay
             timer.OnUpdate -= OnTimerUpdateHandler;
             timer.OnComplete -= OnTimerCompleteHandler;
 
-            EventBus<LevelEvents.ChangeScreens>.Deregister(onChangeScreenEventBinding);
-            EventBus<LevelEvents.Start>.Deregister(onLevelStartEventBinding);
+            EventBus<LevelEvents.SetMonitors>.Deregister(onChangeScreenEventBinding);
+            EventBus<LevelEvents.SetMode>.Deregister(onSetLevelModeEventBinding);
             
             EventBus<TimerEvents.Extend>.Deregister(onExtendTimerEventBinding);
         }
@@ -82,7 +83,7 @@ namespace GlobalGameJam.Gameplay
         /// Deactivates the timer and raises a timer update event with the remaining time.
         /// </summary>
         /// <param name="event">The change screen event data.</param>
-        private void OnChangeScreenEventHandler(LevelEvents.ChangeScreens @event)
+        private void OnChangeScreenEventHandler(LevelEvents.SetMonitors @event)
         {
             timer.Deactivate();
             EventBus<TimerEvents.Update>.Raise(new TimerEvents.Update
@@ -106,7 +107,7 @@ namespace GlobalGameJam.Gameplay
         /// Activates the timer when the level starts.
         /// </summary>
         /// <param name="event">The level start event data.</param>
-        private void OnLevelStartEventHandler(LevelEvents.Start @event)
+        private void OnSetLevelModeEventHandler(LevelEvents.SetMode @event)
         {
             StartCoroutine(ActivateTimerRoutine());
         }
@@ -115,9 +116,12 @@ namespace GlobalGameJam.Gameplay
         /// Event handler for when the timer completes.
         /// Raises the level end event.
         /// </summary>
-        private void OnTimerCompleteHandler()
+        private static void OnTimerCompleteHandler()
         {
-            EventBus<LevelEvents.End>.Raise(LevelEvents.End.Default);
+            EventBus<LevelEvents.SetMode>.Raise(new LevelEvents.SetMode
+            {
+                Mode = LevelMode.End
+            });
         }
 
         /// <summary>
