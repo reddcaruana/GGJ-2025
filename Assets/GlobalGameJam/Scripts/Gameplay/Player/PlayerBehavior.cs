@@ -120,8 +120,8 @@ namespace GlobalGameJam.Gameplay
             {
                 return;
             }
-        
-            playerRenderer.Animator.SetFloat(AnimatorDirectionYFloat, value);
+
+            playerRenderer.Animator.SetFloat(AnimatorDirectionYFloat, Mathf.Sign(value));
         }
 
 #endregion
