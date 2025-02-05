@@ -1,3 +1,5 @@
+using GlobalGameJam.Data;
+using GlobalGameJam.Events;
 using UnityEngine;
 
 namespace GlobalGameJam.Gameplay
@@ -30,12 +32,17 @@ namespace GlobalGameJam.Gameplay
         /// <summary>
         /// Event binding for the TrashcanEvents.Excite event.
         /// </summary>
-        private EventBinding<TrashcanEvents.Excite> onExciteEventBinding;
+        private EventBinding<TrashcanEvents.SetPootions> onExciteEventBinding;
 
         /// <summary>
         /// The number of trash items being held.
         /// </summary>
         private int availableTrash;
+
+        /// <summary>
+        /// The potion registry instance.
+        /// </summary>
+        private PotionRegistry potionRegistry;
 
 #region Lifecycle Events
 
@@ -44,7 +51,9 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void Awake()
         {
-            onExciteEventBinding = new EventBinding<TrashcanEvents.Excite>(OnExciteEventHandler);
+            potionRegistry = Singleton.GetOrCreateScriptableObject<PotionRegistry>();
+            
+            onExciteEventBinding = new EventBinding<TrashcanEvents.SetPootions>(OnExciteEventHandler);
         }
 
         /// <summary>
@@ -52,7 +61,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnEnable()
         {
-            EventBus<TrashcanEvents.Excite>.Register(onExciteEventBinding);
+            EventBus<TrashcanEvents.SetPootions>.Register(onExciteEventBinding);
         }
 
         /// <summary>
@@ -60,7 +69,7 @@ namespace GlobalGameJam.Gameplay
         /// </summary>
         private void OnDisable()
         {
-            EventBus<TrashcanEvents.Excite>.Deregister(onExciteEventBinding);
+            EventBus<TrashcanEvents.SetPootions>.Deregister(onExciteEventBinding);
         }
 
 #endregion
@@ -80,10 +89,16 @@ namespace GlobalGameJam.Gameplay
 
             trashSprite.sprite = playerContext.Bag.Contents.Sprite;
 
-            availableTrash--;
-            animator.SetBool(AnimatorExcitedHash, availableTrash > 0);
+            if (playerContext.Bag.Contents == potionRegistry.Pootion)
+            {
+                EventBus<TrashcanEvents.SetPootions>.Raise(new TrashcanEvents.SetPootions
+                {
+                    Count = -1
+                });
+            }
+            
             animator.SetTrigger(AnimatorEatHash);
-
+            
             playerContext.Bag.Clear();
         }
 
@@ -96,9 +111,9 @@ namespace GlobalGameJam.Gameplay
         /// Sets the "Excited" animation parameter to true.
         /// </summary>
         /// <param name="event">The TrashcanEvents.Excite event.</param>
-        private void OnExciteEventHandler(TrashcanEvents.Excite @event)
+        private void OnExciteEventHandler(TrashcanEvents.SetPootions @event)
         {
-            availableTrash++;
+            availableTrash = Mathf.Max(availableTrash + @event.Count, 0);
             animator.SetBool(AnimatorExcitedHash, availableTrash > 0);
         }
 

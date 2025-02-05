@@ -70,7 +70,10 @@ namespace GlobalGameJam.Gameplay
 
             if (Data == potionRegistry.Pootion)
             {
-                EventBus<TrashcanEvents.Excite>.Raise(TrashcanEvents.Excite.Default);
+                EventBus<TrashcanEvents.SetPootions>.Raise(new TrashcanEvents.SetPootions
+                {
+                    Count = 1
+                });
             }
             
             Despawn();

@@ -51,6 +51,11 @@ namespace GlobalGameJam.Gameplay
                 potionCount = 0;
                 deductions = earnings;
                 earnings = 0;
+                
+                EventBus<TrashcanEvents.SetPootions>.Raise(new TrashcanEvents.SetPootions
+                {
+                    Count = -1
+                });
             }
 
             EventBus<ScoreEvents.Add>.Raise(new ScoreEvents.Add
