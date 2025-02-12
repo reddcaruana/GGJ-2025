@@ -39,7 +39,7 @@ namespace WitchesBasement.Events
 
             foreach (var assembly in assemblies)
             {
-                if (assembly.FullName.StartsWith("GlobalGameJam"))
+                if (assembly.FullName.StartsWith("WitchesBasement"))
                 {
                     AddTypesFromAssembly(assembly.GetTypes(), interfaceType, types);
                 }
