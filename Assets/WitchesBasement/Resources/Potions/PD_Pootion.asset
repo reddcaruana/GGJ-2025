@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3984ef40570840c8b7231df0f45f0c0e, type: 3}
+  m_Name: PD_Pootion
+  m_EditorClassIdentifier: 
+  <Name>k__BackingField: Pootion
+  <Sprite>k__BackingField: {fileID: 21300000, guid: ef411096949504fd8b925689d257cf63, type: 3}
+  <LitterDeduction>k__BackingField: 5
+  <Ingredients>k__BackingField: []
+  <Cost>k__BackingField: -10
+  <Time>k__BackingField: 0

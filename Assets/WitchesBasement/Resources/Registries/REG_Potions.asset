@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509b194afc064de88121b33eb52fd55a, type: 3}
+  m_Name: REG_Potions
+  m_EditorClassIdentifier: 
+  <Pootion>k__BackingField: {fileID: 11400000, guid: d9f5ed7197769499fb1db58492450ee8, type: 2}
+  <Potions>k__BackingField:
+  - {fileID: 11400000, guid: a33e1a6cfb3074193965b3764ac1fc46, type: 2}
+  - {fileID: 11400000, guid: 6a1438fa322fa4d87ae84effafbafd11, type: 2}
+  - {fileID: 11400000, guid: fccb042f18fea49a6b37d3c5a267140d, type: 2}
+  - {fileID: 11400000, guid: 3fc4ef7449f9442db9f124f7b87f5f18, type: 2}
+  - {fileID: 11400000, guid: f9bea5b7d7c884a2f836fcbb588e8081, type: 2}
+  - {fileID: 11400000, guid: 80145b1b5c176430f93790e7def986df, type: 2}
+  - {fileID: 11400000, guid: 820e11b6ff707411ca6aaee51edd7ce8, type: 2}

@@ -6,5 +6,15 @@ namespace WitchesBasement.Data
     public class IngredientRegistry : ScriptableObject
     {
         [field: SerializeField] public IngredientData[] Ingredients { get; private set; }
+
+#region Context Menu
+
+        [ContextMenu("Find Ingredients")]
+        private void FindIngredients()
+        {
+            Ingredients = Resources.LoadAll<IngredientData>("Ingredients");
+        }
+
+#endregion
     }
 }

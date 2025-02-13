@@ -1,0 +1,20 @@
+{
+    "name": "WitchesBasement.Onboarding",
+    "rootNamespace": "WitchesBasement",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:ca7bb48f9fc84cb9b0c69979575fdeae",
+        "GUID:3273e83d45ed4cb496db797dac361904",
+        "GUID:dfb22d7702e04c17b0f66b44f6c1c455",
+        "GUID:569b37b6ef31433d8410e70fc51a1621"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
