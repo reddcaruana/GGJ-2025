@@ -58,6 +58,15 @@ namespace WitchesBasement.Players
         private void LeaveActionHandler(InputAction.CallbackContext context)
         {
             OnLeft?.Invoke();
+
+            var input = Input;
+            Release();
+            
+            if (input is not null)
+            {
+                Destroy(input.gameObject);
+            }
+            
         }
 
 #endregion

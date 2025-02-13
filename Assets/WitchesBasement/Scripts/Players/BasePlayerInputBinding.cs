@@ -5,7 +5,7 @@ namespace WitchesBasement.Players
 {
     public abstract class BasePlayerInputBinding : MonoBehaviour
     {
-        public event System.Action OnBind;
+        public event System.Action<int> OnBind;
         public event System.Action OnRelease;
         
         protected PlayerInput Input { get; private set; }
@@ -20,7 +20,7 @@ namespace WitchesBasement.Players
             ID = playerID;
             Input = dataManager.FindInputByID(ID);
             
-            OnBind?.Invoke();
+            OnBind?.Invoke(ID);
         }
 
         public virtual void Release()

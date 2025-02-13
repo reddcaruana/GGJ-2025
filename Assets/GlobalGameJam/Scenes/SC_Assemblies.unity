@@ -3109,7 +3109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1383763759618420686, guid: b5bedb03ff6fe4a7abe048ab8aef546d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1383763759618420686, guid: b5bedb03ff6fe4a7abe048ab8aef546d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3422,6 +3422,7 @@ MonoBehaviour:
   profileImage: {fileID: 193799899}
   usernameText: {fileID: 402445607}
   passwordField: {fileID: 402445606}
+  passwordInputDuration: 1.5
 --- !u!114 &402445615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3449,6 +3450,7 @@ MonoBehaviour:
   profileImage: {fileID: 1581392966}
   usernameText: {fileID: 402445611}
   passwordField: {fileID: 402445610}
+  passwordInputDuration: 1.5
 --- !u!114 &402445617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3911,6 +3913,7 @@ MonoBehaviour:
   profileImage: {fileID: 538698776}
   usernameText: {fileID: 402445599}
   passwordField: {fileID: 402445598}
+  passwordInputDuration: 1.5
 --- !u!114 &693274226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4988,6 +4991,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1160739808118561424, guid: 8210e4f4a5bc54ccb8973d3ee4a3caab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2322812379242678402, guid: 8210e4f4a5bc54ccb8973d3ee4a3caab, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5438,7 +5445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 3
   m_MaxPlayerCount: 4
-  m_AllowJoining: 0
+  m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
@@ -7234,6 +7241,7 @@ MonoBehaviour:
   profileImage: {fileID: 1233452116}
   usernameText: {fileID: 402445603}
   passwordField: {fileID: 402445602}
+  passwordInputDuration: 1.5
 --- !u!114 &1455508913
 MonoBehaviour:
   m_ObjectHideFlags: 0
