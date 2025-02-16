@@ -16,7 +16,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: 48bec67002e5b4c9c810403f0d9b54c2, type: 3}
   <LitterDeduction>k__BackingField: 5
   <Ingredients>k__BackingField:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 6c10c9dd05688430fb89421d0f7f6829, type: 2}
+  - {fileID: 11400000, guid: ff48b75b32e3f4051a892b11e427a823, type: 2}
   <Cost>k__BackingField: 20
   <Time>k__BackingField: 4

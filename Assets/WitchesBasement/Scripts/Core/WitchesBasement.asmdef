@@ -1,4 +1,14 @@
 {
-  "name": "WitchesBasement",
-  "rootNamespace": "WitchesBasement"
+    "name": "WitchesBasement",
+    "rootNamespace": "WitchesBasement",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,0 +1,5 @@
+{
+  "name": "WitchesBasement.Soap",
+  "rootNamespace": "WitchesBasement",
+  "references":[ "Obvious.Soap", "WitchesBasement.Data" ]
+}

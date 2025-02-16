@@ -1,0 +1,19 @@
+{
+    "name": "WitchesBasement.System",
+    "rootNamespace": "WitchesBasement",
+    "references": [
+        "GUID:ee6baafdecd94804a8714654c4bd097f",
+        "GUID:edc9f0b996d94648b7f20066344b0f15",
+        "GUID:3273e83d45ed4cb496db797dac361904",
+        "GUID:dfb22d7702e04c17b0f66b44f6c1c455"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
