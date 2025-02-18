@@ -166,8 +166,8 @@ MonoBehaviour:
   registry: {fileID: 11400000, guid: 75ac062ddf16d4797bfecc123ee6ccb9, type: 2}
   targetPotion: {fileID: 11400000, guid: cefe52f64f6804cb3b8b78041964f8e8, type: 2}
   requiredIngredients: {fileID: 11400000, guid: ec05e9deff0714412b5749db049196f1, type: 2}
-  updateEvent: {fileID: 11400000, guid: 6c0368c7d4a52436aa51263d81e2a184, type: 2}
-  scriptableEvent: {fileID: 11400000, guid: 087729481103b47b08ff58caf0984071, type: 2}
+  targetPotionChangedEvent: {fileID: 11400000, guid: 6c0368c7d4a52436aa51263d81e2a184, type: 2}
+  nextPotionEvent: {fileID: 11400000, guid: 087729481103b47b08ff58caf0984071, type: 2}
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,8 +336,58 @@ MonoBehaviour:
   registry: {fileID: 11400000, guid: 35bdff4c65fea44f493f579be9ec2c2d, type: 2}
   duration: {fileID: 11400000, guid: 7eab16b7eedfb474e9fcdc9827a8b21a, type: 2}
   targetIngredient: {fileID: 11400000, guid: d08801cee32b1499d94289e43d8addd5, type: 2}
-  updateEvent: {fileID: 11400000, guid: 0e1aadd5a83bf44d3af8b2577fbae9c3, type: 2}
-  scriptableEvent: {fileID: 11400000, guid: 6c0368c7d4a52436aa51263d81e2a184, type: 2}
+  ingredientChangedEvent: {fileID: 11400000, guid: 0e1aadd5a83bf44d3af8b2577fbae9c3, type: 2}
+  potionUpdateEvent: {fileID: 11400000, guid: 6c0368c7d4a52436aa51263d81e2a184, type: 2}
+--- !u!1 &481501541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 481501542}
+  - component: {fileID: 481501543}
+  m_Layer: 0
+  m_Name: Ingredient Evaluator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &481501542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481501541}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &481501543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481501541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fde49a432154428b746c7c68e46a15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetIngredient: {fileID: 11400000, guid: d08801cee32b1499d94289e43d8addd5, type: 2}
+  targetPotion: {fileID: 11400000, guid: cefe52f64f6804cb3b8b78041964f8e8, type: 2}
+  cauldronIngredients: {fileID: 11400000, guid: fc6e16ec439734b30b5011fdd066baa9, type: 2}
+  expectedIngredients: {fileID: 11400000, guid: ec05e9deff0714412b5749db049196f1, type: 2}
+  nextPotionEvent: {fileID: 11400000, guid: 087729481103b47b08ff58caf0984071, type: 2}
+  spawnPotionEvent: {fileID: 11400000, guid: bea220e9890b84de795efd96f6a7d047, type: 2}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +525,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2002629482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002629484}
+  - component: {fileID: 2002629483}
+  m_Layer: 0
+  m_Name: Ingredient Adder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2002629483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002629482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58dc25f09a04699a7367ce03940e11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cauldronIngredients: {fileID: 11400000, guid: fc6e16ec439734b30b5011fdd066baa9, type: 2}
+  ingredientAddedEvent: {fileID: 11400000, guid: 3064337e91edb4df3a4315ccdd770b8d, type: 2}
+--- !u!4 &2002629484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002629482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -483,3 +579,5 @@ SceneRoots:
   - {fileID: 203844589}
   - {fileID: 116364513}
   - {fileID: 421740026}
+  - {fileID: 2002629484}
+  - {fileID: 481501542}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f8e94cd052734f42b28bc91b52d890b, type: 3}
-  m_Name: E_UpdateTargetIngredient
+  m_Name: E_TargetIngredientChanged
   m_EditorClassIdentifier: 
   TagIndex: 0
   Description: 

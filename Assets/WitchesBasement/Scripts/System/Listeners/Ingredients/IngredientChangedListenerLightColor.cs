@@ -3,7 +3,7 @@ using UnityEngine;
 namespace WitchesBasement.System
 {
     [RequireComponent(typeof(Light))]
-    internal class LightColorUpdater : BaseIngredientUpdater
+    internal class IngredientChangedListenerLightColor : IngredientChangedListener
     {
         private Light attachedLight;
         

@@ -6,7 +6,7 @@ using WitchesBasement.Soap;
 
 namespace WitchesBasement.System
 {
-    internal class PotionUpdater : MonoBehaviour
+    internal class PotionSequencer : MonoBehaviour
     {
         [Header("Registry")]
         [SerializeField] private PotionRegistry registry;
@@ -16,10 +16,10 @@ namespace WitchesBasement.System
         [SerializeField] private ScriptableListIngredientData requiredIngredients;
 
         [Header("Events")]
-        [SerializeField] private ScriptableEventPotionData updateEvent;
+        [SerializeField] private ScriptableEventPotionData targetPotionChangedEvent;
 
         [Header("Subscriptions")]
-        [SerializeField] private ScriptableEventNoParam scriptableEvent;
+        [SerializeField] private ScriptableEventNoParam nextPotionEvent;
         
         private readonly List<PotionData> potions = new();
         
@@ -33,12 +33,12 @@ namespace WitchesBasement.System
 
         private void OnEnable()
         {
-            scriptableEvent.OnRaised += Next;
+            nextPotionEvent.OnRaised += Next;
         }
 
         private void OnDisable()
         {
-            scriptableEvent.OnRaised -= Next;
+            nextPotionEvent.OnRaised -= Next;
         }
 
 #endregion
@@ -63,7 +63,7 @@ namespace WitchesBasement.System
             requiredIngredients.Clear();
             requiredIngredients.AddRange(next.Ingredients);
             
-            updateEvent.Raise(targetPotion.Value);
+            targetPotionChangedEvent.Raise(targetPotion.Value);
         }
 
 #endregion

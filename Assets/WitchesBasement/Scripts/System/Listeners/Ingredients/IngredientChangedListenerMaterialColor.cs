@@ -3,7 +3,7 @@ using UnityEngine;
 namespace WitchesBasement.System
 {
     [RequireComponent(typeof(MeshRenderer))]
-    internal class MaterialColorUpdater : BaseIngredientUpdater
+    internal class IngredientChangedListenerMaterialColor : IngredientChangedListener
     {
         private static readonly int EmissionColorID = Shader.PropertyToID("_EmissionColor");
         private MeshRenderer attachedMeshRenderer;

@@ -7,7 +7,7 @@ using WitchesBasement.Soap;
 
 namespace WitchesBasement.System
 {
-    internal class TimedIngredientUpdater : MonoBehaviour
+    internal class IngredientSequencer : MonoBehaviour
     {
         [Header("Registry")]
         [SerializeField] private IngredientRegistry registry;
@@ -17,10 +17,10 @@ namespace WitchesBasement.System
         [SerializeField] private IngredientDataVariable targetIngredient;
 
         [Header("Events")]
-        [SerializeField] private ScriptableEventIngredientData updateEvent;
+        [SerializeField] private ScriptableEventIngredientData ingredientChangedEvent;
         
         [Header("Subscriptions")]
-        [SerializeField] private ScriptableEventPotionData scriptableEvent;
+        [SerializeField] private ScriptableEventPotionData potionUpdateEvent;
         
         private Queue<IngredientData> ingredientQueue;
 
@@ -33,12 +33,12 @@ namespace WitchesBasement.System
 
         private void OnEnable()
         {
-            scriptableEvent.OnRaised += OnPotionUpdated;
+            potionUpdateEvent.OnRaised += OnPotionChanged;
         }
 
         private void OnDisable()
         {
-            scriptableEvent.OnRaised -= OnPotionUpdated;
+            potionUpdateEvent.OnRaised -= OnPotionChanged;
         }
 
         private void Start()
@@ -50,7 +50,7 @@ namespace WitchesBasement.System
         
 #region Event Handlers
 
-        private void OnPotionUpdated(PotionData potionData)
+        private void OnPotionChanged(PotionData potionData)
         {
             ingredientQueue = new Queue<IngredientData>(potionData.Ingredients);
             targetIngredient.Value = null;
@@ -70,7 +70,7 @@ namespace WitchesBasement.System
                 }
 
                 targetIngredient.Value = ingredientQueue.Dequeue();
-                updateEvent.Raise(targetIngredient.Value);
+                ingredientChangedEvent.Raise(targetIngredient.Value);
 
                 yield return new WaitForSeconds(duration.Value);
             }
