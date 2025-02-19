@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dce732f7c96d54066a9ae5ccffb12453, type: 3}
-  m_Name: ScriptableDictionaryPlayers
+  m_Name: D_PlayerMap
   m_EditorClassIdentifier: 
   TagIndex: 0
   Description: 
