@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9978ce9c8bdc724896114c9952c52ea, type: 3}
-  m_Name: V_PlayerMoveSpeed
+  m_Name: V_PlayerInteractionRadius
   m_EditorClassIdentifier: 
   TagIndex: 0
   Description: 
-  _guid: 9194c2953b8a04512885745e299a4c3b
+  _guid: 3a25e49e1799042dab0a6c7177d2c9fa
   _saveGuid: 0
-  _value: 6
+  _value: 0.5
   _debugLogEnabled: 0
   _saved: 0
   _defaultValue: 0

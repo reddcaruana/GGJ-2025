@@ -4,10 +4,10 @@ using WitchesBasement.Soap;
 
 namespace WitchesBasement.System
 {
-    [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(PlayerMovement), typeof(PlayerInventory))]
     internal class PlayerBehavior : MonoBehaviour
     {
-        [SerializeField] private ScriptableDictionaryPlayerID playerIDs;
+        [SerializeField] private ScriptableDictionaryPlayerID playerList;
 
         public PlayerContext Context { get; private set; }
 
@@ -17,13 +17,14 @@ namespace WitchesBasement.System
         {
             Context = new PlayerContext
             {
-                Movement = GetComponent<PlayerMovement>()
+                Movement = GetComponent<PlayerMovement>(),
+                Inventory = GetComponent<PlayerInventory>()
             };
         }
 
         private void OnEnable()
         {
-            playerIDs.OnItemAdded += Bind;
+            playerList.OnItemAdded += Bind;
         }
 
 #endregion
@@ -35,6 +36,7 @@ namespace WitchesBasement.System
             playerInput.SwitchCurrentActionMap("Player");
             
             Context.Movement.Bind(playerInput);
+            Context.Inventory.Bind(playerInput);
         }
 
 #endregion

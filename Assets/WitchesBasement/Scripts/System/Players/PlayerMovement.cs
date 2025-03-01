@@ -1,4 +1,3 @@
-using System.Collections;
 using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,11 +8,13 @@ namespace WitchesBasement.System
     [RequireComponent(typeof(Rigidbody))]
     internal class PlayerMovement : MonoBehaviour, IBindableComponent
     {
+        private enum DashState { Ready, Dashing, Cooldown }
+        
         [SerializeField] private FloatVariable moveSpeed;
         [SerializeField] private FloatVariable dashSpeed;
         [SerializeField] private FloatVariable dashDuration;
         [SerializeField] private FloatVariable dashCooldown;
-
+        
         private Rigidbody attachedRigidbody;
 
         private InputAction dashAction;
@@ -22,8 +23,7 @@ namespace WitchesBasement.System
         private Vector3 inputDirection;
         private Vector3 dashDirection;
 
-        private bool canDash = true;
-        private bool isDashing;
+        private DashState dashState = DashState.Ready;
 
         private float dashDurationCounter;
         private float dashCooldownCounter;
@@ -37,7 +37,7 @@ namespace WitchesBasement.System
 
         private void FixedUpdate()
         {
-            if (isDashing)
+            if (dashState is DashState.Dashing)
             {
                 attachedRigidbody.linearVelocity = dashDirection * dashSpeed.Value;
                 return;
@@ -48,15 +48,16 @@ namespace WitchesBasement.System
 
         private void Update()
         {
-            if (isDashing)
+            switch (dashState)
             {
-                DashDurationTick(Time.deltaTime);
-                return;
-            }
-
-            if (canDash == false)
-            {
-                DashCooldownTick(Time.deltaTime);
+                case DashState.Dashing:
+                    DashDurationTick(Time.deltaTime);
+                    DashCooldownTick(Time.deltaTime);
+                    break;
+                
+                case DashState.Cooldown:
+                    DashCooldownTick(Time.deltaTime);
+                    break;
             }
         }
 
@@ -104,7 +105,7 @@ namespace WitchesBasement.System
             dashDurationCounter -= deltaTime;
             if (dashDurationCounter <= 0)
             {
-                isDashing = false;
+                dashState = DashState.Cooldown;
             }
         }
 
@@ -113,8 +114,19 @@ namespace WitchesBasement.System
             dashCooldownCounter -= deltaTime;
             if (dashCooldownCounter <= 0)
             {
-                canDash = true;
+                dashState = DashState.Ready;
+                UpdateDashDirection();
             }
+        }
+
+        private void UpdateDashDirection()
+        {
+            if (inputDirection.sqrMagnitude < Mathf.Epsilon)
+            {
+                return;
+            }
+
+            dashDirection = inputDirection;
         }
 
 #endregion
@@ -123,26 +135,30 @@ namespace WitchesBasement.System
 
         private void OnDash(InputAction.CallbackContext context)
         {
-            if (canDash == false || dashDirection.sqrMagnitude < Mathf.Epsilon)
+            if (dashState is not DashState.Ready)
             {
                 return;
             }
 
-            isDashing = true;
-            canDash = false;
+            if (dashDirection.sqrMagnitude < Mathf.Epsilon)
+            {
+                dashDirection = transform.forward;
+            }
 
+            dashState = DashState.Dashing;
             dashDurationCounter = dashDuration.Value;
             dashCooldownCounter = dashCooldown.Value;
         }
 
         private void OnMove(InputAction.CallbackContext context)
         {
+            
             var value = context.ReadValue<Vector2>();
             inputDirection = new Vector3(value.x, 0, value.y);
 
-            if (inputDirection.sqrMagnitude > Mathf.Epsilon)
+            if (dashState is not DashState.Dashing)
             {
-                dashDirection = inputDirection;
+                UpdateDashDirection();
             }
         }
 
