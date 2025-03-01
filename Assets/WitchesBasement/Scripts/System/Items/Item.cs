@@ -33,6 +33,7 @@ namespace WitchesBasement.System
 
         private void OnDisable()
         {
+            trailRenderer.Clear();
             attachedRigidbody.Sleep();
             SetData(null);
         }
