@@ -4,13 +4,15 @@ using WitchesBasement.Data;
 namespace WitchesBasement.System
 {
     [RequireComponent(typeof(Rigidbody))]
-    internal class Item : MonoBehaviour, IUsable, IThrowable
+    public class Item : MonoBehaviour, IUsable, IThrowable
     {
         private const float ColliderExpansion = 0.1f;
         
         [SerializeField] private SphereCollider physicalCollider;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private TrailRenderer trailRenderer;
+
+        [SerializeField] private ScriptableEventItem returnToPoolEvent;
         
         private Rigidbody attachedRigidbody;
 
@@ -22,6 +24,17 @@ namespace WitchesBasement.System
         private void Awake()
         {
             attachedRigidbody = GetComponent<Rigidbody>();
+        }
+
+        private void OnEnable()
+        {
+            attachedRigidbody.WakeUp();
+        }
+
+        private void OnDisable()
+        {
+            attachedRigidbody.Sleep();
+            SetData(null);
         }
 
         private void Reset()
@@ -49,14 +62,18 @@ namespace WitchesBasement.System
             spriteRenderer.sprite = Data.Sprite;
             var spriteSize = spriteRenderer.bounds.size;
             var maxSize = Mathf.Max(spriteSize.x, spriteSize.y);
-            physicalCollider.radius = maxSize * 0.5f * ColliderExpansion;
+            physicalCollider.radius = maxSize * 0.5f + ColliderExpansion;
         }
 
         /// <inheritdoc />
         public ItemData Use()
         {
-            Destroy(gameObject);
-            return Data;
+            var data = Data;
+            
+            SetData(null);
+            returnToPoolEvent?.Raise(this);
+            
+            return data;
         }
 
 #endregion

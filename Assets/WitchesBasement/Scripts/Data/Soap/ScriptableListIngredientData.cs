@@ -1,8 +1,7 @@
-using UnityEngine;
 using Obvious.Soap;
-using WitchesBasement.Data;
+using UnityEngine;
 
-namespace WitchesBasement.Soap
+namespace WitchesBasement.Data
 {
     
     

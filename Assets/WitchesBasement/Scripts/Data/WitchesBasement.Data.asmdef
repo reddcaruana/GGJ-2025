@@ -1,4 +1,5 @@
 {
   "name": "WitchesBasement.Data",
-  "rootNamespace": "WitchesBasement"
+  "rootNamespace": "WitchesBasement",
+  "references":[ "GUID:ee6baafdecd94804a8714654c4bd097f" ]
 }

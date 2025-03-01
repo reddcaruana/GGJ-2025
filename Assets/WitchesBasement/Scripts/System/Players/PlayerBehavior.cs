@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using WitchesBasement.Soap;
+using WitchesBasement.Players;
 
 namespace WitchesBasement.System
 {
@@ -27,6 +27,12 @@ namespace WitchesBasement.System
             playerList.OnItemAdded += Bind;
         }
 
+        private void OnDisable()
+        {
+            Release();
+            playerList.OnItemAdded -= Bind;
+        }
+
 #endregion
 
 #region Subscriptions
@@ -37,6 +43,12 @@ namespace WitchesBasement.System
             
             Context.Movement.Bind(playerInput);
             Context.Inventory.Bind(playerInput);
+        }
+
+        private void Release()
+        {
+            Context.Movement.Release();
+            Context.Inventory.Release();
         }
 
 #endregion

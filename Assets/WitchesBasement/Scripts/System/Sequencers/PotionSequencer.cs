@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Obvious.Soap;
 using UnityEngine;
 using WitchesBasement.Data;
-using WitchesBasement.Soap;
 
 namespace WitchesBasement.System
 {

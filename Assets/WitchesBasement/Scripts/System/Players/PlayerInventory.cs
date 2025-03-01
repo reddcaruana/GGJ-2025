@@ -19,6 +19,9 @@ namespace WitchesBasement.System
         [SerializeField] private FloatVariable interactionRadius;
         [SerializeField] private LayerMask interactionLayers;
 
+        [Header("References")]
+        [SerializeField] private SpriteRenderer inventorySpriteRenderer;
+        
         private ItemData currentData;
         
         private InputAction interactAction;
@@ -100,6 +103,14 @@ namespace WitchesBasement.System
         private void SetCurrentData(ItemData itemData)
         {
             currentData = itemData;
+
+            if (currentData is null)
+            {
+                inventorySpriteRenderer.sprite = null;
+                return;
+            }
+            
+            inventorySpriteRenderer.sprite = currentData.Sprite;
         }
 
         private void Throw()
@@ -108,8 +119,12 @@ namespace WitchesBasement.System
             {
                 return;
             }
+
+            var manager = Singleton.GetOrCreateMonoBehaviour<ItemManager>();
+            var item = manager.Generate(currentData, carryAnchor);
+            item.Throw(direction, throwForce.Value, throwAngle.Value);
             
-            
+            SetCurrentData(null);
         }
 
 #endregion
@@ -120,8 +135,7 @@ namespace WitchesBasement.System
         {
             if (currentData is not null)
             {
-                Debug.Log("Holding object.");
-                // Throw();
+                Throw();
                 return;
             }
             

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using WitchesBasement.Soap;
 
 namespace WitchesBasement.Players
 {
