@@ -13,6 +13,8 @@ namespace WitchesBasement.System
         [SerializeField] private ScriptableListIngredientData cauldronIngredients;
         [SerializeField] private ScriptableListIngredientData expectedIngredients;
 
+        [SerializeField] private IntVariable pootionCountVariable;
+            
         [SerializeField] private ScriptableEventNoParam nextPotionEvent;
         [SerializeField] private ScriptableEventPotionData spawnPotionEvent;
         
@@ -43,10 +45,15 @@ namespace WitchesBasement.System
 
         private void OnCauldronItemAdded(IngredientData ingredient)
         {
+            var registry = Singleton.GetOrCreateScriptableObject<PotionRegistry>();
+            
             if (ingredient != targetIngredient.Value)
             {
                 ingredientsToCheck.AddRange(cauldronIngredients);
                 cauldronIngredients.Clear();
+                
+                pootionCountVariable.Value += 1;
+                spawnPotionEvent.Raise(registry.Pootion);
                 return;
             }
             
@@ -54,6 +61,9 @@ namespace WitchesBasement.System
             {
                 ingredientsToCheck.AddRange(ingredientsComplete);
                 cauldronIngredients.Clear();
+                
+                pootionCountVariable.Value += 1;
+                spawnPotionEvent.Raise(registry.Pootion);
                 return;
             }
             

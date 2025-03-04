@@ -250,6 +250,7 @@ MonoBehaviour:
   targetPotion: {fileID: 11400000, guid: cefe52f64f6804cb3b8b78041964f8e8, type: 2}
   cauldronIngredients: {fileID: 11400000, guid: fc6e16ec439734b30b5011fdd066baa9, type: 2}
   expectedIngredients: {fileID: 11400000, guid: ec05e9deff0714412b5749db049196f1, type: 2}
+  pootionCountVariable: {fileID: 11400000, guid: 21556d1fec50449039a7de0d34610820, type: 2}
   nextPotionEvent: {fileID: 11400000, guid: 087729481103b47b08ff58caf0984071, type: 2}
   spawnPotionEvent: {fileID: 11400000, guid: bea220e9890b84de795efd96f6a7d047, type: 2}
 --- !u!4 &1787653254
