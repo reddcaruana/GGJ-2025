@@ -4,24 +4,18 @@ using WitchesBasement.Data;
 
 namespace WitchesBasement.System
 {
-    [RequireComponent(typeof(Animator))]
-    internal class TrashReceiver : ItemReceiverBase<ItemData>
+    internal class CrateReceiver : ItemReceiverBase<PotionData>
     {
-        private static readonly int AnimatorEatHash = Animator.StringToHash("Eat");
-
-        [SerializeField] private SpriteRenderer contentsSpriteRenderer;
-
+        [SerializeField] private ScriptableListPotionData potionList;
+        [SerializeField] private IntVariable sessionScore;
         [SerializeField] private IntVariable pootionCount;
 
         private PotionData pootionData;
-        private Animator attachedAnimator;
-
-#region Lifecycle Events
         
+#region Lifecycle Events
+
         private void Awake()
         {
-            attachedAnimator = GetComponent<Animator>();
-
             var registry = Singleton.GetOrCreateScriptableObject<PotionRegistry>();
             pootionData = registry.Pootion;
         }
@@ -39,8 +33,9 @@ namespace WitchesBasement.System
             }
             
             item.Use();
-            contentsSpriteRenderer.sprite = data.Sprite;
-            attachedAnimator.SetTrigger(AnimatorEatHash);
+            potionList.Add(data);
+
+            sessionScore.Value += data.Cost;
         }
 
 #endregion
