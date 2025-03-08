@@ -16,12 +16,12 @@ MonoBehaviour:
   Description: 
   _guid: dab516970d9c1496e8407f37ef261082
   _saveGuid: 0
-  _value: 0.5
+  _value: 1.5
   _debugLogEnabled: 0
   _saved: 0
   _defaultValue: 0
   _resetOn: 0
-  _runtimeValue: 0.5
+  _runtimeValue: 1
   _isClamped: 0
   _min:
     UseLocal: 1

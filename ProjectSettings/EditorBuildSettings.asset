@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/WitchesBasement/Scenes/SC_MainMenu.unity
     guid: 3e024cbd6211847e387b559e3174767d
   - enabled: 1
-    path: Assets/WitchesBasement/Scenes/SC_ControlsTest.unity
+    path: Assets/WitchesBasement/Scenes/SC_Players.unity
     guid: 5968daa08c9db4ccfb05e32b431604cf
   - enabled: 1
     path: Assets/GlobalGameJam/Scenes/SC_CodeTests.unity

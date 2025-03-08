@@ -87,7 +87,7 @@ namespace WitchesBasement.System
                 var result = results[i];
                 var resultDistance = Vector3.Distance(result.transform.position, point);
 
-                if (resultDistance < closestDistance)
+                if (resultDistance < closestDistance && result.GetComponent<IUsable>() != null)
                 {
                     closestDistance = resultDistance;
                     closestCollider = result;
