@@ -31,8 +31,13 @@ namespace WitchesBasement.System
         private void OnSpawnPotion(PotionData potionData)
         {
             var manager = Singleton.GetOrCreateMonoBehaviour<ItemManager>();
+            
             var item = manager.Generate(potionData, transform);
-            item.Throw(direction.ToVector(), throwForce.Value, angle.Value);
+            
+            var randomOffset = Random.Range(-1f, 1f) * 10;
+            var throwDirection = Quaternion.Euler(0, randomOffset, 0) * direction.ToVector();
+            
+            item.Throw(throwDirection, throwForce.Value, angle.Value);
 
         }
 

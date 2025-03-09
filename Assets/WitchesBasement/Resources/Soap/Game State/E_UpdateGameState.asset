@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a49b7e678b3ebb7418adb84806d24646, type: 3}
-  m_Name: E_StartGame
+  m_Script: {fileID: 11500000, guid: b8c66fb3acecd4bfcac568b1df5b4b55, type: 3}
+  m_Name: E_UpdateGameState
   m_EditorClassIdentifier: 
   TagIndex: 0
   Description: 
   _debugLogEnabled: 0
+  _debugValue: 11

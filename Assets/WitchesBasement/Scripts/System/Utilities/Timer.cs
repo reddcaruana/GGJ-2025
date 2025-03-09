@@ -8,6 +8,8 @@ namespace WitchesBasement.System
         [SerializeField] private FloatVariable duration;
         [SerializeField] private FloatVariable currentValue;
 
+        [SerializeField] private ScriptableEventGameState gameStateEvent;
+        
         private bool isRunning;
 
 #region Lifecycle Events
@@ -19,11 +21,15 @@ namespace WitchesBasement.System
                 return;
             }
 
-            currentValue.Value -= Time.deltaTime;
-            if (currentValue.Value >= duration.Value)
+            var newValue = currentValue.Value - Time.deltaTime;
+            if (newValue <= 0)
             {
-                Deactivate();
+                gameStateEvent?.Raise(GameState.End);
+                isRunning = false;
+                return;
             }
+
+            currentValue.Value = newValue;
         }
 
 #endregion
@@ -31,16 +37,9 @@ namespace WitchesBasement.System
 #region Methods
 
         [ContextMenu("Activate")]
-        public void Activate()
+        public void Initialize()
         {
             currentValue.Value = duration.Value;
-            isRunning = true;
-        }
-
-        public void Deactivate()
-        {
-            currentValue.Value = duration.Value;
-            isRunning = false;
         }
 
         public void Extend(float value)
@@ -51,6 +50,11 @@ namespace WitchesBasement.System
         public void Pause()
         {
             isRunning = false;
+        }
+
+        public void Resume()
+        {
+            isRunning = true;
         }
 
 #endregion

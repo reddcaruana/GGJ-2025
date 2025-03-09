@@ -7,7 +7,7 @@ namespace WitchesBasement.System
     internal abstract class IngredientChangedListener : MonoBehaviour
     {
         [SerializeField] private FloatVariable transitionDuration;
-        [SerializeField] private ScriptableEventIngredientData ingredientChangedEvent;
+        [SerializeField] private IngredientDataVariable targetIngredient;
 
         private Color currentColor;
         private Color targetColor;
@@ -17,12 +17,12 @@ namespace WitchesBasement.System
 
         private void OnEnable()
         {
-            ingredientChangedEvent.OnRaised += OnIngredientChanged;
+            targetIngredient.OnValueChanged += OnIngredientChanged;
         }
 
         private void OnDisable()
         {
-            ingredientChangedEvent.OnRaised -= OnIngredientChanged;
+            targetIngredient.OnValueChanged -= OnIngredientChanged;
         }
 
         private void Update()

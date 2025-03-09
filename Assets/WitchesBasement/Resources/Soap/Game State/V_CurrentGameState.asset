@@ -9,25 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9978ce9c8bdc724896114c9952c52ea, type: 3}
-  m_Name: V_TimerDuration
+  m_Script: {fileID: 11500000, guid: 233a141cecdaf4bc98a9bde849e2a988, type: 3}
+  m_Name: V_CurrentGameState
   m_EditorClassIdentifier: 
   TagIndex: 0
   Description: 
-  _guid: c5eef522d57c54e9a8d0c4f67870df2e
+  _guid: a2f865df800a94a84a777da3d46ed1df
   _saveGuid: 0
-  _value: 180
+  _value: 0
   _debugLogEnabled: 0
   _saved: 0
   _defaultValue: 0
   _resetOn: 0
-  _runtimeValue: 5
-  _isClamped: 0
-  _min:
-    UseLocal: 1
-    LocalValue: 0
-    Variable: {fileID: 0}
-  _max:
-    UseLocal: 1
-    LocalValue: 3.4028235e+38
-    Variable: {fileID: 0}
+  _runtimeValue: 0

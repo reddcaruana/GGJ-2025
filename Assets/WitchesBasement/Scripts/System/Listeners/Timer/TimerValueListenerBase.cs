@@ -1,22 +1,20 @@
 using Obvious.Soap;
-using TMPro;
 using UnityEngine;
 
 namespace WitchesBasement.System
 {
-    internal class TimerValueListener : MonoBehaviour
+    internal abstract class TimerValueListenerBase : MonoBehaviour
     {
         [SerializeField] private FloatVariable timerValue;
-        [SerializeField] private TMP_Text targetText;
-
+        
 #region Lifecycle Events
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             timerValue.OnValueChanged += OnTimerValueChanged;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             timerValue.OnValueChanged -= OnTimerValueChanged;
         }
@@ -25,10 +23,7 @@ namespace WitchesBasement.System
 
 #region Subscriptions
 
-        private void OnTimerValueChanged(float value)
-        {
-            targetText.text = TimeUtility.ToString(value);
-        }
+        protected abstract void OnTimerValueChanged(float value);
 
 #endregion
     }
