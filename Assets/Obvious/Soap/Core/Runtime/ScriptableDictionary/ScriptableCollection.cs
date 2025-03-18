@@ -19,7 +19,7 @@ namespace Obvious.Soap
         public Action Modified;
         public event Action OnCleared;
         public abstract int Count { get; }
-        internal abstract bool CanBeSerialized();
+        public abstract bool CanBeSerialized();
         
         protected virtual void Awake()
         {
@@ -28,6 +28,9 @@ namespace Obvious.Soap
 
         protected virtual void OnEnable()
         {
+            if (_resetOn == ResetType.None)
+                return;
+            
             Clear();
             if (_resetOn == ResetType.SceneLoaded)
                 SceneManager.sceneLoaded += OnSceneLoaded;

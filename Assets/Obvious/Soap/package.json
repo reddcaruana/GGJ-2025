@@ -1,6 +1,6 @@
 {
   "name": "com.obvious.soap",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "displayName": "Soap - ScriptableObject Architecture",
   "description": "Soap helps you gain speed and keep a clean architecture in your game development by leveraging the power of ScriptableObject.",
   "unity": "2019.4",
@@ -12,6 +12,6 @@
     "email": "obviousgame.contact@gmail.com",
     "url": "https://www.youtube.com/@obviousgame"
   },
-  "documentationUrl": "https://drive.google.com/file/d/15quBiCzdHTZEV1e1JMIXQV1hLOHs0xg7/view?usp=sharing",
+  "documentationUrl": "https://obvious-game.gitbook.io/soap",
   "hideInEditor" : "false"
 }

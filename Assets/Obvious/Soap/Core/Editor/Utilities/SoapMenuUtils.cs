@@ -136,7 +136,26 @@ namespace Obvious.Soap.Editor
                     return false;
                 }
             }
+
             return monoScripts.Length > 0;
+        }
+
+        [MenuItem("CONTEXT/ScriptableObject/Select Parent", false, 1)]
+        private static void PingParent(MenuCommand menuCommand)
+        {
+            var scriptableBase = menuCommand.context as ScriptableBase;
+            var path = AssetDatabase.GetAssetPath(scriptableBase);
+            var parent = AssetDatabase.LoadMainAssetAtPath(path);
+            Selection.activeObject = parent;
+        }
+        
+        [MenuItem("CONTEXT/ScriptableObject/Select Parent", true)]
+        private static bool IsSubAsset(MenuCommand command)
+        {
+            var obj = command.context;
+            var isScriptable = obj is ScriptableBase;
+            var isSubAsset = !AssetDatabase.IsMainAsset(obj);
+            return isScriptable && isSubAsset;
         }
     }
 }

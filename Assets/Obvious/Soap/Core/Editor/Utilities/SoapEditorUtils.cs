@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using Obvious.Soap.Attributes;
 using UnityEngine;
 using UnityEditor;
@@ -22,6 +23,7 @@ namespace Obvious.Soap.Editor
         private const string WizardTagsKey = "Soap_Wizard_Tags_";
         private const string TypeCreatorDestinationFolderIndexKey = "Soap_TypeCreator_DestinationFolderIndex_";
         private const string TypeCreatorDestinationFolderPathKey = "Soap_TypeCreator_DestinationFolderPath_";
+        private const string TypeCreatorNamespaceKey = "Soap_TypeCreator_Namespace_";
         private const string WindowLastCategoryKey = "Soap_Window_LastCategory_";
         private const string WindowHasShownWindowKey = "Soap_Window_HasShownWindow_";
 
@@ -61,6 +63,13 @@ namespace Obvious.Soap.Editor
         {
             get => EditorPrefs.GetString(TypeCreatorDestinationFolderPathKey + ApplicationHash, "Assets");
             set => EditorPrefs.SetString(TypeCreatorDestinationFolderPathKey + ApplicationHash, value);
+        }
+        
+        
+        internal static string TypeCreatorNamespace
+        {
+            get => EditorPrefs.GetString(TypeCreatorNamespaceKey + ApplicationHash, string.Empty);
+            set => EditorPrefs.SetString(TypeCreatorNamespaceKey + ApplicationHash, value);
         }
 
         internal static string WindowLastCategory
@@ -232,8 +241,8 @@ namespace Obvious.Soap.Editor
                 return null;
 
             var templateCode = GetTemplateContent(templateName);
-            templateCode = templateCode.Replace("#TYPE#", type);
-            templateCode = templateCode.Replace("#TYPENAME#", type.CapitalizeFirstLetter());
+            templateCode = templateCode.Replace("$TYPE$", type);
+            templateCode = templateCode.Replace("$TYPENAME$", type.CapitalizeFirstLetter());
 
             //wrap namespace if needed
             if (!string.IsNullOrEmpty(nameSpace))
@@ -259,9 +268,9 @@ namespace Obvious.Soap.Editor
                 return null;
 
             var templateCode = GetTemplateContent(templateName);
-            templateCode = templateCode.Replace("#TYPE#", type);
-            templateCode = templateCode.Replace("#KEY#", key);
-            templateCode = templateCode.Replace("#VALUE#", value);
+            templateCode = templateCode.Replace("$TYPE$", type);
+            templateCode = templateCode.Replace("$KEY$", key);
+            templateCode = templateCode.Replace("$VALUE$", value);
 
             //wrap namespace if needed
             if (!string.IsNullOrEmpty(nameSpace))
@@ -727,11 +736,20 @@ namespace Obvious.Soap.Editor
             guid += fileId.ToString().Substring(0, 5);
             return guid;
         }
+        
+        public static string CleanSubAssetName(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+        
+            Match match = Regex.Match(input, "<([^>]+)>");
+            return match.Success ? match.Groups[1].Value : input;
+        }
 
         /// <summary>
         /// Clear editor Prefs for Soap.
         /// </summary>
-        [MenuItem("Tools/Soap/Clear Editor Prefs")]
+        //[MenuItem("Tools/Obvious Game/Soap/Clear Editor Prefs")]
         internal static void ClearEditorPrefs()
         {
             var applicationHash = Application.dataPath.GetHashCode();

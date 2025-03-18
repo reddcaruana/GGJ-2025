@@ -9,8 +9,7 @@ namespace Obvious.Soap.Editor
     {
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.LabelField("Modify settings from the Soap Window:", EditorStyles.boldLabel);
-            EditorGUILayout.LabelField("Window/Obvious/Soap/Soap Window -> Settings");
+            EditorGUILayout.LabelField("Modify settings in : Preferences/Soap", EditorStyles.boldLabel);
             GUI.enabled = false;
             DrawDefaultInspector();
             GUI.enabled = true;

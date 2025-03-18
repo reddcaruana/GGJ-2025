@@ -24,8 +24,15 @@ namespace Obvious.Soap.Example
         private void OnDestroy()
         {
             _scriptableDictionary.OnItemAdded -= OnItemAdded;
-            _scriptableDictionary.Modified -= OnModified;
             _scriptableDictionary.OnItemRemoved -= OnItemRemoved;
+            _scriptableDictionary.Modified -= OnModified;
+        }
+        
+        private void OnItemAdded(ScriptableEnumElement element, int value)
+        {
+            if (element != _scriptableEnumElement)
+                return;
+            _text.transform.parent.gameObject.SetActive(true);
         }
 
         private void OnItemRemoved(ScriptableEnumElement element, int value)
@@ -33,13 +40,6 @@ namespace Obvious.Soap.Example
             if (element != _scriptableEnumElement)
                 return;
             _text.transform.parent.gameObject.SetActive(false);
-        }
-
-        private void OnItemAdded(ScriptableEnumElement element, int value)
-        {
-            if (element != _scriptableEnumElement)
-                return;
-            _text.transform.parent.gameObject.SetActive(true);
         }
 
         private void OnModified()

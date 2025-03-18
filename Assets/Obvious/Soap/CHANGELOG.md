@@ -1,3 +1,13 @@
+## [3.5.1] - 2025-03-11
+- Added a SelectParent method for SubAssets
+- Added keeping the Namespace in the SoapTypeCreator persistent
+- Added compatibly with nullable types Scriptable Variables
+- SubAssets backing fields names are now properly displayed
+- Fixed templates scripts now using Rider format
+- Fixed allowing to inherit from ScriptableCollection
+- Fixed Odin [HideLabel] bug with SubAssets icon
+- Fixed ScriptableCollection resetting when "None" reset mode was selected
+
 ## [3.5.0] - 2025-02-09
 - Added Scriptable Dictionary type
 - Added Scriptable Dictionary Creator Window

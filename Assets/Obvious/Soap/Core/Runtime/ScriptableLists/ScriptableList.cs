@@ -259,7 +259,7 @@ namespace Obvious.Soap
             return list;
         }
         
-        internal override bool CanBeSerialized()
+        public override bool CanBeSerialized()
         {
             var canBeSerialized = SoapUtils.IsUnityType(typeof(T)) || 
                                   SoapUtils.IsSerializable(typeof(T));

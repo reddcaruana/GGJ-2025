@@ -78,15 +78,15 @@ namespace Obvious.Soap.Editor
                                 var popUpRect = new Rect(EditorWindow.focusedWindow.position);
                                 PopupWindow.Show(new Rect(), new SoapAssetCreatorPopup(popUpRect,
                                     SoapAssetCreatorPopup.EOrigin.Inspector,
-                                    fieldInfo.FieldType,assetName, tag, scriptableBase =>
+                                    fieldInfo.FieldType, assetName, tag, scriptableBase =>
                                     {
-                                        property.objectReferenceValue = scriptableBase; 
+                                        property.objectReferenceValue = scriptableBase;
                                         property.serializedObject.ApplyModifiedProperties();
                                     }));
                             }
                             else
                             {
-                                CreateSoapSoAtPath(property,assetName, tag);
+                                CreateSoapSoAtPath(property, assetName, tag);
                             }
                         }
                     }
@@ -112,7 +112,7 @@ namespace Obvious.Soap.Editor
             return null;
         }
 
-        private void CreateSoapSoAtPath(SerializedProperty property,string assetName, int tagIndex)
+        private void CreateSoapSoAtPath(SerializedProperty property, string assetName, int tagIndex)
         {
             var soapSettings = SoapEditorUtils.GetOrCreateSoapSettings();
             var isCustomPath = soapSettings.CreatePathMode == ECreatePathMode.Manual;
@@ -131,7 +131,8 @@ namespace Obvious.Soap.Editor
             var mainAsset = property.serializedObject.targetObject;
             var subAsset = ScriptableObject.CreateInstance(fieldInfo.FieldType);
             var prefix = soapSettings.GetPrefix(fieldInfo.FieldType);
-            subAsset.name = $"{prefix}{GetFieldName()}";
+            var cleanedName = SoapEditorUtils.CleanSubAssetName(GetFieldName());
+            subAsset.name = $"{prefix}{cleanedName}";
             AssetDatabase.AddObjectToAsset(subAsset, mainAsset);
             var scriptableBase = (ScriptableBase)subAsset;
             scriptableBase.TagIndex = tagIndex;
@@ -152,9 +153,12 @@ namespace Obvious.Soap.Editor
             property.isExpanded = EditorGUI.Foldout(labelRect, property.isExpanded, new GUIContent(""), true);
             if (property.isExpanded)
             {
-                //Draw an embedded inspector 
-                if (CanBeSubAsset)
+                //To Handle Odin [HideLabel] attribute 
+                if (CanBeSubAsset && !string.IsNullOrEmpty(label.text))
+                {
                     label.image = SoapInspectorUtils.Icons.SubAsset;
+                }
+
                 EditorGUI.PropertyField(rect, property, label);
                 EditorGUI.indentLevel++;
                 var cacheBgColor = GUI.backgroundColor;
@@ -192,8 +196,11 @@ namespace Obvious.Soap.Editor
         private Rect DrawCustomPropertyField(Rect position, SerializedProperty property, GUIContent label,
             float widthRatio)
         {
-            if (CanBeSubAsset)
+            if (CanBeSubAsset && !string.IsNullOrEmpty(label.text))
+            {
+                label.text = SoapEditorUtils.CleanSubAssetName(label.text);
                 label.image = SoapInspectorUtils.Icons.SubAsset;
+            }
 
             var propertyRect = new Rect(position);
             propertyRect.width = position.width * widthRatio;

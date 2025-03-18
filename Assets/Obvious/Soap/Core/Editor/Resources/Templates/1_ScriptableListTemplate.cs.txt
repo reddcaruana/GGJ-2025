@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using Obvious.Soap;
 
-[CreateAssetMenu(fileName = "ScriptableList#TYPE#", menuName = "Soap/ScriptableLists/#TYPE#")]
-public class ScriptableList#TYPENAME# : ScriptableList<#TYPE#>
+[CreateAssetMenu(fileName = "ScriptableList$TYPE$", menuName = "Soap/ScriptableLists/$TYPE$")]
+public class ScriptableList$TYPENAME$ : ScriptableList<$TYPE$>
 {
     
 }

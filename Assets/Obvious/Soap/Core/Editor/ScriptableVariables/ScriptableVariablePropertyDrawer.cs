@@ -66,7 +66,8 @@
             }
             else
             {
-                EditorGUI.PropertyField(rect, value, GUIContent.none);
+                if (value != null)
+                    EditorGUI.PropertyField(rect, value, GUIContent.none);
             }
         }
 

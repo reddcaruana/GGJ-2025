@@ -51,6 +51,7 @@ namespace Obvious.Soap.Editor
             _path = _destinationFolderIndex == 0
                 ? SoapFileUtils.GetSelectedFolderPathInProjectWindow()
                 : SoapEditorUtils.TypeCreatorDestinationFolderPath;
+            _namespaceText = SoapEditorUtils.TypeCreatorNamespace;
             AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReloaded;
         }
 
@@ -93,6 +94,7 @@ namespace Obvious.Soap.Editor
                 if (EditorGUI.EndChangeCheck())
                 {
                     _isNamespaceInvalid = !SoapEditorUtils.IsNamespaceValid(_namespaceText);
+                    SoapEditorUtils.TypeCreatorNamespace = _namespaceText;
                 }
 
                 EditorGUILayout.EndHorizontal();
@@ -425,7 +427,6 @@ namespace Obvious.Soap.Editor
         private void Clear()
         {
             _typeText = "NewClass";
-            _namespaceText = "";
             _baseClass = false;
             _monoBehaviour = false;
             _variable = false;

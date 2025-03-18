@@ -13,7 +13,7 @@ namespace Obvious.Soap.Editor
         private ScriptableVariableBase _scriptableVariable = null;
         private static bool _repaintFlag;
         private SerializedProperty _valueProperty;
-        protected SoapSettings _soapSettings;
+        private SoapSettings _soapSettings;
 
         public override void OnInspectorGUI()
         {
@@ -51,13 +51,13 @@ namespace Obvious.Soap.Editor
             DrawPlayModeObjects();
         }
 
-        protected virtual void DrawMinimal()
+        private void DrawMinimal()
         {
             var fieldName = Application.isPlaying ? "_runtimeValue" : "_value";
             serializedObject.DrawOnlyField(fieldName, false);
         }
 
-        protected virtual void DrawDefault(Type genericType = null)
+        private void DrawDefault(Type genericType = null)
         {
             serializedObject.DrawOnlyField("m_Script", true);
             var propertiesToHide = new HashSet<string>() { "m_Script", "_guid", "_saveGuid" };
@@ -78,7 +78,7 @@ namespace Obvious.Soap.Editor
                 EditorGUILayout.ObjectField(obj, typeof(UnityEngine.Object), true);
         }
 
-        protected virtual void DrawPlayModeObjects()
+        private void DrawPlayModeObjects()
         {
             if (!EditorApplication.isPlaying)
                 return;

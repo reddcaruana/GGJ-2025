@@ -168,7 +168,7 @@ namespace Obvious.Soap
             return GetEnumerator();
         }
         
-        internal override bool CanBeSerialized()
+        public override bool CanBeSerialized()
         {
             var canKeyBeSerialized = SoapUtils.IsUnityType(typeof(T)) || 
                                   SoapUtils.IsSerializable(typeof(T));

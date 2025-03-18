@@ -114,36 +114,23 @@ namespace Obvious.Soap
                 //dont support multi-dimensional arrays
                 if (type.GetArrayRank() != 1)
                     return false;
-
-                type = type.GetElementType();
-                if (typeof(UnityEngine.Object).IsAssignableFrom(type))
-                    return true;
+                return IsSerializable(type.GetElementType());
             }
-            else if (type.IsGenericType)
-            {
-                // Generic types are allowed on 2020.1 and later
-#if UNITY_2020_1_OR_NEWER
-                if (type.GetGenericTypeDefinition() == typeof(List<>))
-                {
-                    type = type.GetGenericArguments()[0];
-
-                    if (typeof(UnityEngine.Object).IsAssignableFrom(type))
-                        return true;
-                }
-#else
-                if (type.GetGenericTypeDefinition() != typeof(List<>))
-                    return false;
-
-                type = type.GetGenericArguments()[0];
-                if (typeof(UnityEngine.Object).IsAssignableFrom(type))
-                    return true;
-#endif
-            }
-
-#if !UNITY_2020_1_OR_NEWER
+            
             if (type.IsGenericType)
+            {
+                var genericDefinition = type.GetGenericTypeDefinition();
+                if (genericDefinition == typeof(Nullable<>)
+                    || genericDefinition == typeof(List<>))
+                {
+                    return IsSerializable(type.GetGenericArguments()[0]);
+                }
+                
+                // Generic types are allowed on 2020.1 and later
+#if !UNITY_2020_1_OR_NEWER
                 return false;
 #endif
+            }
 
             return Attribute.IsDefined(type, typeof(SerializableAttribute), false);
         }
