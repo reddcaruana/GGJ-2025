@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using WitchesBasement.Players;
 
-namespace WitchesBasement.Intro
+namespace WitchesBasement.MainMenu
 {
     public class PlayerConnectionStatus : MonoBehaviour
     {

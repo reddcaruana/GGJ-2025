@@ -1,3 +1,4 @@
+using Obvious.Soap;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,10 +8,11 @@ namespace WitchesBasement.Players
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private ScriptableDictionaryPlayerID playerMap;
+        [SerializeField] private ScriptableEventNoParam enableInputManagerEvent;
         
         private PlayerInputManager inputManager;
 
-#region Methods
+#region Lifecycle Events
 
         private void Awake()
         {
@@ -19,12 +21,16 @@ namespace WitchesBasement.Players
 
         private void OnEnable()
         {
+            enableInputManagerEvent.OnRaised += OnEnableInputManager;
+            
             inputManager.onPlayerJoined += OnPlayerJoinedHandler;
             inputManager.onPlayerLeft += OnPlayerLeftHandler;
         }
 
         private void OnDisable()
         {
+            enableInputManagerEvent.OnRaised -= OnEnableInputManager;
+            
             inputManager.onPlayerJoined -= OnPlayerJoinedHandler;
             inputManager.onPlayerLeft -= OnPlayerLeftHandler;
         }
@@ -33,14 +39,6 @@ namespace WitchesBasement.Players
         {
             inputManager = GetComponent<PlayerInputManager>();
             inputManager.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
-        }
-
-        private void Start()
-        {
-            if (inputManager.playerCount == 0)
-            {
-                inputManager.JoinPlayer();
-            }
         }
 
 #endregion
@@ -63,6 +61,14 @@ namespace WitchesBasement.Players
 #endregion
 
 #region Subscriptions
+
+        private void OnEnableInputManager()
+        {
+            if (inputManager.playerCount < inputManager.maxPlayerCount)
+            {
+                inputManager.EnableJoining();
+            }
+        }
 
         private void OnPlayerJoinedHandler(PlayerInput playerInput)
         {
