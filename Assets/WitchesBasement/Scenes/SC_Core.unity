@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &483769402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483769404}
+  - component: {fileID: 483769403}
+  m_Layer: 0
+  m_Name: SceneLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &483769403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483769402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba43c9a5fdd4de0b00aeefa6a11fd75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  completeEvent: {fileID: 11400000, guid: a7be4ec5038ac47b694fa400206ae5dc, type: 2}
+  scenePropertiesEvent: {fileID: 11400000, guid: 3790cdce8ae424e779ef168f6b3e32fe, type: 2}
+--- !u!4 &483769404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483769402}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &902713930
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,14 +360,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  far clip plane: 200
+  field of view: 15
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -342,7 +388,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
+  m_LocalPosition: {x: -0.375, y: 76.089, z: -73.883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -391,7 +437,7 @@ GameObject:
   - component: {fileID: 1069192241}
   - component: {fileID: 1069192242}
   m_Layer: 0
-  m_Name: MainMenuLoader
+  m_Name: GameInitializer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,16 +467,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1069192240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3379c8e5a71a48b08160ffabc491d323, type: 3}
+  m_Script: {fileID: 11500000, guid: bfccb9eccb6a41f1ae2e154df8de694e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenesToLoad:
-  - {fileID: 11400000, guid: f52d4c508741f4c43bd6651dbed2949d, type: 2}
   completeEvent: {fileID: 11400000, guid: a7be4ec5038ac47b694fa400206ae5dc, type: 2}
+  sceneProperties:
+  - {fileID: 11400000, guid: 32f69ae0cccb544ea87e49a6f880ffe5, type: 2}
+  sceneEvent: {fileID: 11400000, guid: 3790cdce8ae424e779ef168f6b3e32fe, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 961739753}
   - {fileID: 902713931}
+  - {fileID: 483769404}
   - {fileID: 1069192241}

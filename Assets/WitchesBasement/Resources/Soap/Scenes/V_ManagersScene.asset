@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b91c0e32d7944ada75e5f9dd5bea25, type: 3}
+  m_Name: V_ManagersScene
+  m_EditorClassIdentifier: 
+  TagIndex: 0
+  Description: 
+  _guid: 5ab4c4fcd62e7464a954d1a417b1ddcf
+  _saveGuid: 0
+  _value:
+    Name: SC_Managers
+    Persistent: 0
+  _debugLogEnabled: 0
+  _saved: 0
+  _defaultValue:
+    Name: 
+    Persistent: 0
+  _resetOn: 0
+  _runtimeValue:
+    Name: 
+    Persistent: 0

@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/WitchesBasement/Scenes/Levels/SC_Managers.unity
     guid: fa4a0ded21cd14a27ba7a0ae6f932f96
   - enabled: 1
-    path: Assets/WitchesBasement/Scenes/Levels/SC_TV_Screens.unity
+    path: Assets/WitchesBasement/Scenes/Levels/SC_TVScreens.unity
     guid: 7c98003954e5e413284cf36821bc8b7c
   - enabled: 1
     path: Assets/WitchesBasement/Scenes/Levels/SC_Level.unity

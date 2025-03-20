@@ -2252,6 +2252,7 @@ GameObject:
   - component: {fileID: 1745191553}
   - component: {fileID: 1745191552}
   - component: {fileID: 1745191551}
+  - component: {fileID: 1745191555}
   m_Layer: 5
   m_Name: C_Arcade
   m_TagString: Untagged
@@ -2381,6 +2382,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745191549}
   m_CullTransparentMesh: 1
+--- !u!114 &1745191555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745191549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e31d055137047e78f3dd7b7454525c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneProperties:
+  - {fileID: 11400000, guid: 5ab4c4fcd62e7464a954d1a417b1ddcf, type: 2}
+  - {fileID: 11400000, guid: 8f49dbecd012048e7ac7c82b25cefea8, type: 2}
+  - {fileID: 11400000, guid: d4b42ce7c572544d8af858a6e66dafc9, type: 2}
+  sceneEvent: {fileID: 11400000, guid: 3790cdce8ae424e779ef168f6b3e32fe, type: 2}
 --- !u!1 &1807653074
 GameObject:
   m_ObjectHideFlags: 0
