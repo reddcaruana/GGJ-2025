@@ -2398,6 +2398,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ab4c4fcd62e7464a954d1a417b1ddcf, type: 2}
   - {fileID: 11400000, guid: 8f49dbecd012048e7ac7c82b25cefea8, type: 2}
   - {fileID: 11400000, guid: d4b42ce7c572544d8af858a6e66dafc9, type: 2}
+  - {fileID: 11400000, guid: 5bd760730e02a4ab9b9298e06f846096, type: 2}
   sceneEvent: {fileID: 11400000, guid: 3790cdce8ae424e779ef168f6b3e32fe, type: 2}
 --- !u!1 &1807653074
 GameObject:
